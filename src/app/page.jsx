@@ -120,7 +120,6 @@ export default function PrimeInventory() {
       return set;
     });
     setInventory(newInventory);
-    
   };
 
   const handleToggleMastery = (setName) => {
@@ -132,7 +131,6 @@ export default function PrimeInventory() {
       return set;
     });
     setInventory(newInventory);
-    
   };
 
   const handleBuild = (primeSet) => {
@@ -140,19 +138,12 @@ export default function PrimeInventory() {
       primeSet.components?.every((part) => part.userCount >= part.required) ??
       (primeSet.userCount || 0) >= (primeSet.required || 1);
 
-    if (primeSet.isMastered) {
-      
-      return;
-    }
-
     if (!isBuildable) {
-      
       return;
     }
 
     const updatedInventory = buildInventoryItem(inventory, primeSet);
     setInventory(updatedInventory);
-    
   };
 
   const handleSell = (primeSet) => {
@@ -161,13 +152,11 @@ export default function PrimeInventory() {
       (primeSet.userCount || 0) >= (primeSet.required || 1);
 
     if (!isSellable) {
-      
       return;
     }
 
     const updatedInventory = sellInventoryItem(inventory, primeSet);
     setInventory(updatedInventory);
-    
   };
 
   const handleImport = () => {
@@ -195,10 +184,8 @@ export default function PrimeInventory() {
 
             setInventory(importedInventory);
             saveInventory(importedInventory);
-            
           } catch (error) {
             console.error("Failed to parse imported inventory:", error);
-            
           }
         };
         reader.readAsText(file);
@@ -218,7 +205,6 @@ export default function PrimeInventory() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    
   };
 
   const handleResetInventory = () => {
@@ -229,7 +215,7 @@ export default function PrimeInventory() {
     ) {
       resetUserInventory();
       setInventory([]); // Reset the state as well
-      
+
       // Optionally, re-fetch initial data if needed
       // fetchInventory();
     }
