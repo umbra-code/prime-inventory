@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prime Inventory: Your Ultimate Warframe Prime Inventory Manager
+
+## Overview
+
+Prime Inventory is a dedicated Single Page Application (SPA) meticulously crafted to empower Warframe players with a seamless and intuitive platform for managing their Prime parts collection. Designed for optimal performance and user privacy, this application operates entirely offline, storing all user data locally within the browser. This ensures a fast, secure, and highly personal inventory management experience without reliance on external servers.
+
+## Core Capabilities
+
+- **Comprehensive Inventory Visualization:** Gain immediate clarity on your Prime parts. Our intuitive interface provides a real-time overview of your current holdings versus the required components for each Prime set.
+- **Mastery Progression Tracking:** Effortlessly mark and monitor your mastered Prime sets, ensuring you always know your progress towards completing your collection.
+- **Intelligent Crafting Readiness:** The application intelligently analyzes your inventory, automatically highlighting Prime sets that are ready for crafting based on your available parts.
+- **Streamlined Inventory Actions:** Execute common inventory tasks with ease. Dedicated actions for "Build" and "Sell" sets automatically adjust your part counts, simplifying your management workflow.
+- **Advanced Filtering and Search:** Quickly locate specific Prime sets using a robust search function or apply detailed filters based on category, completion status, or mastery level.
+- **Secure Data Management (Import/Export):** Maintain full control over your inventory data. Export your entire collection to a JSON file for secure backup and effortlessly restore it whenever needed.
+- **Insightful Inventory Statistics:** Access a concise summary of your collection's status, including total parts acquired and the number of completed sets, providing valuable insights into your progress.
+- **Uninterrupted Offline Access:** Enjoy complete functionality even without an internet connection. All data processing and storage occur client-side, guaranteeing continuous access to your inventory.
+
+## Tech Stack
+
+- **Framework:** Next.js 15+ (App Router)
+- **Language:** JavaScript (ES6+)
+- **Styling:** Tailwind CSS
+- **Warframe Data Integration:** `@wfcd/items` package
+- **Local Data Storage:** `localStorage` (100% client-side)
+- **State Management:** React Context API with `useState` and `useReducer`
+
+## Website
+
+Explore Prime Inventory in action and learn more about its features at:
+[https://www.primeinventoryapp.com](https://www.primeinventoryapp.com) (Placeholder - will be updated with the official link)
 
 ## Getting Started
 
-First, run the development server:
+To set up and run Prime Inventory locally, follow these simple steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1.  **Clone the repository:**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    ```bash
+    git clone https://github.com/umbra-code/prime-inventory.git
+    cd prime-inventory
+    ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+2.  **Install dependencies:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+Once the server is running, open [http://localhost:3000](http://localhost:3000) in your web browser to access the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
