@@ -24,7 +24,7 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
   - [x] Implementar función `getCategories()` para obtener categorías disponibles
   - [x] Estructurar datos en formato `PrimeSet` y `PrimePart` para la aplicación
 
-- [ ] **3. Crear servicio de inventario del usuario (`src/services/userInventory.js`):**
+- [x] **3. Crear servicio de inventario del usuario (`src/services/userInventory.js`):**
   - [x] Usar `localStorage` para guardar el estado del inventario del usuario
   - [x] Implementar funciones principales:
     - [x] `saveInventory(inventory)` - Guardar estado completo
@@ -72,7 +72,7 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
   - [x] Cargar datos iniciales de `@wfcd/items` en server-side
   - [x] Integrar inventario del usuario desde localStorage en client-side
   - [x] Renderizar lista completa de componentes `PrimeSet`
-  - [ ] Manejar estado global de la aplicación
+  - [x] Manejar estado global de la aplicación
 
 ### Fase 3: Lógica de Estado y Estilos
 
@@ -106,14 +106,14 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
     - [x] Sets masterizados
     - [x] Sets listos para construir
 
-- [ ] **2. Indicadores y feedback:**
+- [x] **2. Indicadores y feedback:**
 
   - [x] Loading states durante carga inicial
   - [x] Contadores de progreso (ej. "15/20 sets completados")
   - [x] Notificaciones para acciones exitosas
   - [x] Validaciones antes de construir/vender
 
-- [ ] **3. Backup y Restauración:**
+- [x] **3. Backup y Restauración:**
 
   - [x] Exportar inventario a archivo JSON
   - [x] Importar inventario desde archivo JSON
@@ -147,7 +147,7 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
 {
   name: "Ash Prime",
   category: "Warframes",
-  parts: [
+  components: [
     {
       name: "Neuroptics",
       uniqueName: "ash_prime_neuroptics",
@@ -165,7 +165,7 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
 
 ```javascript
 {
-  parts: {
+  components: {
     "ash_prime_neuroptics": 2,
     "ash_prime_chassis": 1,
     // ...

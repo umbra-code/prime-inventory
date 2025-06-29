@@ -15,7 +15,7 @@ export function PrimeSet({
   onSell,
 }) {
   const isBuildable =
-    primeSet.parts?.every((part) => part.userCount >= part.required) ??
+    primeSet.components?.every((part) => part.userCount >= part.required) ??
     primeSet.userCount >= primeSet.required;
 
   const getSetColor = () => {
