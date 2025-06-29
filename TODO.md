@@ -10,120 +10,120 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
 
 ### Fase 1: Configuración y Capa de Datos
 
-- [ ] **1. Configurar proyecto NextJS:**
+- [x] **1. Configurar proyecto NextJS:**
 
-  - [ ] Inicializar proyecto con `create-next-app`
-  - [ ] Configurar estructura de carpetas (components, services, utils)
-  - [ ] Instalar dependencias: `@wfcd/items` para los datos de Warframe
+  - [x] Inicializar proyecto con `create-next-app`
+  - [x] Configurar estructura de carpetas (components, services, utils)
+  - [x] Instalar dependencias: `@wfcd/items` para los datos de Warframe
 
 - [ ] **2. Crear servicio de datos (`src/services/warframeData.js`):**
 
-  - [ ] Importar y procesar datos desde `@wfcd/items`
-  - [ ] Definir funciones para filtrar solo items Prime
-  - [ ] Crear función `getPrimeItems()` que devuelva solo los items con `prime: true`
-  - [ ] Implementar función `getCategories()` para obtener categorías disponibles
-  - [ ] Estructurar datos en formato `PrimeSet` y `PrimePart` para la aplicación
+  - [x] Importar y procesar datos desde `@wfcd/items`
+  - [x] Definir funciones para filtrar solo items Prime
+  - [x] Crear función `getPrimeItems()` que devuelva solo los items con `prime: true`
+  - [x] Implementar función `getCategories()` para obtener categorías disponibles
+  - [x] Estructurar datos en formato `PrimeSet` y `PrimePart` para la aplicación
 
 - [ ] **3. Crear servicio de inventario del usuario (`src/services/userInventory.js`):**
-  - [ ] Usar `localStorage` para guardar el estado del inventario del usuario
-  - [ ] Implementar funciones principales:
-    - [ ] `saveInventory(inventory)` - Guardar estado completo
-    - [ ] `loadInventory()` - Cargar estado desde localStorage
-    - [ ] `updatePartCount(partName, newCount)` - Actualizar cantidad de una parte
-    - [ ] `toggleMastery(setName)` - Cambiar estado de maestría de un set
-    - [ ] `buildItem(setData)` - Construir item (descuenta partes, marca como masterizado)
-    - [ ] `sellItem(setData)` - Vender item (solo descuenta partes necesarias)
+  - [x] Usar `localStorage` para guardar el estado del inventario del usuario
+  - [x] Implementar funciones principales:
+    - [x] `saveInventory(inventory)` - Guardar estado completo
+    - [x] `loadInventory()` - Cargar estado desde localStorage
+    - [x] `updatePartCount(partName, newCount)` - Actualizar cantidad de una parte
+    - [x] `toggleMastery(setName)` - Cambiar estado de maestría de un set
+    - [x] `buildItem(setData)` - Construir item (descuenta partes, marca como masterizado)
+    - [x] `sellItem(setData)` - Vender item (solo descuenta partes necesarias)
 
 ### Fase 2: Desarrollo de Componentes de la Interfaz (UI)
 
-- [ ] **1. Componente `Navbar.jsx`:**
+- [x] **1. Componente `Navbar.jsx`:**
 
-  - [ ] Crear barra de navegación flotante
-  - [ ] Logo de la aplicación a la izquierda
-  - [ ] Barra de búsqueda en el centro
-  - [ ] Botones de importar/exportar inventario a la derecha
+  - [x] Crear barra de navegación flotante
+  - [x] Logo de la aplicación a la izquierda
+  - [x] Barra de búsqueda en el centro
+  - [x] Botones de importar/exportar inventario a la derecha
 
-- [ ] **2. Componente `PrimePart.jsx`:**
+- [x] **2. Componente `PrimePart.jsx`:**
 
-  - [ ] Mostrar nombre de la parte (ej. "Neuropticas")
-  - [ ] Botones `+` y `-` para ajustar cantidad
-  - [ ] Display de cantidad actual vs requerida (`0/1`, `1/1`, `2/2`)
-  - [ ] Sistema de colores:
-    - [ ] **Rojo:** cantidad = 0
-    - [ ] **Amarillo:** 0 < cantidad < requerida
-    - [ ] **Verde:** cantidad >= requerida
-  - [ ] Input manual para ingresar cantidad directamente
+  - [x] Mostrar nombre de la parte (ej. "Neuropticas")
+  - [x] Botones `+` y `-` para ajustar cantidad
+  - [x] Display de cantidad actual vs requerida (`0/1`, `1/1`, `2/2`)
+  - [x] Sistema de colores:
+    - [x] **Rojo:** cantidad = 0
+    - [x] **Amarillo:** 0 < cantidad < requerida
+    - [x] **Verde:** cantidad >= requerida
+  - [x] Input manual para ingresar cantidad directamente
 
-- [ ] **3. Componente `PrimeSet.jsx`:**
+- [x] **3. Componente `PrimeSet.jsx`:**
 
-  - [ ] Mostrar icono y nombre del Set Prime
-  - [ ] Renderizar lista de componentes `PrimePart`
-  - [ ] Toggle/checkbox para marcar como "Masterizado"
-  - [ ] Botones de acción:
-    - [ ] **Construir:** Descuenta partes necesarias y marca como masterizado
-    - [ ] **Vender:** Solo descuenta partes necesarias
-  - [ ] Sistema de colores del contenedor:
-    - [ ] **Gris:** Faltan partes para construir
-    - [ ] **Verde:** Se puede construir Y no está masterizado
-    - [ ] **Amarillo:** Se puede construir Y está masterizado (set extra)
-  - [ ] Manejar items sin componentes (ej. mods Prime)
+  - [x] Mostrar icono y nombre del Set Prime
+  - [x] Renderizar lista de componentes `PrimePart`
+  - [x] Toggle/checkbox para marcar como "Masterizado"
+  - [x] Botones de acción:
+    - [x] **Construir:** Descuenta partes necesarias y marca como masterizado
+    - [x] **Vender:** Solo descuenta partes necesarias
+  - [x] Sistema de colores del contenedor:
+    - [x] **Gris:** Faltan partes para construir
+    - [x] **Verde:** Se puede construir Y no está masterizado
+    - [x] **Amarillo:** Se puede construir Y está masterizado (set extra)
+  - [x] Manejar items sin componentes (ej. mods Prime)
 
-- [ ] **4. Página principal `pages/index.jsx`:**
-  - [ ] Cargar datos iniciales de `@wfcd/items` en server-side
-  - [ ] Integrar inventario del usuario desde localStorage en client-side
-  - [ ] Renderizar lista completa de componentes `PrimeSet`
+- [x] **4. Página principal `pages/index.jsx`:**
+  - [x] Cargar datos iniciales de `@wfcd/items` en server-side
+  - [x] Integrar inventario del usuario desde localStorage en client-side
+  - [x] Renderizar lista completa de componentes `PrimeSet`
   - [ ] Manejar estado global de la aplicación
 
 ### Fase 3: Lógica de Estado y Estilos
 
-- [ ] **1. Gestión de estado:**
+- [x] **1. Gestión de estado:**
 
-  - [ ] Al iniciar la app:
-    1. [ ] Cargar inventario del usuario desde `localStorage`
-    2. [ ] Cargar lista de items Prime desde `@wfcd/items`
-    3. [ ] Fusionar datos para mostrar estado actual
-  - [ ] Actualización en tiempo real:
-    - [ ] Cada cambio de cantidad actualiza estado y `localStorage`
-    - [ ] Cada cambio de maestría persiste inmediatamente
-    - [ ] Validaciones para acciones de construir/vender
+  - [x] Al iniciar la app:
+    1. [x] Cargar inventario del usuario desde `localStorage`
+    2. [x] Cargar lista de items Prime desde `@wfcd/items`
+    3. [x] Fusionar datos para mostrar estado actual
+  - [x] Actualización en tiempo real:
+    - [x] Cada cambio de cantidad actualiza estado y `localStorage`
+    - [x] Cada cambio de maestría persiste inmediatamente
+    - [x] Validaciones para acciones de construir/vender
 
-- [ ] **2. Estilos y UX:**
-  - [ ] Configurar Tailwind CSS o CSS Modules
-  - [ ] Definir clases para colores de estado (rojo, amarillo, verde, gris)
-  - [ ] Layout responsive con grid o flexbox
-  - [ ] Optimizar para dispositivos móviles
-  - [ ] Animaciones sutiles para feedback visual
+- [x] **2. Estilos y UX:**
+  - [x] Configurar Tailwind CSS o CSS Modules
+  - [x] Definir clases para colores de estado (rojo, amarillo, verde, gris)
+  - [x] Layout responsive con grid o flexbox
+  - [x] Optimizar para dispositivos móviles
+  - [x] Animaciones sutiles para feedback visual
 
 ### Fase 4: Funcionalidades Adicionales y Pulido
 
-- [ ] **1. Filtros y búsqueda:**
+- [x] **1. Filtros y búsqueda:**
 
-  - [ ] Barra de búsqueda por nombre de set
-  - [ ] Filtros por categoría (Warframes, Primary, Secondary, etc.)
-  - [ ] Filtros por estado:
-    - [ ] Sets completados
-    - [ ] Sets incompletos
-    - [ ] Sets masterizados
-    - [ ] Sets listos para construir
+  - [x] Barra de búsqueda por nombre de set
+  - [x] Filtros por categoría (Warframes, Primary, Secondary, etc.)
+  - [x] Filtros por estado:
+    - [x] Sets completados
+    - [x] Sets incompletos
+    - [x] Sets masterizados
+    - [x] Sets listos para construir
 
 - [ ] **2. Indicadores y feedback:**
 
-  - [ ] Loading states durante carga inicial
-  - [ ] Contadores de progreso (ej. "15/20 sets completados")
-  - [ ] Notificaciones para acciones exitosas
-  - [ ] Validaciones antes de construir/vender
+  - [x] Loading states durante carga inicial
+  - [x] Contadores de progreso (ej. "15/20 sets completados")
+  - [x] Notificaciones para acciones exitosas
+  - [x] Validaciones antes de construir/vender
 
 - [ ] **3. Backup y Restauración:**
 
-  - [ ] Exportar inventario a archivo JSON
-  - [ ] Importar inventario desde archivo JSON
-  - [ ] Validación de datos importados
-  - [ ] Opción de reset completo del inventario
+  - [x] Exportar inventario a archivo JSON
+  - [x] Importar inventario desde archivo JSON
+  - [x] Validación de datos importados
+  - [x] Opción de reset completo del inventario
 
 - [ ] **4. Características especiales:**
-  - [ ] Manejo flexible de items sin componentes (mods Prime)
+  - [x] Manejo flexible de items sin componentes (mods Prime)
   - [ ] Cálculo automático de valor de platino (opcional)
-  - [ ] Estadísticas del inventario (total de partes, sets completos, etc.)
+  - [x] Estadísticas del inventario (total de partes, sets completos, etc.)
   - [ ] Modo oscuro/claro
 
 ---
