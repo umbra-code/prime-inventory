@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
 import { PrimePart } from "./PrimePart";
+import Image from "next/image";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
@@ -48,10 +49,12 @@ export function PrimeSet({
     >
       <CardHeader>
         <div className='flex items-center space-x-4 mb-3'>
-          <img
+          <Image
             src={`${IMAGE_BASE_URL}${primeSet.imageName}`}
             alt={primeSet.name}
-            className='size-20 object-contain bg-black/20 rounded-lg shadow-sm p-1'
+            width={80} // Corresponds to size-20 (80px)
+            height={80} // Corresponds to size-20 (80px)
+            className='object-contain bg-black/20 rounded-lg shadow-sm p-1'
           />
           <div>
             <CardTitle className='text-lg font-bold text-white'>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
+import Image from "next/image";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
@@ -19,10 +20,12 @@ export function PrimePart({ part, onUpdateCount }) {
     >
       <div className='flex items-center space-x-2'>
         {part.imageName && (
-          <img
+          <Image
             src={`${IMAGE_BASE_URL}${part.imageName}`}
             alt={part.name}
-            className='w-8 h-8 object-contain'
+            width={32} // Corresponds to w-8 (32px)
+            height={32} // Corresponds to h-8 (32px)
+            className='object-contain'
           />
         )}
         <span className='font-medium'>{part.name}</span>
