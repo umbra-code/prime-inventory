@@ -1,17 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Download, Github, Package, Search, Upload } from "lucide-react";
-
-import { PrimeSet } from "@/components/inventory/PrimeSet"; // Keep existing PrimeSet component
+import { Header } from "@/components/layout/Header";
+import { InventoryDashboard } from "@/components/layout/InventoryDashboard";
+import { InventoryGrid } from "@/components/layout/InventoryGrid";
+import { Footer } from "@/components/layout/Footer";
 
 import { categories as allCategories } from "@/lib/utils";
 import {
@@ -35,7 +27,6 @@ export default function PrimeInventory() {
   const [loading, setLoading] = useState(true);
   const isInitialMount = useRef(true);
 
-  // Define statusFilters here as it's used in the JSX directly
   const statusFilters = [
     "All",
     "Buildable",
@@ -57,12 +48,10 @@ export default function PrimeInventory() {
       const mergedInventory = data?.map((item) => {
         const newItem = { ...item };
 
-        // Apply mastered status
         if (masteredSets.has(newItem.name)) {
           newItem.isMastered = true;
         }
 
-        // Apply part counts
         if (newItem.components) {
           newItem.components = newItem.components.map((part) => {
             const userCount = partCountsMap.get(part.uniqueName);
@@ -72,13 +61,12 @@ export default function PrimeInventory() {
             return part;
           });
         } else if (partCountsMap.has(newItem.uniqueName)) {
-          // For direct items (e.g., mods) that have a userCount
           newItem.userCount = partCountsMap.get(newItem.uniqueName);
         }
         return newItem;
       });
       setInventory(mergedInventory);
-      saveInventory(mergedInventory); // Save the merged inventory immediately after setting it
+      saveInventory(mergedInventory);
     } catch (error) {
       console.error("Failed to fetch inventory:", error);
     } finally {
@@ -86,10 +74,9 @@ export default function PrimeInventory() {
     }
   };
 
-  // Fetch data from the API route
   useEffect(() => {
     fetchInventory();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -99,7 +86,6 @@ export default function PrimeInventory() {
     }
   }, [inventory]);
 
-  // Filtrar sets basado en búsqueda, categoría y estado
   const filteredSets = useMemo(() => {
     return inventory.filter((set) => {
       const matchesSearch = set.name
@@ -108,7 +94,6 @@ export default function PrimeInventory() {
       const matchesCategory =
         selectedCategory === "All" || set.category === selectedCategory;
 
-      // Filtro por estado
       const isBuildable =
         set.components?.every((part) => part.userCount >= part.required) ??
         (set.userCount || 0) >= (set.required || 1);
@@ -125,7 +110,6 @@ export default function PrimeInventory() {
     });
   }, [searchTerm, selectedCategory, selectedStatus, inventory]);
 
-  // Estadísticas del inventario
   const stats = useMemo(() => {
     const total = inventory.length;
     const buildable = inventory.filter((set) => {
@@ -190,7 +174,6 @@ export default function PrimeInventory() {
         reader.onload = (e) => {
           try {
             const importedInventory = JSON.parse(e.target.result);
-            // Validación básica
             const isValid =
               Array.isArray(importedInventory) &&
               importedInventory.every(
@@ -241,174 +224,38 @@ export default function PrimeInventory() {
 
   return (
     <div className='flex flex-col min-h-screen bg-gray-50'>
-      {/* Header */}
-      <header className='bg-white border-b border-gray-200 sticky top-0 z-50'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='flex items-center justify-between h-16'>
-            {/* Logo y título */}
-            <div className='flex items-center space-x-4'>
-              <div className='flex items-center space-x-3'>
-                <Package className='h-8 w-8 text-amber-600' />
-                <div>
-                  <h1 className='text-xl font-bold text-gray-900'>
-                    Prime Inventory
-                  </h1>
-                  <p className='text-xs text-gray-500'>
-                    Warframe Management Tool
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Acciones principales */}
-            <div className='flex items-center space-x-3'>
-              <Button variant='outline' onClick={handleImport} size='sm'>
-                <Upload className='size-4' />
-                Import
-              </Button>
-              <Button
-                onClick={handleExport}
-                size='sm'
-                className='bg-amber-600 hover:bg-amber-700'
-              >
-                <Download className='size-4' />
-                Export
-              </Button>
-              <Button
-                className={"bg-red-600 hover:bg-red-700"}
-                onClick={handleResetInventory}
-                size='sm'
-              >
-                Reset
-              </Button>
-              <a
-                href={"https://github.com/umbra-code/prime-inventory"}
-                className='hover:bg-gray-800 hover:text-white rounded-full p-1.5 transition-colors duration-200 ease-in-out'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Github size={18} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header
+        handleImport={handleImport}
+        handleExport={handleExport}
+        handleResetInventory={handleResetInventory}
+      />
 
       <div className='flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full'>
-        {/* Panel de control */}
-        <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8'>
-          {/* Estadísticas */}
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-6'>
-            <div className='text-center'>
-              <div className='text-3xl font-bold text-gray-900'>
-                {stats.total}
-              </div>
-              <div className='text-sm text-gray-500'>Total Prime Sets</div>
-            </div>
-            <div className='text-center'>
-              <div className='text-3xl font-bold text-green-600'>
-                {stats.buildable}
-              </div>
-              <div className='text-sm text-gray-500'>Ready to Build</div>
-            </div>
-            <div className='text-center'>
-              <div className='text-3xl font-bold text-amber-600'>
-                {stats.mastered}
-              </div>
-              <div className='text-sm text-gray-500'>Mastered</div>
-            </div>
-          </div>
+        <InventoryDashboard
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedStatus={selectedStatus}
+          setSelectedStatus={setSelectedStatus}
+          categories={categories}
+          statusFilters={statusFilters}
+          stats={stats}
+          filteredSetsLength={filteredSets.length}
+          inventoryLength={inventory.length}
+        />
 
-          {/* Filtros */}
-          <div className='flex flex-col sm:flex-row gap-4 items-center'>
-            <div className='flex-1'>
-              <div className='relative'>
-                <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4' />
-                <Input
-                  type='search'
-                  placeholder='Search Prime items...'
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className='pl-10 border-gray-300'
-                />
-              </div>
-            </div>
-
-            <div className='flex gap-3'>
-              <Select
-                value={selectedCategory}
-                onValueChange={setSelectedCategory}
-              >
-                <SelectTrigger className='w-40 border-gray-300'>
-                  <SelectValue placeholder='Category' />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger className='w-40 border-gray-300'>
-                  <SelectValue placeholder='Status' />
-                </SelectTrigger>
-                <SelectContent>
-                  {statusFilters.map((status) => (
-                    <SelectItem key={status} value={status}>
-                      {status}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div className='mt-4 text-sm text-gray-500'>
-            Showing {filteredSets.length} of {inventory.length} Prime sets
-          </div>
-        </div>
-
-        {/* Grid de inventario */}
-        {loading ? (
-          <div className='text-center py-12 text-gray-700'>
-            Loading inventory...
-          </div>
-        ) : filteredSets.length > 0 ? (
-          <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
-            {filteredSets.map((primeSet) => (
-              <PrimeSet
-                key={primeSet.name}
-                primeSet={primeSet}
-                onUpdatePart={handleUpdatePart}
-                onToggleMastery={handleToggleMastery}
-                onBuild={handleBuild}
-                onSell={handleSell}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className='text-center py-12'>
-            <Package className='h-12 w-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-lg font-medium text-gray-900 mb-2'>
-              No Prime sets found
-            </h3>
-            <p className='text-gray-500'>Try adjusting your search filters.</p>
-          </div>
-        )}
+        <InventoryGrid
+          loading={loading}
+          filteredSets={filteredSets}
+          handleUpdatePart={handleUpdatePart}
+          handleToggleMastery={handleToggleMastery}
+          handleBuild={handleBuild}
+          handleSell={handleSell}
+        />
       </div>
 
-      {/* Footer */}
-      <footer className='bg-white border-t border-gray-200 mt-16'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'>
-          <div className='text-center text-sm text-gray-500'>
-            © {new Date().getFullYear()} Prime Inventory. Warframe content and
-            materials are trademarks of Digital Extremes Ltd.
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
