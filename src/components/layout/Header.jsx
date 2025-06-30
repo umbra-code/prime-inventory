@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { Download, Github, Package, Upload } from "lucide-react";
+import { InventoryContext } from "@/context/InventoryContext";
+import { use } from "react";
 
-export function Header({
-  handleImport,
-  handleExport,
-  handleResetInventory,
-}) {
+export function Header() {
+  const { handleImport, handleExport, handleResetInventory } = use(InventoryContext);
+
   return (
     <header className='bg-white border-b border-gray-200 sticky top-0 z-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>

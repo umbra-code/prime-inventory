@@ -2,10 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
+import { InventoryContext } from "@/context/InventoryContext";
+import { use } from "react";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
-export function PrimePart({ part, onUpdateCount }) {
+export function PrimePart({ part }) {
+  const { handleUpdatePart } = use(InventoryContext);
+
   const getPartStatus = () => {
     if (part.userCount === 0) return "missing";
     if (part.userCount < part.required) return "partial";
@@ -34,7 +38,7 @@ export function PrimePart({ part, onUpdateCount }) {
           size='sm'
           variant='outline'
           onClick={() =>
-            onUpdateCount(part.uniqueName, Math.max(0, part.userCount - 1))
+            handleUpdatePart(part.uniqueName, Math.max(0, part.userCount - 1))
           }
           className='h-7 w-7 p-0 border-gray-300'
         >
@@ -46,7 +50,7 @@ export function PrimePart({ part, onUpdateCount }) {
             type='number'
             value={part.userCount}
             onChange={(e) =>
-              onUpdateCount(
+              handleUpdatePart(
                 part.uniqueName,
                 Number.parseInt(e.target.value) || 0
               )
@@ -60,7 +64,7 @@ export function PrimePart({ part, onUpdateCount }) {
         <Button
           size='sm'
           variant='outline'
-          onClick={() => onUpdateCount(part.uniqueName, part.userCount + 1)}
+          onClick={() => handleUpdatePart(part.uniqueName, part.userCount + 1)}
           className='h-7 w-7 p-0 border-gray-300'
         >
           <Plus className='h-3 w-3' />

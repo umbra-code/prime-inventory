@@ -9,20 +9,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { InventoryContext } from "@/context/InventoryContext";
+import { use } from "react";
 
-export function InventoryDashboard({
-  searchTerm,
-  setSearchTerm,
-  selectedCategory,
-  setSelectedCategory,
-  selectedStatus,
-  setSelectedStatus,
-  categories,
-  statusFilters,
-  stats,
-  filteredSetsLength,
-  inventoryLength,
-}) {
+export function InventoryDashboard() {
+  const {
+    searchTerm,
+    setSearchTerm,
+    selectedCategory,
+    setSelectedCategory,
+    selectedStatus,
+    setSelectedStatus,
+    categories,
+    statusFilters,
+    stats,
+    filteredSets,
+    inventory,
+  } = use(InventoryContext);
+
   return (
     <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8'>
       {/* Estadísticas */}
@@ -90,7 +94,7 @@ export function InventoryDashboard({
       </div>
 
       <div className='mt-4 text-sm text-gray-500'>
-        Showing {filteredSetsLength} of {inventoryLength} Prime sets
+        Showing {filteredSets.length} of {inventory.length} Prime sets
       </div>
     </div>
   );

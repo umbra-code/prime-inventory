@@ -2,19 +2,22 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { InventoryContext } from "@/context/InventoryContext";
 import { Minus, Plus, Sparkles } from "lucide-react";
 import Image from "next/image";
+import { use } from "react";
 import { PrimePart } from "./PrimePart";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
-export function PrimeSet({
-  primeSet,
-  onUpdatePart,
-  onToggleMastery,
-  onBuild,
-  onSell,
-}) {
+export function PrimeSet({ primeSet }) {
+  const {
+    handleUpdatePart: onUpdatePart,
+    handleToggleMastery: onToggleMastery,
+    handleBuild: onBuild,
+    handleSell: onSell,
+  } = use(InventoryContext);
+
   const isBuildable =
     primeSet.components?.every((part) => part.userCount >= part.required) ??
     primeSet.userCount >= primeSet.required;
@@ -95,7 +98,7 @@ export function PrimeSet({
         </div>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className={"flex flex-col justify-between h-full"}>
         {/* Partes del set */}
         {primeSet.components && primeSet.components.length > 0 ? (
           <div className='space-y-1 mb-4'>

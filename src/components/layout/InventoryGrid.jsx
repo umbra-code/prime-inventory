@@ -1,16 +1,13 @@
 "use client";
 
 import { PrimeSet } from "@/components/inventory/PrimeSet";
+import { InventoryContext } from "@/context/InventoryContext";
 import { Package } from "lucide-react";
+import { use } from "react";
 
-export function InventoryGrid({
-  loading,
-  filteredSets,
-  handleUpdatePart,
-  handleToggleMastery,
-  handleBuild,
-  handleSell,
-}) {
+export function InventoryGrid() {
+  const { loading, filteredSets } = use(InventoryContext);
+
   if (loading) {
     return (
       <div className='text-center py-12 text-gray-700'>
@@ -34,14 +31,7 @@ export function InventoryGrid({
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
       {filteredSets.map((primeSet) => (
-        <PrimeSet
-          key={primeSet.name}
-          primeSet={primeSet}
-          onUpdatePart={handleUpdatePart}
-          onToggleMastery={handleToggleMastery}
-          onBuild={handleBuild}
-          onSell={handleSell}
-        />
+        <PrimeSet key={primeSet.name} primeSet={primeSet} />
       ))}
     </div>
   );
