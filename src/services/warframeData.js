@@ -12,11 +12,30 @@ export const getPrimeItems = async () => {
 
   // Transform items into PrimeSet and PrimePart format
   const primeSets = primeItems.map(item => {
-    const components = item.components?.filter(comp => comp.tradable).map(comp => ({
+    // Consolidate duplicate components by uniqueName
+    const consolidatedComponents = item.components?.filter(comp => comp.tradable).reduce((acc, comp) => {
+      const existingComp = acc.find(c => c.uniqueName === comp.uniqueName);
+
+      if (existingComp) {
+        // If component already exists, add the itemCount
+        existingComp.itemCount = (existingComp.itemCount || 1) + (comp.itemCount || 1);
+      } else {
+        // If it's a new component, add it to the accumulator
+        acc.push({
+          ...comp,
+          itemCount: comp.itemCount || 1
+        });
+      }
+
+      return acc;
+    }, []) ?? [];
+
+    // Transform consolidated components to the desired format
+    const components = consolidatedComponents.map(comp => ({
       ...comp,
-      required: comp.itemCount || 1,
+      required: comp.itemCount,
       userCount: 0, // Default to 0 for user inventory
-    })) ?? []
+    }));
 
     return {
       ...item,
