@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Download, Github, Package, Search, Upload } from "lucide-react";
+import { Download, Package, Search, Upload, Github } from "lucide-react";
 
 import { PrimeSet } from "@/components/inventory/PrimeSet"; // Keep existing PrimeSet component
 
@@ -281,6 +281,13 @@ export default function PrimeInventory() {
               >
                 Reset
               </Button>
+              <Link
+                href={"https://github.com/umbra-code/prime-inventory"}
+                className='hover:bg-gray-800 hover:text-white rounded-full p-1.5 transition-colors duration-200 ease-in-out'
+                target='_blank'
+              >
+                <Github size={18} />
+              </Link>
               <Link
                 href={"https://github.com/umbra-code/prime-inventory"}
                 className='hover:bg-gray-800 hover:text-white rounded-full p-1.5 transition-colors duration-200 ease-in-out'
