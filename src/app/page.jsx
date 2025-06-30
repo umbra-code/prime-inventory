@@ -24,7 +24,6 @@ import {
   updatePartCount as updateInventoryPartCount,
 } from "@/services/userInventory";
 import { getPrimeItems } from "@/services/warframeData";
-import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function PrimeInventory() {
@@ -45,50 +44,50 @@ export default function PrimeInventory() {
     "Extra Sets",
   ];
 
+  const fetchInventory = async () => {
+    try {
+      const data = await getPrimeItems();
+      setCategories(allCategories);
+      const loadedData = loadInventory();
+      const masteredSets = new Set(loadedData.masteredSets);
+      const partCountsMap = new Map(
+        loadedData.partCounts.map((p) => [p.uniqueName, p.userCount])
+      );
+
+      const mergedInventory = data?.map((item) => {
+        const newItem = { ...item };
+
+        // Apply mastered status
+        if (masteredSets.has(newItem.name)) {
+          newItem.isMastered = true;
+        }
+
+        // Apply part counts
+        if (newItem.components) {
+          newItem.components = newItem.components.map((part) => {
+            const userCount = partCountsMap.get(part.uniqueName);
+            if (userCount !== undefined) {
+              return { ...part, userCount };
+            }
+            return part;
+          });
+        } else if (partCountsMap.has(newItem.uniqueName)) {
+          // For direct items (e.g., mods) that have a userCount
+          newItem.userCount = partCountsMap.get(newItem.uniqueName);
+        }
+        return newItem;
+      });
+      setInventory(mergedInventory);
+      saveInventory(mergedInventory); // Save the merged inventory immediately after setting it
+    } catch (error) {
+      console.error("Failed to fetch inventory:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Fetch data from the API route
   useEffect(() => {
-    const fetchInventory = async () => {
-      try {
-        const data = await getPrimeItems();
-        setCategories(allCategories);
-        const loadedData = loadInventory();
-        const masteredSets = new Set(loadedData.masteredSets);
-        const partCountsMap = new Map(
-          loadedData.partCounts.map((p) => [p.uniqueName, p.userCount])
-        );
-
-        const mergedInventory = data?.map((item) => {
-          const newItem = { ...item };
-
-          // Apply mastered status
-          if (masteredSets.has(newItem.name)) {
-            newItem.isMastered = true;
-          }
-
-          // Apply part counts
-          if (newItem.components) {
-            newItem.components = newItem.components.map((part) => {
-              const userCount = partCountsMap.get(part.uniqueName);
-              if (userCount !== undefined) {
-                return { ...part, userCount };
-              }
-              return part;
-            });
-          } else if (partCountsMap.has(newItem.uniqueName)) {
-            // For direct items (e.g., mods) that have a userCount
-            newItem.userCount = partCountsMap.get(newItem.uniqueName);
-          }
-          return newItem;
-        });
-        setInventory(mergedInventory);
-        saveInventory(mergedInventory); // Save the merged inventory immediately after setting it
-      } catch (error) {
-        console.error("Failed to fetch inventory:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchInventory();
   }, []); // Empty dependency array means this runs once on mount
 
@@ -141,7 +140,11 @@ export default function PrimeInventory() {
   }, [inventory]);
 
   const handleUpdatePart = (uniqueName, newCount) => {
-    const updatedInventory = updateInventoryPartCount(inventory, uniqueName, newCount);
+    const updatedInventory = updateInventoryPartCount(
+      inventory,
+      uniqueName,
+      newCount
+    );
     setInventory(updatedInventory);
   };
 
@@ -231,10 +234,8 @@ export default function PrimeInventory() {
       )
     ) {
       resetUserInventory();
-      setInventory([]); // Reset the state as well
-
-      // Optionally, re-fetch initial data if needed
-      // fetchInventory();
+      setInventory([]);
+      fetchInventory();
     }
   };
 
