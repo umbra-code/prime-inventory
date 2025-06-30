@@ -8,8 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search } from "lucide-react";
 import { InventoryContext } from "@/context/InventoryContext";
+import { Search } from "lucide-react";
 import { use } from "react";
 
 export function InventoryDashboard() {
@@ -28,24 +28,32 @@ export function InventoryDashboard() {
   } = use(InventoryContext);
 
   return (
-    <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8'>
+    <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8 dark:bg-gray-900 dark:border-gray-800'>
       {/* Estadísticas */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-6'>
         <div className='text-center'>
-          <div className='text-3xl font-bold text-gray-900'>{stats.total}</div>
-          <div className='text-sm text-gray-500'>Total Prime Sets</div>
+          <div className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
+            {stats.total}
+          </div>
+          <div className='text-sm text-gray-500 dark:text-gray-400'>
+            Total Prime Sets
+          </div>
         </div>
         <div className='text-center'>
           <div className='text-3xl font-bold text-green-600'>
             {stats.buildable}
           </div>
-          <div className='text-sm text-gray-500'>Ready to Build</div>
+          <div className='text-sm text-gray-500 dark:text-gray-400'>
+            Ready to Build
+          </div>
         </div>
         <div className='text-center'>
           <div className='text-3xl font-bold text-amber-600'>
             {stats.mastered}
           </div>
-          <div className='text-sm text-gray-500'>Mastered</div>
+          <div className='text-sm text-gray-500 dark:text-gray-400'>
+            Mastered
+          </div>
         </div>
       </div>
 
@@ -59,19 +67,23 @@ export function InventoryDashboard() {
               placeholder='Search Prime items...'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='pl-10 border-gray-300'
+              className='pl-10 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'
             />
           </div>
         </div>
 
         <div className='flex gap-3'>
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className='w-40 border-gray-300'>
+            <SelectTrigger className='w-40 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'>
               <SelectValue placeholder='Category' />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className='dark:bg-gray-800 dark:border-gray-700'>
               {categories.map((category) => (
-                <SelectItem key={category} value={category}>
+                <SelectItem
+                  key={category}
+                  value={category}
+                  className='dark:text-gray-100 dark:hover:bg-gray-700'
+                >
                   {category}
                 </SelectItem>
               ))}
@@ -79,12 +91,16 @@ export function InventoryDashboard() {
           </Select>
 
           <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-            <SelectTrigger className='w-40 border-gray-300'>
+            <SelectTrigger className='w-40 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'>
               <SelectValue placeholder='Status' />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className='dark:bg-gray-800 dark:border-gray-700'>
               {statusFilters.map((status) => (
-                <SelectItem key={status} value={status}>
+                <SelectItem
+                  key={status}
+                  value={status}
+                  className='dark:text-gray-100 dark:hover:bg-gray-700'
+                >
                   {status}
                 </SelectItem>
               ))}
@@ -93,7 +109,7 @@ export function InventoryDashboard() {
         </div>
       </div>
 
-      <div className='mt-4 text-sm text-gray-500'>
+      <div className='mt-4 text-sm text-gray-500 dark:text-gray-400'>
         Showing {filteredSets.length} of {inventory.length} Prime sets
       </div>
     </div>

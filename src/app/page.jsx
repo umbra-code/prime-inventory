@@ -31,7 +31,7 @@ function PrimeInventoryContent() {
   } = use(InventoryContext);
 
   return (
-    <div className='flex flex-col min-h-screen bg-gray-50'>
+    <div className='flex flex-col min-h-screen bg-gray-50 dark:bg-gray-950'>
       <Header
         handleImport={handleImport}
         handleExport={handleExport}

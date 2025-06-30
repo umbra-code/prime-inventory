@@ -17,9 +17,9 @@ export function PrimePart({ part }) {
   };
 
   return (
-    <div className='flex items-center justify-between py-2 px-3 border-l-4 border-l-gray-200 hover:border-l-amber-500 hover:bg-gray-50 transition-colors'>
+    <div className='flex items-center justify-between py-2 px-3 border-l-4 border-l-gray-200 hover:border-l-amber-500 hover:bg-gray-50 transition-colors dark:border-l-gray-700 dark:hover:bg-gray-800'>
       <div className='flex items-center space-x-3'>
-        <div className='p-px bg-gray-100/50 rounded'>
+        <div className='p-px bg-gray-100/50 rounded dark:bg-gray-800/50'>
           {part.imageName && (
             <Image
               src={`${IMAGE_BASE_URL}${part.imageName}`}
@@ -30,7 +30,7 @@ export function PrimePart({ part }) {
             />
           )}
         </div>
-        <span className='text-sm font-medium text-gray-900'>{part.name}</span>
+        <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{part.name}</span>
       </div>
 
       <div className='flex items-center space-x-2'>
@@ -40,7 +40,7 @@ export function PrimePart({ part }) {
           onClick={() =>
             handleUpdatePart(part.uniqueName, Math.max(0, part.userCount - 1))
           }
-          className='h-7 w-7 p-0 border-gray-300'
+          className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Minus className='h-3 w-3' />
         </Button>
@@ -55,17 +55,17 @@ export function PrimePart({ part }) {
                 Number.parseInt(e.target.value) || 0
               )
             }
-            className='w-10 h-7 text-center text-xs border-gray-300 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+            className='w-10 h-7 text-center text-xs border-gray-300 dark:bg-gray-900 dark:border-gray-600 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             min='0'
           />
-          <span className='text-xs text-gray-500'>/{part.required}</span>
+          <span className='text-xs text-gray-500 dark:text-gray-400'>/{part.required}</span>
         </div>
 
         <Button
           size='sm'
           variant='outline'
           onClick={() => handleUpdatePart(part.uniqueName, part.userCount + 1)}
-          className='h-7 w-7 p-0 border-gray-300'
+          className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Plus className='h-3 w-3' />
         </Button>
