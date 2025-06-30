@@ -124,7 +124,7 @@ Crear una Single Page Application (SPA) para que los jugadores de Warframe pueda
   - [x] Manejo flexible de items sin componentes (mods Prime)
   - [ ] Cálculo automático de valor de platino (opcional)
   - [x] Estadísticas del inventario (total de partes, sets completos, etc.)
-  - [ ] Modo oscuro/claro
+  - [x] Modo oscuro/claro
 
 ---
 
