@@ -24,10 +24,11 @@ Prime Inventory is a dedicated Single Page Application (SPA) meticulously crafte
 - **Local Data Storage:** `localStorage` (100% client-side)
 - **State Management:** React Context API with `useState` and `useReducer`
 
+<!-- TODO: Poner website
 ## Website
 
 Explore Prime Inventory in action and learn more about its features at:
-[https://www.primeinventoryapp.com](https://www.primeinventoryapp.com) (Placeholder - will be updated with the official link)
+[https://www.primeinventoryapp.com](https://www.primeinventoryapp.com) (Placeholder - will be updated with the official link) -->
 
 ## Getting Started
 
