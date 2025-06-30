@@ -139,8 +139,8 @@ export function PrimeSet({
             size='sm'
             className={`text-xs ${
               primeSet.isMastered
-                ? "text-amber-700 bg-amber-50"
-                : "text-gray-500"
+                ? "text-amber-700 bg-amber-50 hover:bg-amber-100 hover:text-amber-900"
+                : "text-gray-500 hover:bg-gray-100"
             }`}
           >
             {primeSet.isMastered ? "✓ Mastered" : "Mark as Mastered"}
