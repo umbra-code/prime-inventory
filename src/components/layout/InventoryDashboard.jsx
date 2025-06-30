@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { InventoryContext } from "@/context/InventoryContext";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { use } from "react";
 
 export function InventoryDashboard() {
@@ -67,8 +67,16 @@ export function InventoryDashboard() {
               placeholder='Search Prime items...'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='pl-10 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'
+              className='pl-10 pr-10 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className='absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1'
+              >
+                <X size={20} />
+              </button>
+            )}
           </div>
         </div>
 
