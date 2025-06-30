@@ -240,7 +240,7 @@ export default function PrimeInventory() {
   };
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='flex flex-col min-h-screen bg-gray-50'>
       {/* Header */}
       <header className='bg-white border-b border-gray-200 sticky top-0 z-50'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -293,7 +293,7 @@ export default function PrimeInventory() {
         </div>
       </header>
 
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+      <div className='flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full'>
         {/* Panel de control */}
         <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8'>
           {/* Estadísticas */}
@@ -324,7 +324,7 @@ export default function PrimeInventory() {
               <div className='relative'>
                 <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4' />
                 <Input
-                  type='text'
+                  type='search'
                   placeholder='Search Prime items...'
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
