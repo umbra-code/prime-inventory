@@ -280,13 +280,14 @@ export default function PrimeInventory() {
               >
                 Reset
               </Button>
-              <Link
+              <a
                 href={"https://github.com/umbra-code/prime-inventory"}
                 className='hover:bg-gray-800 hover:text-white rounded-full p-1.5 transition-colors duration-200 ease-in-out'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 <Github size={18} />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

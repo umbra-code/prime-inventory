@@ -28,7 +28,6 @@ export const loadInventory = () => {
   console.log("Loading inventory from localStorage...");
   try {
     const storedData = localStorage.getItem('primeInventory');
-    console.log("Stored data:", storedData);
     return storedData ? JSON.parse(storedData) : { masteredSets: [], partCounts: [] };
   } catch (error) {
     console.error('Failed to load inventory from localStorage:', error);
