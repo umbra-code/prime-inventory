@@ -25,7 +25,7 @@ import {
 } from "@/services/userInventory";
 import { getPrimeItems } from "@/services/warframeData";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function PrimeInventory() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,6 +34,7 @@ export default function PrimeInventory() {
   const [inventory, setInventory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isInitialMount = useRef(true);
 
   // Define statusFilters here as it's used in the JSX directly
   const statusFilters = [
@@ -50,22 +51,37 @@ export default function PrimeInventory() {
       try {
         const data = await getPrimeItems();
         setCategories(allCategories);
-        const loadedInventory = loadInventory();
-        if (loadedInventory) {
-          // Merge loaded inventory with fetched data
-          const mergedInventory = data?.map((item) => {
-            const userItem = loadedInventory.find(
-              (userItem) => userItem.name === item.name
-            );
-            if (userItem) {
-              return { ...item, ...userItem };
-            }
-            return item;
-          });
-          setInventory(mergedInventory);
-        } else {
-          setInventory(data);
-        }
+        const loadedData = loadInventory();
+        const masteredSets = new Set(loadedData.masteredSets);
+        const partCountsMap = new Map(
+          loadedData.partCounts.map((p) => [p.uniqueName, p.userCount])
+        );
+
+        const mergedInventory = data?.map((item) => {
+          const newItem = { ...item };
+
+          // Apply mastered status
+          if (masteredSets.has(newItem.name)) {
+            newItem.isMastered = true;
+          }
+
+          // Apply part counts
+          if (newItem.components) {
+            newItem.components = newItem.components.map((part) => {
+              const userCount = partCountsMap.get(part.uniqueName);
+              if (userCount !== undefined) {
+                return { ...part, userCount };
+              }
+              return part;
+            });
+          } else if (partCountsMap.has(newItem.uniqueName)) {
+            // For direct items (e.g., mods) that have a userCount
+            newItem.userCount = partCountsMap.get(newItem.uniqueName);
+          }
+          return newItem;
+        });
+        setInventory(mergedInventory);
+        saveInventory(mergedInventory); // Save the merged inventory immediately after setting it
       } catch (error) {
         console.error("Failed to fetch inventory:", error);
       } finally {
@@ -77,7 +93,11 @@ export default function PrimeInventory() {
   }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
-    saveInventory(inventory);
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      saveInventory(inventory);
+    }
   }, [inventory]);
 
   // Filtrar sets basado en búsqueda, categoría y estado
@@ -121,34 +141,13 @@ export default function PrimeInventory() {
   }, [inventory]);
 
   const handleUpdatePart = (uniqueName, newCount) => {
-    updateInventoryPartCount(uniqueName, newCount);
-    const newInventory = inventory.map((set) => {
-      if (set.components) {
-        const newComponents = set.components.map((part) => {
-          if (part.uniqueName === uniqueName) {
-            return { ...part, userCount: newCount };
-          }
-          return part;
-        });
-        return { ...set, components: newComponents };
-      }
-      if (set.uniqueName === uniqueName) {
-        return { ...set, userCount: newCount };
-      }
-      return set;
-    });
-    setInventory(newInventory);
+    const updatedInventory = updateInventoryPartCount(inventory, uniqueName, newCount);
+    setInventory(updatedInventory);
   };
 
   const handleToggleMastery = (setName) => {
-    toggleInventoryMastery(setName);
-    const newInventory = inventory.map((set) => {
-      if (set.name === setName) {
-        return { ...set, isMastered: !set.isMastered };
-      }
-      return set;
-    });
-    setInventory(newInventory);
+    const updatedInventory = toggleInventoryMastery(inventory, setName);
+    setInventory(updatedInventory);
   };
 
   const handleBuild = (primeSet) => {
