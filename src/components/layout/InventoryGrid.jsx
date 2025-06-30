@@ -19,7 +19,7 @@ export function InventoryGrid() {
   if (filteredSets.length === 0) {
     return (
       <div className='text-center py-12'>
-        <Package className='h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4' />
+        <img src="/wf.png" alt="Warframe Logo" className='h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4' />
         <h3 className='text-lg font-medium text-gray-900 dark:text-gray-100 mb-2'>
           No Prime sets found
         </h3>
