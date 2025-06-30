@@ -19,8 +19,33 @@ export function PrimeSet({
     primeSet.components?.every((part) => part.userCount >= part.required) ??
     primeSet.userCount >= primeSet.required;
 
+  const progressPercentage = (() => {
+    if (primeSet.components && primeSet.components.length > 0) {
+      const totalEffectiveObtained = primeSet.components.reduce(
+        (sum, part) => sum + Math.min(part.userCount || 0, part.required || 1),
+        0
+      );
+      const totalRequired = primeSet.components.reduce(
+        (sum, part) => sum + (part.required || 1),
+        0
+      );
+      return totalRequired > 0
+        ? Math.min(100, (totalEffectiveObtained / totalRequired) * 100)
+        : 0;
+    } else {
+      // For direct items (no components)
+      const userCount = primeSet.userCount || 0;
+      const required = primeSet.required || 1;
+      return required > 0 ? Math.min(100, (userCount / required) * 100) : 0;
+    }
+  })();
+
   return (
-    <Card className='border border-gray-200 shadow-sm hover:shadow-md transition-shadow'>
+    <Card className='border border-gray-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden'>
+      <div
+        className='absolute bottom-0 left-0 h-1 bg-amber-500 transition-all duration-300 ease-in-out'
+        style={{ width: `${progressPercentage}%` }}
+      />
       <CardHeader className='border-b border-gray-100 !pb-0'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center space-x-3'>
@@ -139,7 +164,7 @@ export function PrimeSet({
             size='sm'
             className={`text-xs ${
               primeSet.isMastered
-                ? "text-amber-700 bg-amber-50 hover:bg-amber-100 hover:text-amber-900"
+                ? "text-amber-800 bg-amber-50 hover:bg-amber-600 hover:text-white"
                 : "text-gray-500 hover:bg-gray-100"
             }`}
           >
