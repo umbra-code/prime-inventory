@@ -94,3 +94,24 @@ export const saveFilters = (filters) => {
     // Filters are a convenience; ignore storage failures.
   }
 };
+
+const VIEW_KEY = "primeInventoryView";
+export const views = ["inventory", "missing"];
+
+/** Last open tab, defaulting to the inventory. */
+export const loadView = () => {
+  try {
+    const view = localStorage.getItem(VIEW_KEY);
+    return views.includes(view) ? view : "inventory";
+  } catch {
+    return "inventory";
+  }
+};
+
+export const saveView = (view) => {
+  try {
+    localStorage.setItem(VIEW_KEY, view);
+  } catch {
+    // Remembering the tab is a convenience; ignore storage failures.
+  }
+};

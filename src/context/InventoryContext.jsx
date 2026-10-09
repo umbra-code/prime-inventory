@@ -8,10 +8,13 @@ import {
   filterAndSortSets,
   getCategories,
   loadFilters,
+  loadView,
   saveFilters,
+  saveView,
   sortOptions,
   statusFilters,
 } from "@/services/filters";
+import { groupMissingPartsByRelic } from "@/services/missingParts";
 import {
   emptyUserData,
   getCount,
@@ -57,6 +60,7 @@ export function InventoryProvider({ children }) {
   const [catalog, setCatalog] = useState(getInitialCatalog);
   const [userData, dispatch] = useReducer(userDataReducer, catalog.sets, loadUserData);
   const [searchTerm, setSearchTerm] = useState("");
+  const [view, setView] = useState(loadView);
   const [initialFilters] = useState(() => loadFilters(getCategories(catalog.sets)));
   const [selectedCategory, setSelectedCategory] = useState(initialFilters.category);
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
@@ -75,6 +79,10 @@ export function InventoryProvider({ children }) {
   useEffect(() => {
     if (userData !== receivedFromStorage.current) saveUserData(userData);
   }, [userData]);
+
+  useEffect(() => {
+    saveView(view);
+  }, [view]);
 
   useEffect(() => {
     saveFilters({
@@ -158,10 +166,21 @@ export function InventoryProvider({ children }) {
       },
 
       resetInventory: () => replaceAll(emptyUserData(), "Inventory reset"),
+
+      showSetInInventory: (set) => {
+        setSearchTerm(set.name);
+        setView("inventory");
+        window.scrollTo({ top: 0 });
+      },
     };
   }, []);
 
   const categories = useMemo(() => getCategories(catalog.sets), [catalog]);
+
+  const missingParts = useMemo(
+    () => groupMissingPartsByRelic(catalog.sets, userData),
+    [catalog, userData]
+  );
 
   // One entry per set: owned counts per component, progress and status.
   const summaries = useMemo(() => {
@@ -226,6 +245,9 @@ export function InventoryProvider({ children }) {
       stats,
       summaries,
       filteredSets,
+      missingParts,
+      view,
+      setView,
     }),
     [
       catalog,
@@ -239,6 +261,8 @@ export function InventoryProvider({ children }) {
       stats,
       summaries,
       filteredSets,
+      missingParts,
+      view,
     ]
   );
 

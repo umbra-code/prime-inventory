@@ -32,7 +32,7 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] Sorting (name, progress, ready first), progress and missing parts on each card
 - [x] Distinct card states (ready, extra set, progress-scaled accent) and "Almost Complete" filter
 - [x] Theme selector (System / Light / Dark)
-- [ ] "Missing parts" shopping-list view
+- [x] Missing Parts tab: parts of non-mastered sets grouped by the relics available now
 - [ ] warframe.market prices (needs a proxy because of CORS)
 - [ ] Installable PWA with full offline support
 - [ ] i18n

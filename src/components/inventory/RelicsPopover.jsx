@@ -1,14 +1,8 @@
 "use client";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RARITY_CLASS } from "@/lib/relics";
 import { Gem } from "lucide-react";
-
-// In-game relic reward tiers: bronze, silver and gold.
-const RARITY_CLASS = {
-  Common: "text-[#9a5b2e] dark:text-[#d9a066]",
-  Uncommon: "text-slate-500 dark:text-slate-300",
-  Rare: "text-yellow-600 dark:text-yellow-400",
-};
 
 /** Button listing the relics a part drops from; available relics come first. */
 export function RelicsPopover({ relics = [], label }) {
