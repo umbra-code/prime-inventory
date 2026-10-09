@@ -134,6 +134,9 @@ const en = {
   backFromVaultHint: "Vaulted Primes whose relics drop again right now.",
   releasedIn: "{update} · {date}",
   highlightIncomplete: "{percent}%",
+  primeResurgence: "Prime Resurgence",
+  resurgenceEnds: "ends {relative}",
+  resurgenceHint: "Varzia sells these Primes at {location} for Aya or Regal Aya until {date}.",
 
   // Missing Parts
   relicTitle: "{name} Relic",
@@ -320,6 +323,9 @@ const es = {
   backFromVaultHint: "Prime en bóveda cuyas reliquias vuelven a caer ahora.",
   releasedIn: "{update} · {date}",
   highlightIncomplete: "{percent}%",
+  primeResurgence: "Resurgimiento Prime",
+  resurgenceEnds: "termina {relative}",
+  resurgenceHint: "Varzia vende estos Prime en {location} por Aya o Aya Regia hasta el {date}.",
 
   relicTitle: "Reliquia {name}",
   partsYouNeed: { one: "te sirve {count} parte", other: "te sirven {count} partes" },

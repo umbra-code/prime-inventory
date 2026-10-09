@@ -3,6 +3,7 @@
 import { InventoryDashboard } from "@/components/layout/InventoryDashboard";
 import { InventoryGrid } from "@/components/layout/InventoryGrid";
 import { NowInGame } from "@/components/layout/NowInGame";
+import { PrimeResurgence } from "@/components/layout/PrimeResurgence";
 import { MissingPartsView } from "@/components/missing/MissingPartsView";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InventoryStateContext } from "@/context/InventoryContext";
@@ -28,7 +29,10 @@ export function AppTabs() {
       </TabsList>
 
       <TabsContent value='inventory'>
-        <NowInGame />
+        <div className='mb-8 flex flex-col gap-3 empty:hidden'>
+          <NowInGame />
+          <PrimeResurgence />
+        </div>
         <InventoryDashboard />
         <InventoryGrid />
       </TabsContent>
