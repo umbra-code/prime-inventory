@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useState, useEffect, useMemo, useRef } from "react";
-import { categories as allCategories } from "@/lib/utils";
+import { createContext, useState, useEffect, useMemo } from "react";
 import {
   buildItem as buildInventoryItem,
+  clearUserData,
   loadInventory,
   resetInventory as resetUserInventory,
   saveInventory,
@@ -15,73 +15,69 @@ import { getPrimeItems } from "@/services/warframeData";
 
 export const InventoryContext = createContext(undefined);
 
+const statusFilters = ["All", "Buildable", "Incomplete", "Mastered", "Extra Sets"];
+
+const mergeWithSavedInventory = (data) => {
+  const loadedData = loadInventory();
+  const masteredSets = new Set(loadedData.masteredSets);
+  const partCountsMap = new Map(
+    loadedData.partCounts.map((p) => [p.uniqueName, p.userCount])
+  );
+
+  return data.map((item) => {
+    const newItem = { ...item };
+
+    if (masteredSets.has(newItem.name)) {
+      newItem.isMastered = true;
+    }
+
+    if (newItem.components) {
+      newItem.components = newItem.components.map((part) => {
+        const userCount = partCountsMap.get(part.uniqueName);
+        if (userCount !== undefined) {
+          return { ...part, userCount };
+        }
+        return part;
+      });
+    } else if (partCountsMap.has(newItem.uniqueName)) {
+      newItem.userCount = partCountsMap.get(newItem.uniqueName);
+    }
+    return newItem;
+  });
+};
+
 export function InventoryProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [inventory, setInventory] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const isInitialMount = useRef(true);
-
-  const statusFilters = [
-    "All",
-    "Buildable",
-    "Incomplete",
-    "Mastered",
-    "Extra Sets",
-  ];
-
-  const fetchInventory = async () => {
-    try {
-      const data = await getPrimeItems();
-      setCategories(allCategories);
-      const loadedData = loadInventory();
-      const masteredSets = new Set(loadedData.masteredSets);
-      const partCountsMap = new Map(
-        loadedData.partCounts.map((p) => [p.uniqueName, p.userCount])
-      );
-
-      const mergedInventory = data?.map((item) => {
-        const newItem = { ...item };
-
-        if (masteredSets.has(newItem.name)) {
-          newItem.isMastered = true;
-        }
-
-        if (newItem.components) {
-          newItem.components = newItem.components.map((part) => {
-            const userCount = partCountsMap.get(part.uniqueName);
-            if (userCount !== undefined) {
-              return { ...part, userCount };
-            }
-            return part;
-          });
-        } else if (partCountsMap.has(newItem.uniqueName)) {
-          newItem.userCount = partCountsMap.get(newItem.uniqueName);
-        }
-        return newItem;
-      });
-      setInventory(mergedInventory);
-      saveInventory(mergedInventory);
-    } catch (error) {
-      console.error("Failed to fetch inventory:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchInventory();
+    let cancelled = false;
+    getPrimeItems()
+      .then((data) => {
+        if (!cancelled) setInventory(mergeWithSavedInventory(data ?? []));
+      })
+      .catch((error) => console.error("Failed to fetch inventory:", error))
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
+  // Only persist once the saved data has been merged in; saving earlier would
+  // overwrite localStorage with an empty inventory (e.g. StrictMode remounts).
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      saveInventory(inventory);
-    }
-  }, [inventory]);
+    if (!loading) saveInventory(inventory);
+  }, [inventory, loading]);
+
+  const categories = useMemo(
+    () => ["All", ...new Set(inventory.map((set) => set.category))],
+    [inventory]
+  );
 
   const filteredSets = useMemo(() => {
     return inventory.filter((set) => {
@@ -124,7 +120,7 @@ export function InventoryProvider({ children }) {
     const updatedInventory = updateInventoryPartCount(
       inventory,
       uniqueName,
-      newCount
+      Math.max(0, Math.floor(newCount) || 0)
     );
     setInventory(updatedInventory);
   };
@@ -183,7 +179,6 @@ export function InventoryProvider({ children }) {
             }
 
             setInventory(importedInventory);
-            saveInventory(importedInventory);
           } catch (error) {
             console.error("Failed to parse imported inventory:", error);
           }
@@ -214,8 +209,7 @@ export function InventoryProvider({ children }) {
       )
     ) {
       resetUserInventory();
-      setInventory([]);
-      fetchInventory();
+      setInventory(clearUserData);
     }
   };
 

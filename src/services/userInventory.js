@@ -25,7 +25,6 @@ export const saveInventory = (inventory) => {
 };
 
 export const loadInventory = () => {
-  console.log("Loading inventory from localStorage...");
   try {
     const storedData = localStorage.getItem('primeInventory');
     return storedData ? JSON.parse(storedData) : { masteredSets: [], partCounts: [] };
@@ -103,8 +102,16 @@ export const sellItem = (currentInventory, primeSet) => {
 export const resetInventory = () => {
   try {
     localStorage.removeItem('primeInventory');
-    console.log('Inventory reset in localStorage.');
   } catch (error) {
     console.error('Failed to reset inventory in localStorage:', error);
   }
+};
+
+export const clearUserData = (currentInventory) => {
+  return currentInventory.map((set) => ({
+    ...set,
+    isMastered: false,
+    userCount: 0,
+    components: set.components?.map((part) => ({ ...part, userCount: 0 })),
+  }));
 };

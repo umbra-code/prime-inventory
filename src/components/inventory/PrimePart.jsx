@@ -52,9 +52,11 @@ export function PrimePart({ part }) {
             onChange={(e) =>
               handleUpdatePart(
                 part.uniqueName,
-                Number.parseInt(e.target.value) || 0
+                Number.parseInt(e.target.value, 10)
               )
             }
+            onFocus={(e) => e.target.select()}
+            inputMode='numeric'
             className='w-10 h-7 text-center text-xs border-gray-300 dark:bg-gray-900 dark:border-gray-600 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             min='0'
           />
