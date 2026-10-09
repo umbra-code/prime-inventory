@@ -2,17 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
-import { InventoryContext } from "@/context/InventoryContext";
-import { use } from "react";
+import { InventoryActionsContext } from "@/context/InventoryContext";
+import { memo, use } from "react";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
-export function PrimePart({ part }) {
-  const { handleUpdatePart } = use(InventoryContext);
+export const PrimePart = memo(function PrimePart({ part, count }) {
+  const { updatePart } = use(InventoryActionsContext);
 
   const getPartStatus = () => {
-    if (part.userCount === 0) return "missing";
-    if (part.userCount < part.required) return "partial";
+    if (count === 0) return "missing";
+    if (count < part.required) return "partial";
     return "complete";
   };
 
@@ -24,9 +24,8 @@ export function PrimePart({ part }) {
             <Image
               src={`${IMAGE_BASE_URL}${part.imageName}`}
               alt={part.name}
-              width={32} // Corresponds to w-8 (32px)
-              height={32} // Corresponds to h-8 (32px)
-              className='' // Remove object-contain, keep original size
+              width={32}
+              height={32}
             />
           )}
         </div>
@@ -38,7 +37,7 @@ export function PrimePart({ part }) {
           size='sm'
           variant='outline'
           onClick={() =>
-            handleUpdatePart(part.uniqueName, Math.max(0, part.userCount - 1))
+            updatePart(part.uniqueName, Math.max(0, count - 1))
           }
           className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
@@ -48,9 +47,9 @@ export function PrimePart({ part }) {
         <div className='flex items-center space-x-1 min-w-[60px] justify-center'>
           <Input
             type='number'
-            value={part.userCount}
+            value={count}
             onChange={(e) =>
-              handleUpdatePart(
+              updatePart(
                 part.uniqueName,
                 Number.parseInt(e.target.value, 10)
               )
@@ -66,7 +65,7 @@ export function PrimePart({ part }) {
         <Button
           size='sm'
           variant='outline'
-          onClick={() => handleUpdatePart(part.uniqueName, part.userCount + 1)}
+          onClick={() => updatePart(part.uniqueName, count + 1)}
           className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Plus className='h-3 w-3' />
@@ -84,4 +83,4 @@ export function PrimePart({ part }) {
       </div>
     </div>
   );
-}
+});

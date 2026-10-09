@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { InventoryContext } from "@/context/InventoryContext";
+import { InventoryStateContext } from "@/context/InventoryContext";
 import { Search, X } from "lucide-react";
 import { use } from "react";
 
@@ -24,12 +24,11 @@ export function InventoryDashboard() {
     statusFilters,
     stats,
     filteredSets,
-    inventory,
-  } = use(InventoryContext);
+  } = use(InventoryStateContext);
 
   return (
     <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8 dark:bg-gray-900 dark:border-gray-800'>
-      {/* Estadísticas */}
+      {/* Stats */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-6'>
         <div className='text-center'>
           <div className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
@@ -57,7 +56,7 @@ export function InventoryDashboard() {
         </div>
       </div>
 
-      {/* Filtros */}
+      {/* Filters */}
       <div className='flex flex-col sm:flex-row gap-4 items-center'>
         <div className='flex-1'>
           <div className='relative'>
@@ -118,7 +117,7 @@ export function InventoryDashboard() {
       </div>
 
       <div className='mt-4 text-sm text-gray-500 dark:text-gray-400'>
-        Showing {filteredSets.length} of {inventory.length} Prime sets
+        Showing {filteredSets.length} of {stats.total} Prime sets
       </div>
     </div>
   );

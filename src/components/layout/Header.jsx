@@ -1,19 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Download, Github, Package, Upload } from "lucide-react";
-import { InventoryContext } from "@/context/InventoryContext";
+import { Download, Github, Upload } from "lucide-react";
+import { InventoryActionsContext } from "@/context/InventoryContext";
 import { use } from "react";
 import { ThemeToggler } from "./ThemeToggler";
 
 export function Header() {
-  const { handleImport, handleExport, handleResetInventory } = use(InventoryContext);
+  const { importInventory, exportInventory, resetInventory } = use(InventoryActionsContext);
 
   return (
     <header className='bg-white border-b border-gray-200 sticky top-0 z-50 dark:bg-gray-900 dark:border-gray-800'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
-          {/* Logo y título */}
+          {/* Logo and title */}
           <div className='flex items-center space-x-4'>
             <div className='flex items-center space-x-3'>
             <img src="/wf.png" alt="Warframe Logo" className='h-8 w-8' />
@@ -26,15 +26,15 @@ export function Header() {
           </div>
           </div>
 
-          {/* Acciones principales */}
+          {/* Main actions */}
           <div className='flex items-center space-x-3'>
             <ThemeToggler />
-            <Button variant='outline' onClick={handleImport} size='sm'>
+            <Button variant='outline' onClick={importInventory} size='sm'>
               <Upload className='size-4' />
               Import
             </Button>
             <Button
-              onClick={handleExport}
+              onClick={exportInventory}
               size='sm'
               className='bg-amber-600 hover:bg-amber-700'
             >
@@ -43,7 +43,7 @@ export function Header() {
             </Button>
             <Button
               className={"bg-red-600 hover:bg-red-700"}
-              onClick={handleResetInventory}
+              onClick={resetInventory}
               size='sm'
             >
               Reset

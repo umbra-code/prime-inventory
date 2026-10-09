@@ -1,47 +1,32 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { InventoryContext } from "@/context/InventoryContext";
-import { Minus, Plus, Sparkles } from "lucide-react";
+import { InventoryActionsContext } from "@/context/InventoryContext";
 import Image from "next/image";
-import { use } from "react";
+import { memo, use } from "react";
 import { PrimePart } from "./PrimePart";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
-export function PrimeSet({ primeSet }) {
-  const {
-    handleUpdatePart: onUpdatePart,
-    handleToggleMastery: onToggleMastery,
-    handleBuild: onBuild,
-    handleSell: onSell,
-  } = use(InventoryContext);
+// `counts` holds the owned count of each component, in the same order as
+// `primeSet.components`; comparing it element-wise lets unaffected cards skip renders.
+const arePropsEqual = (prev, next) =>
+  prev.primeSet === next.primeSet &&
+  prev.isMastered === next.isMastered &&
+  prev.counts.length === next.counts.length &&
+  prev.counts.every((count, i) => count === next.counts[i]);
 
-  const isBuildable =
-    primeSet.components?.every((part) => part.userCount >= part.required) ??
-    primeSet.userCount >= primeSet.required;
+export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered }) {
+  const { toggleMastery, build, sell } = use(InventoryActionsContext);
 
-  const progressPercentage = (() => {
-    if (primeSet.components && primeSet.components.length > 0) {
-      const totalEffectiveObtained = primeSet.components.reduce(
-        (sum, part) => sum + Math.min(part.userCount || 0, part.required || 1),
-        0
-      );
-      const totalRequired = primeSet.components.reduce(
-        (sum, part) => sum + (part.required || 1),
-        0
-      );
-      return totalRequired > 0
-        ? Math.min(100, (totalEffectiveObtained / totalRequired) * 100)
-        : 0;
-    } else {
-      // For direct items (no components)
-      const userCount = primeSet.userCount || 0;
-      const required = primeSet.required || 1;
-      return required > 0 ? Math.min(100, (userCount / required) * 100) : 0;
-    }
-  })();
+  const isBuildable = primeSet.components.every((part, i) => counts[i] >= part.required);
+
+  const totalRequired = primeSet.components.reduce((sum, part) => sum + part.required, 0);
+  const totalOwned = primeSet.components.reduce(
+    (sum, part, i) => sum + Math.min(counts[i], part.required),
+    0
+  );
+  const progressPercentage = totalRequired > 0 ? (totalOwned / totalRequired) * 100 : 0;
 
   return (
     <Card className='border border-gray-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden dark:border-gray-800 dark:bg-gray-900'>
@@ -57,8 +42,8 @@ export function PrimeSet({ primeSet }) {
                 <Image
                   src={`${IMAGE_BASE_URL}${primeSet.imageName}`}
                   alt={primeSet.name}
-                  width={80} // Corresponds to size-20 (80px)
-                  height={80} // Corresponds to size-20 (80px)
+                  width={80}
+                  height={80}
                   className='object-contain'
                 />
               )}
@@ -77,7 +62,7 @@ export function PrimeSet({ primeSet }) {
             <Badge
               variant={
                 isBuildable
-                  ? primeSet.isMastered
+                  ? isMastered
                     ? "default"
                     : "secondary"
                   : "outline"
@@ -85,14 +70,14 @@ export function PrimeSet({ primeSet }) {
               className={
                 !isBuildable
                   ? "text-gray-500 border-gray-300 dark:text-gray-400 dark:border-gray-600"
-                  : primeSet.isMastered
+                  : isMastered
                   ? "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:border-amber-800"
                   : "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-800"
               }
             >
               {!isBuildable
                 ? "Incomplete"
-                : primeSet.isMastered
+                : isMastered
                 ? "Mastered"
                 : "Ready"}
             </Badge>
@@ -101,84 +86,31 @@ export function PrimeSet({ primeSet }) {
       </CardHeader>
 
       <CardContent className={"flex flex-col justify-between h-full"}>
-        {/* Partes del set */}
-        {primeSet.components && primeSet.components.length > 0 ? (
-          <div className='space-y-1 mb-4'>
-            {primeSet.components.map((part, index) => (
-              <PrimePart
-                key={`${part.uniqueName}-${index}`}
-                part={part}
-                onUpdateCount={onUpdatePart}
-              />
-            ))}
-          </div>
-        ) : (
-          // Para mods Prime sin componentes
-          <div className='flex items-center justify-between py-2 px-3 bg-blue-50 border border-blue-200 rounded mb-4 dark:bg-blue-900/50 dark:border-blue-800'>
-            <div className='flex items-center space-x-3'>
-              <Sparkles className='h-4 w-4 text-blue-600 dark:text-blue-400' />
-              <span className='text-sm font-medium text-blue-900 dark:text-blue-200'>
-                Direct Item
-              </span>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <Button
-                size='sm'
-                variant='outline'
-                onClick={() =>
-                  onUpdatePart(
-                    primeSet.name,
-                    Math.max(0, (primeSet.userCount || 0) - 1)
-                  )
-                }
-                className='h-7 w-7 p-0 dark:border-gray-600'
-              >
-                <Minus className='h-3 w-3' />
-              </Button>
-              <Input
-                type='number'
-                value={primeSet.userCount || 0}
-                onChange={(e) =>
-                  onUpdatePart(
-                    primeSet.name,
-                    Number.parseInt(e.target.value) || 0
-                  )
-                }
-                className='w-12 h-7 text-center text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none dark:bg-gray-900 dark:border-gray-600'
-                min='0'
-              />
-              <Button
-                size='sm'
-                variant='outline'
-                onClick={() =>
-                  onUpdatePart(primeSet.name, (primeSet.userCount || 0) + 1)
-                }
-                className='h-7 w-7 p-0 dark:border-gray-600'
-              >
-                <Plus className='h-3 w-3' />
-              </Button>
-            </div>
-          </div>
-        )}
+        {/* Set components */}
+        <div className='space-y-1 mb-4'>
+          {primeSet.components.map((part, i) => (
+            <PrimePart key={part.uniqueName} part={part} count={counts[i]} />
+          ))}
+        </div>
 
-        {/* Controles */}
+        {/* Set actions */}
         <div className='flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-800'>
           <Button
-            onClick={() => onToggleMastery(primeSet.name)}
+            onClick={() => toggleMastery(primeSet)}
             variant='ghost'
             size='sm'
             className={`text-xs ${
-              primeSet.isMastered
+              isMastered
                 ? "text-amber-800 bg-amber-50 hover:bg-amber-600 hover:text-white dark:bg-amber-900/50 dark:text-amber-300 dark:hover:bg-amber-600"
                 : "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
             }`}
           >
-            {primeSet.isMastered ? "✓ Mastered" : "Mark as Mastered"}
+            {isMastered ? "✓ Mastered" : "Mark as Mastered"}
           </Button>
 
           <div className='flex space-x-2'>
             <Button
-              onClick={() => onBuild(primeSet)}
+              onClick={() => build(primeSet)}
               disabled={!isBuildable}
               size='sm'
               className='bg-amber-600 hover:bg-amber-700 text-white disabled:bg-gray-300 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 dark:bg-amber-600 dark:hover:bg-amber-700'
@@ -186,7 +118,7 @@ export function PrimeSet({ primeSet }) {
               Build
             </Button>
             <Button
-              onClick={() => onSell(primeSet)}
+              onClick={() => sell(primeSet)}
               disabled={!isBuildable}
               variant='outline'
               size='sm'
@@ -199,4 +131,4 @@ export function PrimeSet({ primeSet }) {
       </CardContent>
     </Card>
   );
-}
+}, arePropsEqual);

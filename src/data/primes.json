@@ -1,0 +1,5601 @@
+{
+  "version": "1.1276.18",
+  "generatedAt": "2026-10-09T00:48:41.884Z",
+  "sets": [
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeAcceltra/PrimeAcceltraWeapon",
+      "name": "Acceltra Prime",
+      "category": "Primary",
+      "imageName": "AcceltraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AcceltraPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AcceltraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AcceltraPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AcceltraPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeAfentis/PrimeAfentisWeapon",
+      "name": "Afentis Prime",
+      "category": "Primary",
+      "imageName": "AfentisPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AfentisPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AfentisPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AfentisPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AfentisPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAfuris/PrimeAFurisWeapon",
+      "name": "Afuris Prime",
+      "category": "Secondary",
+      "imageName": "AfurisPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AfurisPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AfurisPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AfurisPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AfurisPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 2,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAkarius/PrimeAkariusWeapon",
+      "name": "Akarius Prime",
+      "category": "Secondary",
+      "imageName": "AkariusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkariusPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkariusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkariusPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkariusPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 2,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAkbolto/PrimeAkBoltoWeapon",
+      "name": "Akbolto Prime",
+      "category": "Secondary",
+      "imageName": "AkboltoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkboltoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 2,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkboltoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkboltoPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkboltoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 2,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Akimbo/PrimeAkimboShotGun",
+      "name": "Akbronco Prime",
+      "category": "Secondary",
+      "imageName": "AkbroncoPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkbroncoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkbroncoPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAkjagara/AkJagaraPrime",
+      "name": "Akjagara Prime",
+      "category": "Secondary",
+      "imageName": "AkjagaraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkjagaraPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkjagaraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkjagaraPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkjagaraPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Akimbo/AkLexPrimePistols",
+      "name": "Aklex Prime",
+      "category": "Secondary",
+      "imageName": "AklexPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AklexPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AklexPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Akimbo/DualMagnusPrime",
+      "name": "Akmagnus Prime",
+      "category": "Secondary",
+      "imageName": "AkmagnusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkmagnusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkmagnusPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAksomati/PrimeAksomati",
+      "name": "Aksomati Prime",
+      "category": "Secondary",
+      "imageName": "AksomatiPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AksomatiPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 2,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AksomatiPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AksomatiPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AksomatiPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAkstiletto/PrimeAkstiletto",
+      "name": "Akstiletto Prime",
+      "category": "Secondary",
+      "imageName": "AkstiletoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkstilettoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 2,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkstilettoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkstilettoPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkstilettoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeVasto/AkPrimeVasto/AkPrimeVastoPistol",
+      "name": "Akvasto Prime",
+      "category": "Secondary",
+      "imageName": "AkvastoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AkvastoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AkvastoPrimeLink",
+          "name": "Link",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeAlternox/PrimeAlternoxWeapon",
+      "name": "Alternox Prime",
+      "category": "Primary",
+      "imageName": "AlternoxPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AlternoxPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AlternoxPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AlternoxPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AlternoxPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Gauntlet/PrimeAnkyros/PrimeAnkyros",
+      "name": "Ankyros Prime",
+      "category": "Melee",
+      "imageName": "AnkyrosPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AnkyrosPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AnkyrosPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AnkyrosPrimeGauntlet",
+          "name": "Gauntlet",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Ninja/AshPrime",
+      "name": "Ash Prime",
+      "category": "Warframes",
+      "imageName": "AshPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AshPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AshPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AshPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AshPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeAstilla/AstillaPrimeWeapon",
+      "name": "Astilla Prime",
+      "category": "Primary",
+      "imageName": "AstillaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AstillaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AstillaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AstillaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AstillaPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeAthodai/PrimeAthodaiPistolWeapon",
+      "name": "Athodai Prime",
+      "category": "Secondary",
+      "imageName": "AthodaiPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AthodaiPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/AthodaiPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/AthodaiPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Brawler/AtlasPrime",
+      "name": "Atlas Prime",
+      "category": "Warframes",
+      "imageName": "AtlasPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AtlasPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AtlasPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AtlasPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/AtlasPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeBallistica/PrimeBallistica",
+      "name": "Ballistica Prime",
+      "category": "Secondary",
+      "imageName": "BallisticaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeBallisticaBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBallisticaLowerLimb",
+          "name": "Lower Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBallisticaReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBallisticaString",
+          "name": "String",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBallisticaUpperLimb",
+          "name": "Upper Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Banshee/BansheePrime",
+      "name": "Banshee Prime",
+      "category": "Warframes",
+      "imageName": "BansheePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BansheePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BansheePrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BansheePrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BansheePrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Pacifist/BaruukPrime",
+      "name": "Baruuk Prime",
+      "category": "Warframes",
+      "imageName": "BaruukPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BaruukPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BaruukPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BaruukPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/BaruukPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeBaza/PrimeBazaGun",
+      "name": "Baza Prime",
+      "category": "Primary",
+      "imageName": "BazaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BazaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BazaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BazaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BazaPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Staff/PrimeBo/PrimeBoWeapon",
+      "name": "Bo Prime",
+      "category": "Melee",
+      "imageName": "BoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeBoBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBoHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBoOrnament",
+          "name": "Ornament",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Shotgun/PrimeBoar",
+      "name": "Boar Prime",
+      "category": "Primary",
+      "imageName": "BoarPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoarPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BoarPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoarPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoarPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeBoltor/PrimeBoltor",
+      "name": "Boltor Prime",
+      "category": "Primary",
+      "imageName": "BoltorPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoltorPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BoltorPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoltorPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BoltorPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Rifle/BratonPrime",
+      "name": "Braton Prime",
+      "category": "Primary",
+      "imageName": "BratonPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BratonPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BratonPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BratonPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BratonPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 25
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistol/BroncoPrime",
+      "name": "Bronco Prime",
+      "category": "Secondary",
+      "imageName": "BroncoPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BroncoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BroncoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BroncoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeBurston/PrimeBurston",
+      "name": "Burston Prime",
+      "category": "Primary",
+      "imageName": "BurstonPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BurstonPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BurstonPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BurstonPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/BurstonPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Sentient/CalibanPrime",
+      "name": "Caliban Prime",
+      "category": "Warframes",
+      "imageName": "CalibanPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CalibanPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CalibanPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CalibanPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CalibanPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Types/Sentinels/SentinelPowersuits/PrimeCarrierPowerSuit",
+      "name": "Carrier Prime",
+      "category": "Sentinels",
+      "imageName": "CarrierPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/SentinelRecipes/PrimeCarrierSentinelBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCarrierCarapace",
+          "name": "Carapace",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCarrierCerebrum",
+          "name": "Cerebrum",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCarrierSystems",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeCedo/PrimeCedoWeapon",
+      "name": "Cedo Prime",
+      "category": "Primary",
+      "imageName": "CedoPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CedoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/CedoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CedoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CedoPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Bows/PrimeCernos/PrimeCernos",
+      "name": "Cernos Prime",
+      "category": "Primary",
+      "imageName": "CernosPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeCernosBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCernosGrip",
+          "name": "Grip",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCernosLowerLimb",
+          "name": "Lower Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCernosString",
+          "name": "String",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCernosUpperLimb",
+          "name": "Upper Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Dragon/ChromaPrime",
+      "name": "Chroma Prime",
+      "category": "Warframes",
+      "imageName": "ChromaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ChromaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ChromaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ChromaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ChromaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Geode/CitrinePrime",
+      "name": "Citrine Prime",
+      "category": "Warframes",
+      "imageName": "CitrinePrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CitrinePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CitrinePrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CitrinePrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/CitrinePrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/SwordsAndBoards/PrimeCobraAndCrane/PrimeCobraAndCraneWeapon",
+      "name": "Cobra & Crane Prime",
+      "category": "Melee",
+      "imageName": "CobraCranePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CobraCranePrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/CobraCranePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CobraCranePrimeGuard",
+          "name": "Guard",
+          "imageName": "GenericWeaponPrimeGuard.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CobraCranePrimeHandle",
+          "name": "Hilt",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeCorinth/PrimeCorinth",
+      "name": "Corinth Prime",
+      "category": "Primary",
+      "imageName": "CorinthPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorinthPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/CorinthPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorinthPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorinthPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Archwing/Melee/PrimeCorufell/PrimeCorufellScytheWeapon",
+      "name": "Corufell Prime",
+      "category": "Arch-Melee",
+      "imageName": "CorufellPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/CorufellPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorufellPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorufellPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorufellPrimeBarrel",
+          "name": "Stock",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Archwing/Primary/PrimeCorvas/PrimeCorvasWeapon",
+      "name": "Corvas Prime",
+      "category": "Arch-Gun",
+      "imageName": "CorvasPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorvasPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/CorvasPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorvasPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/CorvasPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Bows/PrimeDaikyu/PrimeDaikyuBow",
+      "name": "Daikyu Prime",
+      "category": "Primary",
+      "imageName": "DaikyuPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeDaikyuBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDaikyuGrip",
+          "name": "Grip",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDaikyuLowerLimb",
+          "name": "Lower Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDaikyuString",
+          "name": "String",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDaikyuUpperLimb",
+          "name": "Upper Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/CronusSword/PrimeCronusLongSword",
+      "name": "Dakra Prime",
+      "category": "Melee",
+      "imageName": "DakraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCronusLongSwordBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeCronusLongSwordBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeCronusLongSwordHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PRapier/DestrezaPrime",
+      "name": "Destreza Prime",
+      "category": "Melee",
+      "imageName": "DestrezaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/DestrezaPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/DestrezaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/DestrezaPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Types/Sentinels/SentinelPowersuits/PrimeDethCubePowerSuit",
+      "name": "Dethcube Prime",
+      "category": "Sentinels",
+      "imageName": "DethcubePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/SentinelRecipes/PrimeDethcubeSentinelBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDethcubeCarapace",
+          "name": "Carapace",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDethcubeCerebrum",
+          "name": "Cerebrum",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDethcubeSystems",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeDualKamas/PrimeDualKamas",
+      "name": "Dual Kamas Prime",
+      "category": "Melee",
+      "imageName": "DualKamasPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDualKamasBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeDualKamasBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeDualKamasHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeDualKeres/PrimeDualKeresWeapon",
+      "name": "Dual Keres Prime",
+      "category": "Melee",
+      "imageName": "DualKeresPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/DualKeresPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/DualKeresPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/DualKeresPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Axe/PrimeZoren/PrimeZorenAxeWeapon",
+      "name": "Dual Zoren Prime",
+      "category": "Melee",
+      "imageName": "DualZorenPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/DualZorenPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/DualZorenPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/DualZorenPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Ember/EmberPrime",
+      "name": "Ember Prime",
+      "category": "Warframes",
+      "imageName": "EmberPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EmberPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EmberPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EmberPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EmberPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeEpitaph/PrimeEpitaphSidearmWeapon",
+      "name": "Epitaph Prime",
+      "category": "Secondary",
+      "imageName": "EpitaphPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/EpitaphPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/EpitaphPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/EpitaphPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/YinYang/EquinoxPrime",
+      "name": "Equinox Prime",
+      "category": "Warframes",
+      "imageName": "EquinoxPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EquinoxPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EquinoxPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EquinoxPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/EquinoxPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/AllNew1hSG/AllNew1hSG",
+      "name": "Euphona Prime",
+      "category": "Secondary",
+      "imageName": "EuphonaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/Prime1HShotgunBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/Prime1HShotgunBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/Prime1HShotgunReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/DualDagger/FangPrimeDagger",
+      "name": "Fang Prime",
+      "category": "Melee",
+      "imageName": "FangPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeFangBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/FangPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeFangHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 25
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeFragor/PrimeFragor",
+      "name": "Fragor Prime",
+      "category": "Melee",
+      "imageName": "FragorPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/FragorPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/FragorPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/FragorPrimeHead",
+          "name": "Head",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Frost/FrostPrime",
+      "name": "Frost Prime",
+      "category": "Warframes",
+      "imageName": "FrostPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/FrostPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/FrostPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/FrostPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/FrostPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeFulmin/PrimeFulmin",
+      "name": "Fulmin Prime",
+      "category": "Primary",
+      "imageName": "FulminPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/FulminPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/FulminPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/FulminPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/FulminPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeGalatine/PrimeGalatine",
+      "name": "Galatine Prime",
+      "category": "Melee",
+      "imageName": "GalatinePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeGalatineBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeGalatineBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeGalatineHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Glass/GaraPrime",
+      "name": "Gara Prime",
+      "category": "Warframes",
+      "imageName": "GaraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaraPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaraPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaraPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Garuda/GarudaPrime",
+      "name": "Garuda Prime",
+      "category": "Warframes",
+      "imageName": "GarudaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GarudaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GarudaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GarudaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GarudaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Runner/GaussPrime",
+      "name": "Gauss Prime",
+      "category": "Warframes",
+      "imageName": "GaussPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaussPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaussPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaussPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GaussPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Glaives/PrimeGlaive/PrimeGlaiveWeapon",
+      "name": "Glaive Prime",
+      "category": "Melee",
+      "imageName": "GlaivePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GlaivePrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/GlaivePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GlaivePrimeDisc",
+          "name": "Disc",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeGram/PrimeGram",
+      "name": "Gram Prime",
+      "category": "Melee",
+      "imageName": "GramPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GramPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/GramPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GramPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Devourer/GrendelPrime",
+      "name": "Grendel Prime",
+      "category": "Warframes",
+      "imageName": "GrendelPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GrendelPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GrendelPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GrendelPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GrendelPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Polearms/PrimeGuandao/PrimeGuandaoWeapon",
+      "name": "Guandao Prime",
+      "category": "Melee",
+      "imageName": "GuandaoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GuandaoPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/GuandaoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GuandaoPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Warfan/PrimeGunsen/PrimeGunsenWeapon",
+      "name": "Gunsen Prime",
+      "category": "Melee",
+      "imageName": "GunsenPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GunsenPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/GunsenPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/GunsenPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Gyre/GyrePrime",
+      "name": "Gyre Prime",
+      "category": "Warframes",
+      "imageName": "GyrePrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GyrePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GyrePrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GyrePrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/GyrePrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Priest/HarrowPrime",
+      "name": "Harrow Prime",
+      "category": "Warframes",
+      "imageName": "HarrowPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HarrowPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HarrowPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HarrowPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HarrowPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Types/Sentinels/SentinelPowersuits/PrimeHeliosPowerSuit",
+      "name": "Helios Prime",
+      "category": "Sentinels",
+      "imageName": "HeliosPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/SentinelRecipes/PrimeHeliosSentinelBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeHeliosCarapace",
+          "name": "Carapace",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeHeliosCerebrum",
+          "name": "Cerebrum",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeHeliosSystems",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/ThrowingWeapons/PrimeThrowingStar/PrimeHikou",
+      "name": "Hikou Prime",
+      "category": "Secondary",
+      "imageName": "HikouPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeHikouBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeHikouHolster",
+          "name": "Pouch",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeHikouStars",
+          "name": "Stars",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/IronFrame/IronFramePrime",
+      "name": "Hildryn Prime",
+      "category": "Warframes",
+      "imageName": "HildrynPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HildrynPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HildrynPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HildrynPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HildrynPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Pirate/HydroidPrime",
+      "name": "Hydroid Prime",
+      "category": "Warframes",
+      "imageName": "HydroidPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HydroidPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HydroidPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HydroidPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/HydroidPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeHystrix/PrimeHystrixWeapon",
+      "name": "Hystrix Prime",
+      "category": "Secondary",
+      "imageName": "HystrixPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/HystrixPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/HystrixPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/HystrixPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Sandman/InarosPrime",
+      "name": "Inaros Prime",
+      "category": "Warframes",
+      "imageName": "InarosPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/InarosPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/InarosPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/InarosPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/InarosPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Ranger/IvaraPrime",
+      "name": "Ivara Prime",
+      "category": "Warframes",
+      "imageName": "IvaraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/IvaraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/IvaraPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/IvaraPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/IvaraPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeKaryst/PrimeKrisDagger",
+      "name": "Karyst Prime",
+      "category": "Melee",
+      "imageName": "KarystPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KarystPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/KarystPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KarystPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Glaives/PrimeKestrel/PrimeKestrel",
+      "name": "Kestrel Prime",
+      "category": "Melee",
+      "imageName": "KestrelPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KestrelPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/KestrelPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KestrelPrimeGrip",
+          "name": "Grip",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Khora/KhoraPrime",
+      "name": "Khora Prime",
+      "category": "Warframes",
+      "imageName": "KhoraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/KhoraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/KhoraPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/KhoraPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/KhoraPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeKnell/PrimeKnellWeapon",
+      "name": "Knell Prime",
+      "category": "Secondary",
+      "imageName": "KnellPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KnellPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/KnellPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KnellPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeKogake/KogakePrimeKnuckles",
+      "name": "Kogake Prime",
+      "category": "Melee",
+      "imageName": "KogakePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/KogakePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KogakePrimeBoot",
+          "name": "Boot",
+          "imageName": "GenericWeaponPrimeGuard.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KogakePrimeGauntlet",
+          "name": "Gauntlet",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeKompressa/PrimeKompressa",
+      "name": "Kompressa Prime",
+      "category": "Secondary",
+      "imageName": "KompressaPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KompressaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/KompressaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KompressaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Tonfa/TonfaContestWinnerPrime/TonfaContestWinnerPrimeWeapon",
+      "name": "Kronen Prime",
+      "category": "Melee",
+      "imageName": "KronenPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KronenPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/KronenPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/KronenPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Archwing/Primary/PrimeLarkspur/PrimeLarkspurWeapon",
+      "name": "Larkspur Prime",
+      "category": "Arch-Gun",
+      "imageName": "LarkspurPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LarkspurPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/LarkspurPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LarkspurPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LarkspurPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Rifle/LatronPrime",
+      "name": "Latron Prime",
+      "category": "Primary",
+      "imageName": "LatronPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LatronPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/LatronPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LatronPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LatronPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Alchemist/LavosPrime",
+      "name": "Lavos Prime",
+      "category": "Warframes",
+      "imageName": "LavosPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LavosPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LavosPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LavosPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LavosPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeLex/PrimeLex",
+      "name": "Lex Prime",
+      "category": "Secondary",
+      "imageName": "LexPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LexPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/LexPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/LexPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Magician/LimboPrime",
+      "name": "Limbo Prime",
+      "category": "Warframes",
+      "imageName": "LimboPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LimboPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LimboPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LimboPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LimboPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Loki/LokiPrime",
+      "name": "Loki Prime",
+      "category": "Warframes",
+      "imageName": "LokiPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LokiPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LokiPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LokiPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/LokiPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Mag/MagPrime",
+      "name": "Mag Prime",
+      "category": "Warframes",
+      "imageName": "MagPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MagPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MagPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MagPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MagPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeMagnus/PrimeMagnusWeapon",
+      "name": "Magnus Prime",
+      "category": "Secondary",
+      "imageName": "MagnusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/MagnusPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/MagnusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/MagnusPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeMasseter/PrimeMasseter",
+      "name": "Masseter Prime",
+      "category": "Melee",
+      "imageName": "MasseterPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/MasseterPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/MasseterPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/MasseterPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Cowgirl/MesaPrime",
+      "name": "Mesa Prime",
+      "category": "Warframes",
+      "imageName": "MesaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MesaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MesaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MesaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MesaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Harlequin/MiragePrime",
+      "name": "Mirage Prime",
+      "category": "Warframes",
+      "imageName": "MiragePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MiragePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MiragePrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MiragePrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/MiragePrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeNagantaka/PrimeNagantakaWeapon",
+      "name": "Nagantaka Prime",
+      "category": "Primary",
+      "imageName": "NagantakaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NagantakaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/NagantakaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NagantakaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NagantakaPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeNamiSkyla/PrimeNamiSkyla",
+      "name": "Nami Skyla Prime",
+      "category": "Melee",
+      "imageName": "NamiSkylaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeNamiSkylaBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeNamiSkylaBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeNamiSkylaHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Types/Sentinels/SentinelPowersuits/NautilusPrimeSentinelPowerSuit",
+      "name": "Nautilus Prime",
+      "category": "Sentinels",
+      "imageName": "NautilusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/SentinelRecipes/NautilusPrimeSentinelBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NautilusPrimeCarapace",
+          "name": "Carapace",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NautilusPrimeCerebrum",
+          "name": "Cerebrum",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NautilusPrimeSystems",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Necro/NekrosPrime",
+      "name": "Nekros Prime",
+      "category": "Warframes",
+      "imageName": "NekrosPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NekrosPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NekrosPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NekrosPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NekrosPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Nezha/NezhaPrime",
+      "name": "Nezha Prime",
+      "category": "Warframes",
+      "imageName": "NezhaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NezhaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NezhaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NezhaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NezhaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Infestation/InfestationPrime",
+      "name": "Nidus Prime",
+      "category": "Warframes",
+      "imageName": "NidusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NidusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NidusPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NidusPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NidusPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeKatana/PrimeNikana",
+      "name": "Nikana Prime",
+      "category": "Melee",
+      "imageName": "NikanaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeNikanaBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeNikanaBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeNikanaHandle",
+          "name": "Hilt",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeNinkondi/PrimeNikondi",
+      "name": "Ninkondi Prime",
+      "category": "Melee",
+      "imageName": "NinkondiPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/NinkondiPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NinkondiPrimeChain",
+          "name": "Chain",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/NinkondiPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/AntiMatter/NovaPrime",
+      "name": "Nova Prime",
+      "category": "Warframes",
+      "imageName": "NovaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NovaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NovaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NovaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NovaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Jade/NyxPrime",
+      "name": "Nyx Prime",
+      "category": "Warframes",
+      "imageName": "NyxPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NyxPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NyxPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NyxPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/NyxPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Paladin/PaladinPrime",
+      "name": "Oberon Prime",
+      "category": "Warframes",
+      "imageName": "OberonPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OberonPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OberonPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OberonPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OberonPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Bard/OctaviaPrime",
+      "name": "Octavia Prime",
+      "category": "Warframes",
+      "imageName": "OctaviaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OctaviaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OctaviaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OctaviaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/OctaviaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Archwing/PrimeJetPack/PrimeJetPack",
+      "name": "Odonata Prime",
+      "category": "Archwing",
+      "imageName": "OdonataPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingChassisComponent",
+          "name": "Harness",
+          "imageName": "GenericArchwingHarnessPrime.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericArchwingSystemsPrime.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/ArchwingRecipes/PrimeArchwing/PrimeArchwingWingsComponent",
+          "name": "Wings",
+          "imageName": "GenericArchwingWingsPrime.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeOkina/PrimeOkina",
+      "name": "Okina Prime",
+      "category": "Melee",
+      "imageName": "OkinaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/OkinaPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/OkinaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/OkinaPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Polearms/PrimePolearmWeapon",
+      "name": "Orthos Prime",
+      "category": "Melee",
+      "imageName": "OrthosPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimePolearmBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PolearmPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimePolearmHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimePandero/PanderoPrimeWeapon",
+      "name": "Pandero Prime",
+      "category": "Secondary",
+      "imageName": "PanderoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PanderoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PanderoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PanderoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimePangolinSword/PrimePangolinSword",
+      "name": "Pangolin Prime",
+      "category": "Melee",
+      "imageName": "PangolinPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PangolinPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PangolinPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PangolinPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimePanthera/PrimePanthera",
+      "name": "Panthera Prime",
+      "category": "Primary",
+      "imageName": "PantheraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PantheraPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PantheraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PantheraPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PantheraPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Bows/PrimeHuntingBow",
+      "name": "Paris Prime",
+      "category": "Primary",
+      "imageName": "ParisPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/BowPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBowGrip",
+          "name": "Grip",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBowLowerLimb",
+          "name": "Lower Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBowString",
+          "name": "String",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeBowUpperLimb",
+          "name": "Upper Limb",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 25
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimePerigale/PrimePerigaleSniper",
+      "name": "Perigale Prime",
+      "category": "Primary",
+      "imageName": "PerigalePrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PerigalePrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PerigalePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PerigalePrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PerigalePrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimePhantasma/PhantasmaPrimeShotgun",
+      "name": "Phantasma Prime",
+      "category": "Primary",
+      "imageName": "PhantasmaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PhantasmaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PhantasmaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PhantasmaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PhantasmaPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Odalisk/ProteaPrime",
+      "name": "Protea Prime",
+      "category": "Warframes",
+      "imageName": "ProteaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ProteaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ProteaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ProteaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ProteaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimePyrana/PrimePyranaPistol",
+      "name": "Pyrana Prime",
+      "category": "Secondary",
+      "imageName": "PyranaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PyranaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PyranaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PyranaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Warfan/PrimeQuassus/PrimeQuassusWeapon",
+      "name": "Quassus Prime",
+      "category": "Melee",
+      "imageName": "QuassusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/QuassusPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/QuassusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/QuassusPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Scythe/ReaperWeapon",
+      "name": "Reaper Prime",
+      "category": "Melee",
+      "imageName": "ReaperPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeScytheBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeScytheBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeScytheHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Gunblade/RedeemerPrime/RedeemerPrimeWep",
+      "name": "Redeemer Prime",
+      "category": "Melee",
+      "imageName": "RedeemerPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/RedeemerPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/RedeemerPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/RedeemerPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Revenant/RevenantPrime",
+      "name": "Revenant Prime",
+      "category": "Warframes",
+      "imageName": "RevenantPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RevenantPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RevenantPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RevenantPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RevenantPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Rhino/RhinoPrime",
+      "name": "Rhino Prime",
+      "category": "Warframes",
+      "imageName": "RhinoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RhinoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RhinoPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RhinoPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/RhinoPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/RubicoPrime/RubicoPrimeWeapon",
+      "name": "Rubico Prime",
+      "category": "Primary",
+      "imageName": "RubicoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/RubicoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/RubicoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/RubicoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/RubicoPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Axe/PrimeVorunaAxeWeapon",
+      "name": "Sarofang Prime",
+      "category": "Melee",
+      "imageName": "SarofangPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SarofangPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/SarofangPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SarofangPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Saryn/SarynPrime",
+      "name": "Saryn Prime",
+      "category": "Warframes",
+      "imageName": "SarynPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SarynPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SarynPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SarynPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SarynPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Axe/PrimeScindo/PrimeScindoWeapon",
+      "name": "Scindo Prime",
+      "category": "Melee",
+      "imageName": "ScindoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeScindoBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeScindoBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeScindoHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 25
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeScourge/PrimeScourgeWeapon",
+      "name": "Scourge Prime",
+      "category": "Primary",
+      "imageName": "ScourgePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ScourgePrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ScourgePrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/ScourgePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ScourgePrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Wraith/SevagothPrime",
+      "name": "Sevagoth Prime",
+      "category": "Warframes",
+      "imageName": "SevagothPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SevagothPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SevagothPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SevagothPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/SevagothPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Types/Sentinels/SentinelPowersuits/PrimeShadePowerSuit",
+      "name": "Shade Prime",
+      "category": "Sentinels",
+      "imageName": "ShadePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/SentinelRecipes/ShadePrimeSentinelBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ShadePrimeCarapace",
+          "name": "Carapace",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ShadePrimeCerebrum",
+          "name": "Cerebrum",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ShadePrimeSystems",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeSicarus/PrimeSicarusPistol",
+      "name": "Sicarus Prime",
+      "category": "Secondary",
+      "imageName": "SicarusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SicarusPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/SicarusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SicarusPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeSilvaAegis/PrimeSilvaAegis",
+      "name": "Silva & Aegis Prime",
+      "category": "Melee",
+      "imageName": "SilvaAegisPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SilvaAegisPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/SilvaAegisPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SilvaAegisPrimeGuard",
+          "name": "Guard",
+          "imageName": "GenericWeaponPrimeGuard.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SilvaAegisPrimeHandle",
+          "name": "Hilt",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeSoma/PrimeSomaRifle",
+      "name": "Soma Prime",
+      "category": "Primary",
+      "imageName": "SomaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SomaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/SomaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SomaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SomaPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/ThrowingWeapons/PrimeLiDagger/PrimeLiDagger",
+      "name": "Spira Prime",
+      "category": "Secondary",
+      "imageName": "SpiraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeLiDaggerBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeLiDaggerBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeLiDaggerHolster",
+          "name": "Pouch",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 2,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeSteflos/PrimeSteflosShotgun",
+      "name": "Steflos Prime",
+      "category": "Primary",
+      "imageName": "SteflosPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SteflosPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/SteflosPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SteflosPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SteflosPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeStradavar/PrimeStradavarGun",
+      "name": "Stradavar Prime",
+      "category": "Primary",
+      "imageName": "StradavarPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/StradavarPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/StradavarPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/StradavarPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/StradavarPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeStrun/PrimeStrunWeapon",
+      "name": "Strun Prime",
+      "category": "Primary",
+      "imageName": "StrunPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/StrunPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/StrunPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/StrunPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/StrunPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Hoplite/StyanaxPrime",
+      "name": "Styanax Prime",
+      "category": "Warframes",
+      "imageName": "StyanaxPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/StyanaxPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/StyanaxPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/StyanaxPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/StyanaxPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeSybaris/PrimeSybarisRifle",
+      "name": "Sybaris Prime",
+      "category": "Primary",
+      "imageName": "SybarisPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SybarisPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/SybarisPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SybarisPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/SybarisPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Swords/PrimeTatsu/PrimeTatsuWeapon",
+      "name": "Tatsu Prime",
+      "category": "Melee",
+      "imageName": "TatsuPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TatsuPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/TatsuPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TatsuPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeTekko/PrimeTekko",
+      "name": "Tekko Prime",
+      "category": "Melee",
+      "imageName": "TekkoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TekkoPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/TekkoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TekkoPrimeGauntlet",
+          "name": "Gauntlet",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeTenora/TenoraPrimeWeapon",
+      "name": "Tenora Prime",
+      "category": "Primary",
+      "imageName": "TenoraPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TenoraPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/TenoraPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TenoraPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TenoraPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeTiberon/PrimeTiberonRifle",
+      "name": "Tiberon Prime",
+      "category": "Primary",
+      "imageName": "TiberonPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TiberonPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/TiberonPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TiberonPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TiberonPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeTigris/PrimeTigris",
+      "name": "Tigris Prime",
+      "category": "Primary",
+      "imageName": "TigrisPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeTigrisBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeTigrisBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeTigrisReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeTigrisStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Staff/TipedoPrime/TipedoPrimeWeapon",
+      "name": "Tipedo Prime",
+      "category": "Melee",
+      "imageName": "TipedoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/TipedoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TipedoPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TipedoPrimeOrnament",
+          "name": "Ornament",
+          "imageName": "GenericComponentPrimePlug.png",
+          "required": 2,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Fairy/TitaniaPrime",
+      "name": "Titania Prime",
+      "category": "Warframes",
+      "imageName": "TitaniaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TitaniaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TitaniaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TitaniaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TitaniaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Trinity/TrinityPrime",
+      "name": "Trinity Prime",
+      "category": "Warframes",
+      "imageName": "TrinityPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TrinityPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TrinityPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TrinityPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/TrinityPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeTrumna/PrimeTrumnaWeapon",
+      "name": "Trumna Prime",
+      "category": "Primary",
+      "imageName": "TrumnaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TrumnaPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/TrumnaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TrumnaPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/TrumnaPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeLightningGun/PrimeLightningGun",
+      "name": "Vadarya Prime",
+      "category": "Primary",
+      "imageName": "VadaryaPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeLightningGunBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeLightningGunBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeLightningGunReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeLightningGunStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Berserker/ValkyrPrime",
+      "name": "Valkyr Prime",
+      "category": "Warframes",
+      "imageName": "ValkyrPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ValkyrPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ValkyrPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ValkyrPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ValkyrPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeVasto/PrimeVastoPistol",
+      "name": "Vasto Prime",
+      "category": "Secondary",
+      "imageName": "VastoPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VastoPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/VastoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VastoPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Trapper/TrapperPrime",
+      "name": "Vauban Prime",
+      "category": "Warframes",
+      "imageName": "VaubanPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VaubanPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VaubanPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VaubanPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VaubanPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeVectis/PrimeVectisRifle",
+      "name": "Vectis Prime",
+      "category": "Primary",
+      "imageName": "VectisPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VectisPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/VectisPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VectisPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VectisPrimeStock",
+          "name": "Stock",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 65
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeVelox/PrimeVeloxPistol",
+      "name": "Velox Prime",
+      "category": "Secondary",
+      "imageName": "VeloxPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VeloxPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/VeloxPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VeloxPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/Scythe/PrimeVento/PrimeVentoScythe",
+      "name": "Venato Prime",
+      "category": "Melee",
+      "imageName": "VenatoPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VentoPrimeBlade",
+          "name": "Blade",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/VentoPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VentoPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeVenKa/PrimeVenkaClaws",
+      "name": "Venka Prime",
+      "category": "Melee",
+      "imageName": "VenkaPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeVenkaClawsBlade",
+          "name": "Blades",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 2,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/PrimeVenkaClawsBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeVenkaClawsGauntlet",
+          "name": "Gauntlet",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 2,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Melee/PrimeVolnus/VolnusPrimeWeapon",
+      "name": "Volnus Prime",
+      "category": "Melee",
+      "imageName": "VolnusPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/VolnusPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VolnusPrimeHandle",
+          "name": "Handle",
+          "imageName": "GenericWeaponPrimeHilt.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/VolnusPrimeHead",
+          "name": "Head",
+          "imageName": "GenericWeaponPrimeBlade.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Volt/VoltPrime",
+      "name": "Volt Prime",
+      "category": "Warframes",
+      "imageName": "VoltPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VoltPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VoltPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VoltPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VoltPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Werewolf/VorunaPrime",
+      "name": "Voruna Prime",
+      "category": "Warframes",
+      "imageName": "VorunaPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VorunaPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VorunaPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VorunaPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/VorunaPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Wisp/WispPrime",
+      "name": "Wisp Prime",
+      "category": "Warframes",
+      "imageName": "WispPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WispPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WispPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WispPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WispPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/MonkeyKing/WukongPrime",
+      "name": "Wukong Prime",
+      "category": "Warframes",
+      "imageName": "WukongPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WukongPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WukongPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WukongPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/WukongPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Types/Sentinels/SentinelPowersuits/PrimeWyrmPowerSuit",
+      "name": "Wyrm Prime",
+      "category": "Sentinels",
+      "imageName": "WyrmPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/SentinelRecipes/PrimeWyrmSentinelBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeWyrmCarapace",
+          "name": "Carapace",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeWyrmCerebrum",
+          "name": "Cerebrum",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/PrimeWyrmSystems",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/BrokenFrame/XakuPrime",
+      "name": "Xaku Prime",
+      "category": "Warframes",
+      "imageName": "XakuPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/XakuPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/XakuPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/XakuPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/XakuPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Yareli/YareliPrime",
+      "name": "Yareli Prime",
+      "category": "Warframes",
+      "imageName": "YareliPrime.png",
+      "vaulted": false,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/YareliPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/YareliPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/YareliPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/YareliPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeZakti/PrimeZaktiPistol",
+      "name": "Zakti Prime",
+      "category": "Secondary",
+      "imageName": "ZaktiPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZaktiPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/ZaktiPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZaktiPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Powersuits/Tengu/ZephyrPrime",
+      "name": "Zephyr Prime",
+      "category": "Warframes",
+      "imageName": "ZephyrPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ZephyrPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 65
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ZephyrPrimeChassisComponent",
+          "name": "Chassis",
+          "imageName": "GenericWarframePrimeChassis.png",
+          "required": 1,
+          "ducats": 25
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ZephyrPrimeHelmetComponent",
+          "name": "Neuroptics",
+          "imageName": "GenericWarframePrimeHelmet.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/WarframeRecipes/ZephyrPrimeSystemsComponent",
+          "name": "Systems",
+          "imageName": "GenericWarframePrimeSystem.png",
+          "required": 1,
+          "ducats": 100
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/LongGuns/PrimeZhuge/PrimeZhugeCrossbow",
+      "name": "Zhuge Prime",
+      "category": "Primary",
+      "imageName": "ZhugePrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZhugePrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/ZhugePrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZhugePrimeStock",
+          "name": "Grip",
+          "imageName": "GenericComponentPrimeLatch.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZhugePrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZhugePrimeString",
+          "name": "String",
+          "imageName": "GenericGunPrimeStock.png",
+          "required": 1,
+          "ducats": 15
+        }
+      ]
+    },
+    {
+      "uniqueName": "/Lotus/Weapons/Tenno/Pistols/PrimeZylok/ZylokPrimePistol",
+      "name": "Zylok Prime",
+      "category": "Secondary",
+      "imageName": "ZylokPrime.png",
+      "vaulted": true,
+      "components": [
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZylokPrimeBarrel",
+          "name": "Barrel",
+          "imageName": "GenericGunPrimeBarrel.png",
+          "required": 1,
+          "ducats": 15
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/ZylokPrimeBlueprint",
+          "name": "Blueprint",
+          "imageName": "blueprint.png",
+          "required": 1,
+          "ducats": 100
+        },
+        {
+          "uniqueName": "/Lotus/Types/Recipes/Weapons/WeaponParts/ZylokPrimeReceiver",
+          "name": "Receiver",
+          "imageName": "GenericGunPrimeReceiver.png",
+          "required": 1,
+          "ducats": 45
+        }
+      ]
+    }
+  ]
+}
