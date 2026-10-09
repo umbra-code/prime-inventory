@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { InventoryActionsContext } from "@/context/InventoryContext";
-import { Download, Github, RotateCcw, Upload } from "lucide-react";
+import { GithubIcon } from "@/components/icons/GithubIcon";
+import { Download, RotateCcw, Upload } from "lucide-react";
 import Image from "next/image";
 import { use } from "react";
 import { ThemeToggler } from "./ThemeToggler";
@@ -84,7 +85,7 @@ export function Header() {
               rel='noopener noreferrer'
               aria-label='Source code on GitHub'
             >
-              <Github size={18} />
+              <GithubIcon size={18} />
             </a>
           </div>
         </div>
