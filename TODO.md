@@ -29,10 +29,14 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [ ] Ducat value of owned parts and sets (`ducats` is already in the catalog)
 - [ ] Vaulted badge and filter (`vaulted` is already in the catalog)
 - [ ] Relics that drop each missing part (`drops` in `@wfcd/items`)
-- [ ] Sorting (name, progress, category) and a "missing parts" view
+- [x] Sorting (name, progress, ready first), progress and missing parts on each card
+- [x] Distinct card states (ready, extra set, progress-scaled accent) and "Almost Complete" filter
+- [x] Theme selector (System / Light / Dark)
+- [ ] "Missing parts" shopping-list view
 - [ ] warframe.market prices (needs a proxy because of CORS)
 - [ ] Installable PWA with full offline support
 - [ ] i18n
+- [ ] Visual identity rework (after features settle)
 
 ## Tooling
 

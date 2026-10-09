@@ -2,12 +2,11 @@
 
 import { PrimeSet } from "@/components/inventory/PrimeSet";
 import { InventoryStateContext } from "@/context/InventoryContext";
-import { getCount } from "@/services/userInventory";
 import Image from "next/image";
 import { use } from "react";
 
 export function InventoryGrid() {
-  const { filteredSets, userData } = use(InventoryStateContext);
+  const { filteredSets, summaries } = use(InventoryStateContext);
 
   if (filteredSets.length === 0) {
     return (
@@ -23,14 +22,17 @@ export function InventoryGrid() {
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
-      {filteredSets.map((primeSet) => (
-        <PrimeSet
-          key={primeSet.uniqueName}
-          primeSet={primeSet}
-          counts={primeSet.components.map((part) => getCount(userData.counts, part.uniqueName))}
-          isMastered={Boolean(userData.mastered[primeSet.uniqueName])}
-        />
-      ))}
+      {filteredSets.map((primeSet) => {
+        const { owned, isMastered } = summaries.get(primeSet.uniqueName);
+        return (
+          <PrimeSet
+            key={primeSet.uniqueName}
+            primeSet={primeSet}
+            counts={owned}
+            isMastered={isMastered}
+          />
+        );
+      })}
     </div>
   );
 }

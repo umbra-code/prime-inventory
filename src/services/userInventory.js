@@ -14,13 +14,24 @@ export const getCount = (counts, uniqueName) => counts[uniqueName] ?? 0;
 export const isSetComplete = (set, counts) =>
   set.components.every((part) => getCount(counts, part.uniqueName) >= part.required);
 
-export const getSetProgress = (set, counts) => {
-  const required = set.components.reduce((sum, part) => sum + part.required, 0);
-  const owned = set.components.reduce(
-    (sum, part) => sum + Math.min(getCount(counts, part.uniqueName), part.required),
-    0
-  );
-  return required > 0 ? (owned / required) * 100 : 0;
+export const getOwnedCounts = (set, counts) =>
+  set.components.map((part) => getCount(counts, part.uniqueName));
+
+/**
+ * Progress of a set given the owned count of each component (same order as
+ * set.components). Status: "incomplete", "ready" (buildable, not mastered) or
+ * "extra" (buildable and already mastered, so it can be sold).
+ */
+export const summarizeSet = (set, owned, isMastered) => {
+  let required = 0;
+  let have = 0;
+  set.components.forEach((part, i) => {
+    required += part.required;
+    have += Math.min(owned[i], part.required);
+  });
+  const missing = required - have;
+  const status = missing > 0 ? "incomplete" : isMastered ? "extra" : "ready";
+  return { progress: required > 0 ? (have / required) * 100 : 0, missing, status };
 };
 
 const toCount = (value) => {

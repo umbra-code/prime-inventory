@@ -6,12 +6,14 @@ import { getInitialCatalog, refreshCatalog } from "@/services/catalog";
 import {
   emptyUserData,
   getCount,
+  getOwnedCounts,
   isSetComplete,
   loadUserData,
   normalizeUserData,
   parseStoredUserData,
   saveUserData,
   STORAGE_KEY,
+  summarizeSet,
   toExportFile,
   userDataReducer,
 } from "@/services/userInventory";
@@ -21,34 +23,55 @@ import {
 export const InventoryStateContext = createContext(undefined);
 export const InventoryActionsContext = createContext(undefined);
 
-const statusFilters = ["All", "Buildable", "Incomplete", "Mastered", "Extra Sets"];
+const ALMOST_COMPLETE_PERCENT = 75;
 
-const matchesStatus = (status, isComplete, isMastered) => {
-  switch (status) {
-    case "Buildable":
-      return isComplete && !isMastered;
+const statusFilters = [
+  "All",
+  "Ready to Build",
+  "Extra Sets",
+  "Almost Complete",
+  "Incomplete",
+  "Mastered",
+];
+
+const matchesStatus = (filter, { status, progress, isMastered }) => {
+  switch (filter) {
+    case "Ready to Build":
+      return status === "ready";
+    case "Extra Sets":
+      return status === "extra";
+    case "Almost Complete":
+      return status === "incomplete" && progress >= ALMOST_COMPLETE_PERCENT;
     case "Incomplete":
-      return !isComplete;
+      return status === "incomplete";
     case "Mastered":
       return isMastered;
-    case "Extra Sets":
-      return isComplete && isMastered;
     default:
       return true;
   }
+};
+
+const STATUS_RANK = { ready: 0, extra: 1, incomplete: 2 };
+
+// The catalog is already sorted by name and Array#sort is stable, so ties keep name order.
+const sortOptions = {
+  Name: null,
+  Progress: (a, b) => b.progress - a.progress,
+  "Ready First": (a, b) => STATUS_RANK[a.status] - STATUS_RANK[b.status] || b.progress - a.progress,
 };
 
 const FILTERS_KEY = "primeInventoryFilters";
 
 const loadFilters = (categories) => {
   try {
-    const { category, status } = JSON.parse(localStorage.getItem(FILTERS_KEY)) ?? {};
+    const { category, status, sort } = JSON.parse(localStorage.getItem(FILTERS_KEY)) ?? {};
     return {
       category: categories.includes(category) ? category : "All",
       status: statusFilters.includes(status) ? status : "All",
+      sort: sort in sortOptions ? sort : "Name",
     };
   } catch {
-    return { category: "All", status: "All" };
+    return { category: "All", status: "All", sort: "Name" };
   }
 };
 
@@ -82,6 +105,7 @@ export function InventoryProvider({ children }) {
   const [initialFilters] = useState(() => loadFilters(getCategories(catalog)));
   const [selectedCategory, setSelectedCategory] = useState(initialFilters.category);
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
+  const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
 
   // Read by event handlers without making the actions unstable.
   const latest = useRef({ userData, catalog });
@@ -100,12 +124,12 @@ export function InventoryProvider({ children }) {
     try {
       localStorage.setItem(
         FILTERS_KEY,
-        JSON.stringify({ category: selectedCategory, status: selectedStatus })
+        JSON.stringify({ category: selectedCategory, status: selectedStatus, sort: selectedSort })
       );
     } catch {
       // Filters are a convenience; ignore storage failures.
     }
-  }, [selectedCategory, selectedStatus]);
+  }, [selectedCategory, selectedStatus, selectedSort]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
@@ -185,30 +209,42 @@ export function InventoryProvider({ children }) {
 
   const categories = useMemo(() => getCategories(catalog), [catalog]);
 
-  const stats = useMemo(() => {
-    let buildable = 0;
-    let mastered = 0;
+  // One entry per set: owned counts per component, progress and status.
+  const summaries = useMemo(() => {
+    const map = new Map();
     for (const set of catalog.sets) {
+      const owned = getOwnedCounts(set, userData.counts);
       const isMastered = Boolean(userData.mastered[set.uniqueName]);
-      if (isMastered) mastered++;
-      else if (isSetComplete(set, userData.counts)) buildable++;
+      map.set(set.uniqueName, { owned, isMastered, ...summarizeSet(set, owned, isMastered) });
     }
-    return { total: catalog.sets.length, buildable, mastered };
+    return map;
   }, [catalog, userData]);
+
+  const stats = useMemo(() => {
+    const stats = { total: catalog.sets.length, ready: 0, extra: 0, mastered: 0 };
+    for (const summary of summaries.values()) {
+      if (summary.status === "ready") stats.ready++;
+      if (summary.status === "extra") stats.extra++;
+      if (summary.isMastered) stats.mastered++;
+    }
+    return stats;
+  }, [catalog, summaries]);
 
   const filteredSets = useMemo(() => {
     const search = searchTerm.trim().toLowerCase();
-    return catalog.sets.filter(
-      (set) =>
+    const sets = catalog.sets.filter((set) => {
+      const summary = summaries.get(set.uniqueName);
+      return (
         set.name.toLowerCase().includes(search) &&
         (selectedCategory === "All" || set.category === selectedCategory) &&
-        matchesStatus(
-          selectedStatus,
-          isSetComplete(set, userData.counts),
-          Boolean(userData.mastered[set.uniqueName])
-        )
-    );
-  }, [catalog, userData, searchTerm, selectedCategory, selectedStatus]);
+        matchesStatus(selectedStatus, summary)
+      );
+    });
+    const compare = sortOptions[selectedSort];
+    return compare
+      ? sets.sort((a, b) => compare(summaries.get(a.uniqueName), summaries.get(b.uniqueName)))
+      : sets;
+  }, [catalog, summaries, searchTerm, selectedCategory, selectedStatus, selectedSort]);
 
   const state = useMemo(
     () => ({
@@ -220,12 +256,27 @@ export function InventoryProvider({ children }) {
       setSelectedCategory,
       selectedStatus,
       setSelectedStatus,
+      selectedSort,
+      setSelectedSort,
+      sortOptions: Object.keys(sortOptions),
       categories,
       statusFilters,
       stats,
+      summaries,
       filteredSets,
     }),
-    [catalog, userData, searchTerm, selectedCategory, selectedStatus, categories, stats, filteredSets]
+    [
+      catalog,
+      userData,
+      searchTerm,
+      selectedCategory,
+      selectedStatus,
+      selectedSort,
+      categories,
+      stats,
+      summaries,
+      filteredSets,
+    ]
   );
 
   return (

@@ -2,11 +2,60 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InventoryActionsContext } from "@/context/InventoryContext";
+import { summarizeSet } from "@/services/userInventory";
 import Image from "next/image";
 import { memo, use } from "react";
 import { PrimePart } from "./PrimePart";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
+
+const STATUS_STYLES = {
+  incomplete: {
+    accent: "var(--set-incomplete)",
+    bar: "bg-amber-500",
+    badge: "Incomplete",
+    badgeClass: "text-gray-500 border-gray-300 dark:text-gray-400 dark:border-gray-600",
+  },
+  ready: {
+    accent: "var(--set-ready)",
+    bar: "bg-green-500",
+    badge: "Ready to Build",
+    badgeClass:
+      "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-800",
+  },
+  extra: {
+    accent: "var(--set-extra)",
+    bar: "bg-violet-500",
+    badge: "Extra Set",
+    badgeClass:
+      "bg-violet-100 text-violet-800 border-violet-200 dark:bg-violet-900/50 dark:text-violet-300 dark:border-violet-800",
+  },
+};
+
+const PRIMARY_BUILD =
+  "bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-600 dark:hover:bg-amber-700 dark:text-white";
+const PRIMARY_SELL =
+  "bg-violet-600 hover:bg-violet-700 text-white dark:bg-violet-600 dark:hover:bg-violet-700 dark:text-white";
+const SECONDARY =
+  "border-gray-300 disabled:border-gray-200 disabled:text-gray-400 dark:border-gray-600 dark:disabled:border-gray-700 dark:disabled:text-gray-500";
+
+const progressLabel = ({ status, progress, missing }) => {
+  if (status === "ready") return "All parts collected";
+  if (status === "extra") return "Ready to sell";
+  return `${Math.floor(progress)}% · ${missing} ${missing === 1 ? "part" : "parts"} missing`;
+};
+
+// Complete sets get the full accent; incomplete ones fade in quadratically so
+// only the sets close to completion stand out.
+const accentStyle = ({ status, progress }) => {
+  const { accent } = STATUS_STYLES[status];
+  const strength = status === "incomplete" ? (progress / 100) ** 2 * 0.7 : 1;
+  const ring = status === "incomplete" ? "0 0 0 0 transparent" : `0 0 0 1px ${accent}`;
+  return {
+    borderColor: `color-mix(in oklab, ${accent} ${Math.round(strength * 100)}%, var(--set-border))`,
+    boxShadow: `${ring}, 0 0 ${Math.round(28 * strength)}px -6px color-mix(in oklab, ${accent} ${Math.round(strength * 60)}%, transparent)`,
+  };
+};
 
 // `counts` holds the owned count of each component, in the same order as
 // `primeSet.components`; comparing it element-wise lets unaffected cards skip renders.
@@ -19,69 +68,48 @@ const arePropsEqual = (prev, next) =>
 export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered }) {
   const { toggleMastery, build, sell } = use(InventoryActionsContext);
 
-  const isBuildable = primeSet.components.every((part, i) => counts[i] >= part.required);
-
-  const totalRequired = primeSet.components.reduce((sum, part) => sum + part.required, 0);
-  const totalOwned = primeSet.components.reduce(
-    (sum, part, i) => sum + Math.min(counts[i], part.required),
-    0
-  );
-  const progressPercentage = totalRequired > 0 ? (totalOwned / totalRequired) * 100 : 0;
+  const summary = summarizeSet(primeSet, counts, isMastered);
+  const { status, progress } = summary;
+  const styles = STATUS_STYLES[status];
+  const isComplete = status !== "incomplete";
 
   return (
-    <Card className='border border-gray-200 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden dark:border-gray-800 dark:bg-gray-900'>
+    <Card
+      className='border relative overflow-hidden transition-[border-color,box-shadow] duration-300 dark:bg-gray-900'
+      style={accentStyle(summary)}
+    >
       <div
-        className='absolute bottom-0 left-0 h-1 bg-amber-500 transition-all duration-300 ease-in-out'
-        style={{ width: `${progressPercentage}%` }}
+        className={`absolute bottom-0 left-0 h-1 transition-all duration-300 ease-in-out ${styles.bar}`}
+        style={{ width: `${progress}%` }}
       />
       <CardHeader className='border-b border-gray-100 !pb-0 dark:border-gray-800'>
-        <div className='flex items-center justify-between'>
-          <div className='flex items-center space-x-3'>
-            <div className='p-2 bg-gray-100 rounded dark:bg-gray-800'>
+        <div className='flex items-center justify-between gap-2'>
+          <div className='flex items-center space-x-3 min-w-0'>
+            <div className='p-1.5 sm:p-2 bg-gray-100 rounded dark:bg-gray-800 shrink-0'>
               {primeSet.imageName && (
                 <Image
                   src={`${IMAGE_BASE_URL}${primeSet.imageName}`}
                   alt={primeSet.name}
                   width={80}
                   height={80}
-                  className='object-contain'
+                  className='object-contain size-14 sm:size-20'
                 />
               )}
             </div>
-            <div>
-              <CardTitle className='text-lg font-semibold text-gray-900 dark:text-gray-100'>
+            <div className='min-w-0'>
+              <CardTitle className='text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100'>
                 {primeSet.name}
               </CardTitle>
-              <p className='text-sm text-gray-500 dark:text-gray-400'>
-                {primeSet.category}
+              <p className='text-sm text-gray-500 dark:text-gray-400'>{primeSet.category}</p>
+              <p className='text-xs font-medium text-gray-600 dark:text-gray-300 mt-0.5'>
+                {progressLabel(summary)}
               </p>
             </div>
           </div>
 
-          <div className='flex items-center space-x-2'>
-            <Badge
-              variant={
-                isBuildable
-                  ? isMastered
-                    ? "default"
-                    : "secondary"
-                  : "outline"
-              }
-              className={
-                !isBuildable
-                  ? "text-gray-500 border-gray-300 dark:text-gray-400 dark:border-gray-600"
-                  : isMastered
-                  ? "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:border-amber-800"
-                  : "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-800"
-              }
-            >
-              {!isBuildable
-                ? "Incomplete"
-                : isMastered
-                ? "Mastered"
-                : "Ready"}
-            </Badge>
-          </div>
+          <Badge variant='outline' className={`shrink-0 ${styles.badgeClass}`}>
+            {styles.badge}
+          </Badge>
         </div>
       </CardHeader>
 
@@ -98,7 +126,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
           ))}
         </div>
 
-        {/* Set actions */}
+        {/* Set actions: the primary action follows the set status */}
         <div className='flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-800'>
           <Button
             onClick={() => toggleMastery(primeSet)}
@@ -116,18 +144,19 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
           <div className='flex space-x-2'>
             <Button
               onClick={() => build(primeSet)}
-              disabled={!isBuildable}
+              disabled={!isComplete}
+              variant={status === "ready" ? "default" : "outline"}
               size='sm'
-              className='bg-amber-600 hover:bg-amber-700 text-white disabled:bg-gray-300 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 dark:bg-amber-600 dark:hover:bg-amber-700'
+              className={status === "ready" ? PRIMARY_BUILD : SECONDARY}
             >
               Build
             </Button>
             <Button
               onClick={() => sell(primeSet)}
-              disabled={!isBuildable}
-              variant='outline'
+              disabled={!isComplete}
+              variant={status === "extra" ? "default" : "outline"}
               size='sm'
-              className='border-gray-300 disabled:border-gray-200 disabled:text-gray-400 dark:border-gray-600 dark:disabled:border-gray-700 dark:disabled:text-gray-500'
+              className={status === "extra" ? PRIMARY_SELL : SECONDARY}
             >
               Sell
             </Button>
