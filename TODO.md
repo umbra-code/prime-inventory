@@ -16,13 +16,13 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 
 ## UX and accessibility
 
-- [ ] Responsive header (actions overflow on mobile)
-- [ ] `aria-label` on icon-only buttons (+/−, clear search, GitHub, theme)
-- [ ] Toasts for Build/Sell with undo
-- [ ] Replace `window.confirm` on reset with an in-app dialog
-- [ ] Persist filters (URL or localStorage)
-- [ ] Sync inventory across tabs (`storage` event)
-- [ ] Use `next/image` for local images (`wf.png`)
+- [x] Responsive header and filters
+- [x] `aria-label` on icon-only buttons (+/−, clear search, GitHub, theme)
+- [x] Toasts with undo for Build/Sell/Import/Reset
+- [x] Replace `window.confirm` on reset with an in-app dialog
+- [x] Persist category and status filters
+- [x] Sync inventory across tabs (`storage` event)
+- [x] Use `next/image` for local images (`wf.png`)
 
 ## Features
 

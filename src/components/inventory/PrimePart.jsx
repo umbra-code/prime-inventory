@@ -7,8 +7,9 @@ import { memo, use } from "react";
 
 const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
-export const PrimePart = memo(function PrimePart({ part, count }) {
-  const { updatePart } = use(InventoryActionsContext);
+export const PrimePart = memo(function PrimePart({ part, count, setName }) {
+  const { updatePart, adjustPart } = use(InventoryActionsContext);
+  const label = `${setName} ${part.name}`;
 
   const getPartStatus = () => {
     if (count === 0) return "missing";
@@ -36,9 +37,8 @@ export const PrimePart = memo(function PrimePart({ part, count }) {
         <Button
           size='sm'
           variant='outline'
-          onClick={() =>
-            updatePart(part.uniqueName, Math.max(0, count - 1))
-          }
+          onClick={() => adjustPart(part.uniqueName, -1)}
+          aria-label={`Decrease ${label}`}
           className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Minus className='h-3 w-3' />
@@ -56,6 +56,7 @@ export const PrimePart = memo(function PrimePart({ part, count }) {
             }
             onFocus={(e) => e.target.select()}
             inputMode='numeric'
+            aria-label={`${label} owned`}
             className='w-10 h-7 text-center text-xs border-gray-300 dark:bg-gray-900 dark:border-gray-600 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             min='0'
           />
@@ -65,7 +66,8 @@ export const PrimePart = memo(function PrimePart({ part, count }) {
         <Button
           size='sm'
           variant='outline'
-          onClick={() => updatePart(part.uniqueName, count + 1)}
+          onClick={() => adjustPart(part.uniqueName, 1)}
+          aria-label={`Increase ${label}`}
           className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Plus className='h-3 w-3' />

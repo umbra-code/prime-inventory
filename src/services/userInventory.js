@@ -3,7 +3,7 @@
 //   mastered: { [setUniqueName]: true }
 // Counts for parts missing from the current catalog are kept untouched.
 
-const STORAGE_KEY = "primeInventory";
+export const STORAGE_KEY = "primeInventory";
 const STORAGE_VERSION = 2;
 const EXPORT_APP_ID = "prime-inventory";
 
@@ -98,10 +98,19 @@ const serialize = ({ counts, mastered }) => ({
   mastered: Object.keys(mastered),
 });
 
+/** Parses a stored inventory string; null or unreadable values become an empty inventory. */
+export const parseStoredUserData = (value, catalogSets) => {
+  try {
+    return normalizeUserData(JSON.parse(value), catalogSets) ?? emptyUserData();
+  } catch (error) {
+    console.error("Failed to read stored inventory:", error);
+    return emptyUserData();
+  }
+};
+
 export const loadUserData = (catalogSets) => {
   try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return normalizeUserData(stored, catalogSets) ?? emptyUserData();
+    return parseStoredUserData(localStorage.getItem(STORAGE_KEY), catalogSets);
   } catch (error) {
     console.error("Failed to load inventory from localStorage:", error);
     return emptyUserData();
@@ -127,6 +136,16 @@ export const userDataReducer = (state, action) => {
     case "setCount":
       return { ...state, counts: setCount(state.counts, action.uniqueName, action.count) };
 
+    case "adjustCount":
+      return {
+        ...state,
+        counts: setCount(
+          state.counts,
+          action.uniqueName,
+          getCount(state.counts, action.uniqueName) + action.delta
+        ),
+      };
+
     case "toggleMastery": {
       const mastered = { ...state.mastered };
       if (mastered[action.set.uniqueName]) delete mastered[action.set.uniqueName];
@@ -144,6 +163,18 @@ export const userDataReducer = (state, action) => {
     case "sell":
       if (!isSetComplete(action.set, state.counts)) return state;
       return { ...state, counts: consumeSet(state.counts, action.set) };
+
+    // Undo for build/sell: puts back the set's previous part counts and mastery.
+    case "restoreSet": {
+      const counts = action.set.components.reduce(
+        (next, part, i) => setCount(next, part.uniqueName, action.counts[i]),
+        state.counts
+      );
+      const mastered = { ...state.mastered };
+      if (action.isMastered) mastered[action.set.uniqueName] = true;
+      else delete mastered[action.set.uniqueName];
+      return { counts, mastered };
+    }
 
     case "replace":
       return action.userData;

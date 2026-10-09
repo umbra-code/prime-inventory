@@ -27,50 +27,52 @@ export function InventoryDashboard() {
   } = use(InventoryStateContext);
 
   return (
-    <div className='bg-white rounded-lg border border-gray-200 p-6 mb-8 dark:bg-gray-900 dark:border-gray-800'>
+    <div className='bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-8 dark:bg-gray-900 dark:border-gray-800'>
       {/* Stats */}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-6'>
+      <div className='grid grid-cols-3 gap-2 sm:gap-6 mb-6'>
         <div className='text-center'>
-          <div className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
+          <div className='text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100'>
             {stats.total}
           </div>
-          <div className='text-sm text-gray-500 dark:text-gray-400'>
+          <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>
             Total Prime Sets
           </div>
         </div>
         <div className='text-center'>
-          <div className='text-3xl font-bold text-green-600'>
+          <div className='text-2xl sm:text-3xl font-bold text-green-600'>
             {stats.buildable}
           </div>
-          <div className='text-sm text-gray-500 dark:text-gray-400'>
+          <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>
             Ready to Build
           </div>
         </div>
         <div className='text-center'>
-          <div className='text-3xl font-bold text-amber-600'>
+          <div className='text-2xl sm:text-3xl font-bold text-amber-600'>
             {stats.mastered}
           </div>
-          <div className='text-sm text-gray-500 dark:text-gray-400'>
+          <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>
             Mastered
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className='flex flex-col sm:flex-row gap-4 items-center'>
-        <div className='flex-1'>
+      <div className='flex flex-col sm:flex-row gap-4 sm:items-center'>
+        <div className='w-full sm:flex-1'>
           <div className='relative'>
             <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4' />
             <Input
               type='search'
               placeholder='Search Prime items...'
+              aria-label='Search Prime items'
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='pl-10 pr-10 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'
+              className='pl-10 pr-10 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 [&::-webkit-search-cancel-button]:appearance-none'
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
+                aria-label='Clear search'
                 className='absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1'
               >
                 <X size={20} />
@@ -79,9 +81,9 @@ export function InventoryDashboard() {
           </div>
         </div>
 
-        <div className='flex gap-3'>
+        <div className='grid grid-cols-2 gap-3 sm:flex'>
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className='w-40 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'>
+            <SelectTrigger aria-label='Filter by category' className='w-full sm:w-40 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'>
               <SelectValue placeholder='Category' />
             </SelectTrigger>
             <SelectContent className='dark:bg-gray-800 dark:border-gray-700'>
@@ -98,7 +100,7 @@ export function InventoryDashboard() {
           </Select>
 
           <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-            <SelectTrigger className='w-40 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'>
+            <SelectTrigger aria-label='Filter by status' className='w-full sm:w-40 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100'>
               <SelectValue placeholder='Status' />
             </SelectTrigger>
             <SelectContent className='dark:bg-gray-800 dark:border-gray-700'>

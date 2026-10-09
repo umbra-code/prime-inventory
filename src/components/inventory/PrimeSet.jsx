@@ -89,7 +89,12 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
         {/* Set components */}
         <div className='space-y-1 mb-4'>
           {primeSet.components.map((part, i) => (
-            <PrimePart key={part.uniqueName} part={part} count={counts[i]} />
+            <PrimePart
+              key={part.uniqueName}
+              part={part}
+              count={counts[i]}
+              setName={primeSet.name}
+            />
           ))}
         </div>
 
