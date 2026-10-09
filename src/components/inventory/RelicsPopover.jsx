@@ -1,20 +1,23 @@
 "use client";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useI18n } from "@/i18n/I18nContext";
 import { RARITY_CLASS } from "@/lib/relics";
 import { Gem } from "lucide-react";
 
 /** Button listing the relics a part drops from; available relics come first. */
 export function RelicsPopover({ relics = [], label }) {
+  const { t } = useI18n();
   if (relics.length === 0) return null;
   const availableCount = relics.filter((relic) => relic.available).length;
+  const counts = { count: relics.length, available: availableCount };
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <button
           type='button'
-          aria-label={`${label}: drops from ${relics.length} relics, ${availableCount} available now`}
+          aria-label={t("relicsButton", { name: label, ...counts })}
           className={`inline-flex items-center gap-1 rounded px-1 -mx-1 text-[11px] hover:bg-gray-100 dark:hover:bg-gray-700 ${
             availableCount > 0
               ? "font-medium text-sky-700 dark:text-sky-300"
@@ -23,16 +26,13 @@ export function RelicsPopover({ relics = [], label }) {
         >
           <Gem className='size-3' aria-hidden='true' />
           {relics.length}
-          {availableCount > 0 && <span className='sr-only'> ({availableCount} available)</span>}
         </button>
       </PopoverTrigger>
       <PopoverContent align='start' className='w-64 p-0'>
         <div className='border-b px-3 py-2 text-xs font-semibold'>
           {label}
           <span className='block font-normal text-muted-foreground'>
-            {availableCount > 0
-              ? `${availableCount} of ${relics.length} relics drop now`
-              : `All ${relics.length} relics are vaulted`}
+            {availableCount > 0 ? t("relicsAvailable", counts) : t("relicsAllVaulted", counts)}
           </span>
         </div>
         <ul className='max-h-64 overflow-y-auto py-1 text-sm'>
@@ -42,11 +42,11 @@ export function RelicsPopover({ relics = [], label }) {
                 {relic.name}
                 {relic.available && (
                   <span className='ml-1.5 rounded bg-sky-100 px-1 text-[10px] font-medium text-sky-800 dark:bg-sky-900/60 dark:text-sky-200'>
-                    Available
+                    {t("relicAvailable")}
                   </span>
                 )}
               </span>
-              <span className={`text-xs ${RARITY_CLASS[relic.rarity]}`}>{relic.rarity}</span>
+              <span className={`text-xs ${RARITY_CLASS[relic.rarity]}`}>{t(`rarity.${relic.rarity}`)}</span>
             </li>
           ))}
         </ul>

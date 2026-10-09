@@ -12,6 +12,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
+- **English and Spanish:** the interface follows your browser language, and item names can stay in English (as on warframe.market) or use the game's own translations. Both are in the Preferences menu, next to the theme.
 - **Light and dark themes:** follows your system setting by default.
 - **Installable and offline:** install it as an app from the browser (Install app / Add to Home Screen). After the first visit it works without a connection; images you have already seen stay available.
 
@@ -23,6 +24,11 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
   2. Once a day the app checks jsDelivr for a newer `@wfcd/items` release. If there is one, it downloads it and caches it in the browser, so new Primes appear without redeploying.
   3. If the check fails (offline, network errors), the app keeps using the cached or bundled catalog.
 - **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
+
+## Translations
+
+- UI strings live in `src/i18n/messages.js` (English and Spanish side by side). A unit test checks that every language has every key with the same placeholders and plural forms.
+- In-game item names come from `@wfcd/items` translations: `scripts/build-catalog.mjs` writes `src/data/names.<lang>.json` (generated, git-ignored), keeping only names that differ from English. Primes newer than the build fall back to English.
 
 ## Offline support
 
@@ -85,6 +91,8 @@ src/lib/slimCatalog.mjs     Raw @wfcd/items data -> app catalog (shared by build
 src/services/catalog.js     Catalog selection and daily refresh
 src/services/userInventory.js  User data reducer, storage, migrations, backups
 src/services/filters.js     Search, status filters and sorting
+src/i18n/                   UI strings, translator and language context
+src/lib/itemNames.mjs       In-game item names per language (used by the catalog script)
 src/context/InventoryContext.jsx  App state (state + stable actions contexts)
 src/components/             UI (inventory cards, layout, shadcn/ui primitives)
 src/test/                   Shared test fixtures

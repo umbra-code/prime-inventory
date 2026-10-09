@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InventoryActionsContext } from "@/context/InventoryContext";
+import { useI18n } from "@/i18n/I18nContext";
 import { imageUrl } from "@/lib/images";
 import { summarizeSet } from "@/services/userInventory";
 import { Lock } from "lucide-react";
@@ -14,20 +15,20 @@ const STATUS_STYLES = {
   incomplete: {
     accent: "var(--set-incomplete)",
     bar: "bg-amber-500",
-    badge: "Incomplete",
+    badge: "badge.incomplete",
     badgeClass: "text-gray-500 border-gray-300 dark:text-gray-400 dark:border-gray-600",
   },
   ready: {
     accent: "var(--set-ready)",
     bar: "bg-green-500",
-    badge: "Ready to Build",
+    badge: "badge.ready",
     badgeClass:
       "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-800",
   },
   extra: {
     accent: "var(--set-extra)",
     bar: "bg-violet-500",
-    badge: "Extra Set",
+    badge: "badge.extra",
     badgeClass:
       "bg-violet-100 text-violet-800 border-violet-200 dark:bg-violet-900/50 dark:text-violet-300 dark:border-violet-800",
   },
@@ -40,10 +41,10 @@ const PRIMARY_SELL =
 const SECONDARY =
   "border-gray-300 disabled:border-gray-200 disabled:text-gray-400 dark:border-gray-600 dark:disabled:border-gray-700 dark:disabled:text-gray-500";
 
-const progressLabel = ({ status, progress, missing }) => {
-  if (status === "ready") return "All parts collected";
-  if (status === "extra") return "Ready to sell";
-  return `${Math.floor(progress)}% · ${missing} ${missing === 1 ? "part" : "parts"} missing`;
+const progressLabel = (t, { status, progress, missing }) => {
+  if (status === "ready") return t("allPartsCollected");
+  if (status === "extra") return t("readyToSell");
+  return t("partsMissing", { percent: Math.floor(progress), count: missing });
 };
 
 // Complete sets get the full accent; incomplete ones fade in quadratically so
@@ -68,6 +69,8 @@ const arePropsEqual = (prev, next) =>
 
 export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered }) {
   const { toggleMastery, build, sell } = use(InventoryActionsContext);
+  const { t, setName } = useI18n();
+  const name = setName(primeSet);
 
   const summary = summarizeSet(primeSet, counts, isMastered);
   const { status, progress } = summary;
@@ -90,7 +93,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
               {primeSet.imageName && (
                 <Image
                   src={imageUrl(primeSet.imageName)}
-                  alt={primeSet.name}
+                  alt={name}
                   width={80}
                   height={80}
                   className='object-contain size-14 sm:size-20'
@@ -99,37 +102,37 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
             </div>
             <div className='min-w-0'>
               <CardTitle className='text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100'>
-                {primeSet.name}
+                {name}
               </CardTitle>
-              <p className='flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400'>
-                {primeSet.category}
+              <p className='flex flex-wrap items-center gap-x-1.5 text-sm text-gray-500 dark:text-gray-400'>
+                <span className='whitespace-nowrap'>{t(`category.${primeSet.category}`)}</span>
                 {primeSet.vaulted && (
-                  <span className='inline-flex items-center gap-0.5 text-xs' title='Vaulted: its relics no longer drop'>
-                    · <Lock className='size-3' aria-hidden='true' /> Vaulted
+                  <span className='inline-flex items-center gap-0.5 text-xs whitespace-nowrap' title={t("vaultedHint")}>
+                    · <Lock className='size-3' aria-hidden='true' /> {t("vaulted")}
                   </span>
                 )}
               </p>
               <p className='text-xs font-medium text-gray-600 dark:text-gray-300 mt-0.5'>
-                {progressLabel(summary)}
+                {progressLabel(t, summary)}
               </p>
             </div>
           </div>
 
           <div className='flex flex-col items-end gap-1.5 shrink-0'>
             <Badge variant='outline' className={styles.badgeClass}>
-              {styles.badge}
+              {t(styles.badge)}
             </Badge>
             <Ducats
               value={summary.ducats}
-              prefix='Set'
-              label='ducats for a full set'
+              prefix={t("setDucatsPrefix")}
+              label={t("setDucatsLabel")}
               className='text-xs text-gray-600 dark:text-gray-300'
             />
             {summary.spareDucats > 0 && (
               <Ducats
                 value={summary.spareDucats}
-                prefix='Spare'
-                label='ducats in spare parts'
+                prefix={t("spareDucatsPrefix")}
+                label={t("spareDucatsLabel")}
                 className='text-xs font-medium text-violet-700 dark:text-violet-300'
               />
             )}
@@ -145,7 +148,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
               key={part.uniqueName}
               part={part}
               count={counts[i]}
-              setName={primeSet.name}
+              set={primeSet}
             />
           ))}
         </div>
@@ -162,7 +165,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
                 : "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
             }`}
           >
-            {isMastered ? "✓ Mastered" : "Mark as Mastered"}
+            {isMastered ? t("mastered") : t("markMastered")}
           </Button>
 
           <div className='flex space-x-2'>
@@ -173,7 +176,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
               size='sm'
               className={status === "ready" ? PRIMARY_BUILD : SECONDARY}
             >
-              Build
+              {t("build")}
             </Button>
             <Button
               onClick={() => sell(primeSet)}
@@ -182,7 +185,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
               size='sm'
               className={status === "extra" ? PRIMARY_SELL : SECONDARY}
             >
-              Sell
+              {t("sell")}
             </Button>
           </div>
         </div>

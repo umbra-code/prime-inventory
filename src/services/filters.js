@@ -53,12 +53,15 @@ export const getCategories = (sets) => ["All", ...new Set(sets.map((set) => set.
 export const filterAndSortSets = (
   sets,
   summaries,
-  { search = "", category = "All", status = "All", availability = "All", sort = "Name" }
+  { search = "", category = "All", status = "All", availability = "All", sort = "Name", nameOf }
 ) => {
   const term = search.trim().toLowerCase();
+  // Matches the English name and, when given, the displayed (translated) one.
+  const matchesSearch = (set) =>
+    set.name.toLowerCase().includes(term) || Boolean(nameOf?.(set).toLowerCase().includes(term));
   const result = sets.filter(
     (set) =>
-      set.name.toLowerCase().includes(term) &&
+      matchesSearch(set) &&
       (category === "All" || set.category === category) &&
       matchesAvailability(availability, set) &&
       matchesStatus(status, summaries.get(set.uniqueName))

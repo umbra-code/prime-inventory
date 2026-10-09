@@ -3,14 +3,17 @@ import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { InventoryActionsContext } from "@/context/InventoryContext";
+import { useI18n } from "@/i18n/I18nContext";
 import { imageUrl } from "@/lib/images";
 import { memo, use, useState } from "react";
 import { Ducats } from "./Ducats";
 import { RelicsPopover } from "./RelicsPopover";
 
-export const PrimePart = memo(function PrimePart({ part, count, setName }) {
+export const PrimePart = memo(function PrimePart({ part, count, set }) {
   const { updatePart, adjustPart } = use(InventoryActionsContext);
-  const label = `${setName} ${part.name}`;
+  const { t, partName, fullPartName } = useI18n();
+  const name = partName(part);
+  const label = fullPartName(set, part);
   // Raw text while the input is focused, so it can be emptied before typing a
   // new number; null when not editing (the stored count is shown).
   const [draft, setDraft] = useState(null);
@@ -28,18 +31,18 @@ export const PrimePart = memo(function PrimePart({ part, count, setName }) {
           {part.imageName && (
             <Image
               src={imageUrl(part.imageName)}
-              alt={part.name}
+              alt={name}
               width={32}
               height={32}
             />
           )}
         </div>
         <div className='flex flex-col'>
-          <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{part.name}</span>
+          <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{name}</span>
           <div className='flex items-center gap-2.5'>
             <Ducats
               value={part.ducats}
-              label='ducats each'
+              label={t("partDucatsLabel")}
               className='text-[11px] text-gray-500 dark:text-gray-400'
             />
             <RelicsPopover relics={part.relics} label={label} />
@@ -53,7 +56,7 @@ export const PrimePart = memo(function PrimePart({ part, count, setName }) {
           variant='outline'
           onClick={() => adjustPart(part.uniqueName, -1)}
           disabled={count === 0}
-          aria-label={`Decrease ${label}`}
+          aria-label={t("decreasePart", { name: label })}
           className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Minus className='h-3 w-3' />
@@ -79,7 +82,7 @@ export const PrimePart = memo(function PrimePart({ part, count, setName }) {
             }}
             inputMode='numeric'
             pattern='[0-9]*'
-            aria-label={`${label} owned`}
+            aria-label={t("ownedPart", { name: label })}
             className='w-10 h-7 text-center text-xs border-gray-300 dark:bg-gray-900 dark:border-gray-600'
           />
           <span className='text-xs text-gray-500 dark:text-gray-400'>/{part.required}</span>
@@ -89,7 +92,7 @@ export const PrimePart = memo(function PrimePart({ part, count, setName }) {
           size='sm'
           variant='outline'
           onClick={() => adjustPart(part.uniqueName, 1)}
-          aria-label={`Increase ${label}`}
+          aria-label={t("increasePart", { name: label })}
           className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
           <Plus className='h-3 w-3' />

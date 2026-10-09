@@ -2,6 +2,7 @@
 
 import { createContext, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { toast } from "sonner";
+import { useI18n } from "@/i18n/I18nContext";
 import { getInitialCatalog, refreshCatalog } from "@/services/catalog";
 import {
   availabilityFilters,
@@ -59,6 +60,7 @@ const downloadJson = (data, fileName) => {
 export function InventoryProvider({ children }) {
   const [catalog, setCatalog] = useState(getInitialCatalog);
   const [userData, dispatch] = useReducer(userDataReducer, catalog.sets, loadUserData);
+  const { t, setName } = useI18n();
   const [searchTerm, setSearchTerm] = useState("");
   const [view, setView] = useState(loadView);
   const [initialFilters] = useState(() => loadFilters(getCategories(catalog.sets)));
@@ -68,10 +70,10 @@ export function InventoryProvider({ children }) {
   const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
 
   // Read by event handlers without making the actions unstable.
-  const latest = useRef({ userData, catalog });
+  const latest = useRef({ userData, catalog, t, setName });
   useEffect(() => {
-    latest.current = { userData, catalog };
-  }, [userData, catalog]);
+    latest.current = { userData, catalog, t, setName };
+  }, [userData, catalog, t, setName]);
 
   // Data received from another tab is already stored; writing it back could
   // overwrite a newer value that tab saved in the meantime.
@@ -116,8 +118,10 @@ export function InventoryProvider({ children }) {
   }, [catalog]);
 
   const actions = useMemo(() => {
+    const translate = (...args) => latest.current.t(...args);
+    const nameOf = (set) => latest.current.setName(set);
     const undoable = (message, undo) =>
-      toast.success(message, { action: { label: "Undo", onClick: undo } });
+      toast.success(message, { action: { label: translate("undo"), onClick: undo } });
 
     // Build and Sell only touch one set, so undo restores just that set
     // instead of discarding edits made after the toast appeared.
@@ -142,8 +146,8 @@ export function InventoryProvider({ children }) {
       updatePart: (uniqueName, count) => dispatch({ type: "setCount", uniqueName, count }),
       adjustPart: (uniqueName, delta) => dispatch({ type: "adjustCount", uniqueName, delta }),
       toggleMastery: (set) => dispatch({ type: "toggleMastery", set }),
-      build: (set) => consumeSet("build", set, `Built ${set.name}`),
-      sell: (set) => consumeSet("sell", set, `Sold ${set.name}`),
+      build: (set) => consumeSet("build", set, translate("built", { name: nameOf(set) })),
+      sell: (set) => consumeSet("sell", set, translate("sold", { name: nameOf(set) })),
 
       exportInventory: () => {
         downloadJson(toExportFile(latest.current.userData), "prime_inventory.json");
@@ -156,16 +160,16 @@ export function InventoryProvider({ children }) {
           const raw = JSON.parse(await file.text());
           const imported = normalizeUserData(raw, latest.current.catalog.sets);
           if (!imported) throw new Error("Unrecognized inventory format");
-          replaceAll(imported, `Imported inventory from ${file.name}`);
+          replaceAll(imported, translate("imported", { file: file.name }));
         } catch (error) {
           console.error("Failed to import inventory:", error);
-          toast.error(`Could not import ${file.name}`, {
-            description: "It is not a valid Prime Inventory backup.",
+          toast.error(translate("importFailed", { file: file.name }), {
+            description: translate("importFailedHint"),
           });
         }
       },
 
-      resetInventory: () => replaceAll(emptyUserData(), "Inventory reset"),
+      resetInventory: () => replaceAll(emptyUserData(), translate("inventoryReset")),
 
       showSetInInventory: (set) => {
         setSearchTerm(set.name);
@@ -212,10 +216,12 @@ export function InventoryProvider({ children }) {
         status: selectedStatus,
         availability: selectedAvailability,
         sort: selectedSort,
+        nameOf: setName,
       }),
     [
       catalog,
       summaries,
+      setName,
       searchTerm,
       selectedCategory,
       selectedStatus,

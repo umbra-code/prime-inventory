@@ -1,15 +1,18 @@
-// Generates src/data/primes.json, the catalog bundled with the app.
-// Runs before every build; `generatedAt` only changes when the data does.
+// Generates src/data/primes.json, the catalog bundled with the app, and
+// src/data/names.<lang>.json with the in-game item names for each language.
+// Runs before dev, build and test; `generatedAt` only changes when the data does.
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { isDeepStrictEqual } from "node:util";
+import { buildItemNames } from "../src/lib/itemNames.mjs";
 import { CATALOG_FORMAT, slimCatalog } from "../src/lib/slimCatalog.mjs";
 
 const require = createRequire(import.meta.url);
 const Items = require("@wfcd/items");
 
 const OUTPUT = new URL("../src/data/primes.json", import.meta.url);
+const ITEM_NAME_LANGUAGES = ["es"];
 const packageJson = new URL("../node_modules/@wfcd/items/package.json", import.meta.url);
 
 const { version } = JSON.parse(await readFile(packageJson, "utf8"));
@@ -38,4 +41,20 @@ if (
   await mkdir(new URL(".", OUTPUT), { recursive: true });
   await writeFile(OUTPUT, JSON.stringify(catalog, null, 2) + "\n");
   console.log(`Catalog written: ${sets.length} sets from @wfcd/items@${version}.`);
+}
+
+for (const language of ITEM_NAME_LANGUAGES) {
+  const translationsFile = new URL(
+    `../node_modules/@wfcd/items/data/json/i18n/${language}.json`,
+    import.meta.url
+  );
+  const translations = JSON.parse(await readFile(translationsFile, "utf8"));
+  const names = buildItemNames(sets, translations, language);
+  await writeFile(
+    new URL(`../src/data/names.${language}.json`, import.meta.url),
+    JSON.stringify(names, null, 2) + "\n"
+  );
+  console.log(
+    `Item names (${language}): ${Object.keys(names.sets).length} sets, ${Object.keys(names.parts).length} parts.`
+  );
 }

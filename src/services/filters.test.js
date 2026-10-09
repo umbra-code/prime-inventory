@@ -48,6 +48,13 @@ describe("filterAndSortSets", () => {
     expect(query({ search: "  ASH " })).toEqual(["Ash Prime"]);
   });
 
+  it("also matches the displayed (translated) name", () => {
+    const nameOf = (set) => (set.name === "Akbronco Prime" ? "Akbronco Primado" : set.name);
+    const sets = filterAndSortSets(catalogSets, summaries, { search: "primado", nameOf });
+    expect(names(sets)).toEqual(["Akbronco Prime"]);
+    expect(query({ search: "primado" })).toEqual([]);
+  });
+
   it("filters by category and status", () => {
     expect(query({ category: "Primary" })).toEqual(["Braton Prime"]);
     expect(query({ status: "Almost Complete" })).toEqual(["Braton Prime"]);
