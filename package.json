@@ -33,7 +33,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@wfcd/items": "^1.1276.18",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-next": "^16.4.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
