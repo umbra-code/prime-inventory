@@ -1,5 +1,6 @@
 "use client";
 
+import { InventoryTable } from "@/components/inventory/InventoryTable";
 import { PrimeSet } from "@/components/inventory/PrimeSet";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
@@ -7,7 +8,7 @@ import Image from "next/image";
 import { use } from "react";
 
 export function InventoryGrid() {
-  const { filteredSets, summaries } = use(InventoryStateContext);
+  const { filteredSets, summaries, layout } = use(InventoryStateContext);
   const { t } = useI18n();
 
   if (filteredSets.length === 0) {
@@ -22,16 +23,19 @@ export function InventoryGrid() {
     );
   }
 
+  if (layout === "table") return <InventoryTable />;
+
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
       {filteredSets.map((primeSet) => {
-        const { owned, isMastered } = summaries.get(primeSet.uniqueName);
+        const { owned, isMastered, inArsenal } = summaries.get(primeSet.uniqueName);
         return (
           <PrimeSet
             key={primeSet.uniqueName}
             primeSet={primeSet}
             counts={owned}
             isMastered={isMastered}
+            inArsenal={inArsenal}
           />
         );
       })}

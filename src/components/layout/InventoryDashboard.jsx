@@ -11,7 +11,7 @@ import {
 import { Ducats } from "@/components/inventory/Ducats";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
-import { ArrowUpDown, Search, X } from "lucide-react";
+import { ArrowUpDown, LayoutGrid, Rows3, Search, X } from "lucide-react";
 import { use } from "react";
 
 // Beveled field; the border is an inset shadow so the bevel does not cut it.
@@ -57,6 +57,8 @@ export function InventoryDashboard() {
     sortOptions,
     stats,
     filteredSets,
+    layout,
+    setLayout,
   } = use(InventoryStateContext);
   const { t } = useI18n();
   // Option values are internal keys; "All" gets a label per filter.
@@ -154,8 +156,32 @@ export function InventoryDashboard() {
         </div>
       </div>
 
-      <div className='text-sm text-oro-ink-muted'>
-        {t("showing", { shown: filteredSets.length, total: stats.total })}
+      <div className='flex items-center justify-between gap-3'>
+        <span className='text-sm text-oro-ink-muted'>
+          {t("showing", { shown: filteredSets.length, total: stats.total })}
+        </span>
+        <div role='group' aria-label={t("layoutLabel")} className='flex gap-1'>
+          {[
+            ["cards", LayoutGrid],
+            ["table", Rows3],
+          ].map(([value, Icon]) => (
+            <button
+              key={value}
+              type='button'
+              aria-pressed={layout === value}
+              onClick={() => setLayout(value)}
+              title={t(`layout.${value}`)}
+              className={`bevel inline-flex h-8 cursor-pointer items-center gap-1.5 px-2.5 text-xs font-medium transition-colors [--cut:5px] ${
+                layout === value
+                  ? "bg-oro-surface-2 text-oro-gold shadow-[inset_0_0_0_1px_var(--oro-gold)]"
+                  : "text-oro-ink-faint shadow-[inset_0_0_0_1px_var(--oro-line)] hover:text-oro-ink"
+              }`}
+            >
+              <Icon className='size-4' aria-hidden='true' />
+              <span className='hidden sm:inline'>{t(`layout.${value}`)}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

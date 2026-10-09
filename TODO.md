@@ -39,6 +39,13 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] Original logo and app icon (replaces the official Lotus emblem)
 - [x] Orokin visual identity: Prime gold on warm black or white marble, beveled frames, Cinzel display type, Void cyan for relics available now
 
+## From the original PrimeInventory (Laravel)
+
+- [x] Compact table layout (one row per set), switchable with the cards
+- [x] In Arsenal flag, separate from Mastered, with its own status filter
+- [ ] Weapon type sub-filter (rifle, shotgun, bow, nikana…) from the catalog's `type`
+- [ ] "Now in game" panel: newest Primes and relics that just returned
+
 ## Tooling
 
 - [x] Vitest for `src/services` and `src/lib` (reducer, migrations, filters, catalog)

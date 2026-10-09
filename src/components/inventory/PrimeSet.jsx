@@ -2,41 +2,26 @@ import { Button } from "@/components/ui/button";
 import { InventoryActionsContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
 import { imageUrl } from "@/lib/images";
+import { accentStrength, progressLabel, STATUS } from "@/lib/setStatus";
 import { summarizeSet } from "@/services/userInventory";
 import { Lock } from "lucide-react";
 import Image from "next/image";
 import { memo, use } from "react";
 import { Ducats } from "./Ducats";
 import { PrimePart } from "./PrimePart";
-
-// Each status tints the card frame, glow, progress line and badge.
-const STATUS = {
-  incomplete: { accent: "var(--oro-gold)", badge: "badge.incomplete", badgeClass: "bg-oro-surface-2 text-oro-ink-muted" },
-  ready: { accent: "var(--oro-ready)", badge: "badge.ready", badgeClass: "bg-oro-ready/15 text-oro-ready" },
-  extra: { accent: "var(--oro-extra)", badge: "badge.extra", badgeClass: "bg-oro-extra/15 text-oro-extra" },
-};
-
-const progressLabel = (t, { status, progress, missing }) => {
-  if (status === "ready") return t("allPartsCollected");
-  if (status === "extra") return t("readyToSell");
-  return t("partsMissing", { percent: Math.floor(progress), count: missing });
-};
-
-// Complete sets get the full accent; incomplete ones fade in quadratically so
-// only the sets close to completion stand out.
-const accentStrength = ({ status, progress }) =>
-  status === "incomplete" ? (progress / 100) ** 2 * 0.7 : 1;
+import { SetToggles } from "./SetToggles";
 
 // `counts` holds the owned count of each component, in the same order as
 // `primeSet.components`; comparing it element-wise lets unaffected cards skip renders.
 const arePropsEqual = (prev, next) =>
   prev.primeSet === next.primeSet &&
   prev.isMastered === next.isMastered &&
+  prev.inArsenal === next.inArsenal &&
   prev.counts.length === next.counts.length &&
   prev.counts.every((count, i) => count === next.counts[i]);
 
-export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered }) {
-  const { toggleMastery, build, sell } = use(InventoryActionsContext);
+export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, inArsenal }) {
+  const { build, sell } = use(InventoryActionsContext);
   const { t, setName } = useI18n();
   const name = setName(primeSet);
 
@@ -118,14 +103,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
 
           {/* Set actions: the primary action follows the set status */}
           <footer className='mt-1.5 flex items-center justify-between gap-2 border-t border-oro-line px-4 pb-4 pt-3 sm:px-[18px]'>
-            <Button
-              onClick={() => toggleMastery(primeSet)}
-              variant='ghost'
-              size='sm'
-              className={`px-2 ${isMastered ? "text-oro-gold" : ""}`}
-            >
-              {isMastered ? t("mastered") : t("markMastered")}
-            </Button>
+            <SetToggles set={primeSet} isMastered={isMastered} inArsenal={inArsenal} />
 
             <div className='flex gap-2'>
               <Button

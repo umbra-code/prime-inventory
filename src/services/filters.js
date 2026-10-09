@@ -1,5 +1,5 @@
 // Search, status filters and sorting for the Prime set grid. Works on set
-// summaries from summarizeSet() plus isMastered.
+// summaries from summarizeSet() plus isMastered and inArsenal.
 
 const FILTERS_KEY = "primeInventoryFilters";
 const ALMOST_COMPLETE_PERCENT = 75;
@@ -11,9 +11,10 @@ export const statusFilters = [
   "Almost Complete",
   "Incomplete",
   "Mastered",
+  "In Arsenal",
 ];
 
-export const matchesStatus = (filter, { status, progress, isMastered }) => {
+export const matchesStatus = (filter, { status, progress, isMastered, inArsenal }) => {
   switch (filter) {
     case "Ready to Build":
       return status === "ready";
@@ -25,6 +26,8 @@ export const matchesStatus = (filter, { status, progress, isMastered }) => {
       return status === "incomplete";
     case "Mastered":
       return isMastered;
+    case "In Arsenal":
+      return inArsenal;
     default:
       return true;
   }
@@ -46,6 +49,8 @@ const comparators = {
 };
 
 export const sortOptions = Object.keys(comparators);
+
+export const layouts = ["cards", "table"];
 
 export const getCategories = (sets) => ["All", ...new Set(sets.map((set) => set.category))];
 
@@ -72,7 +77,7 @@ export const filterAndSortSets = (
     : result;
 };
 
-const DEFAULT_FILTERS = { category: "All", status: "All", availability: "All", sort: "Name" };
+const DEFAULT_FILTERS = { category: "All", status: "All", availability: "All", sort: "Name", layout: "cards" };
 
 /** Saved filters and sort, falling back to defaults for unknown values. */
 export const loadFilters = (categories) => {
@@ -84,6 +89,7 @@ export const loadFilters = (categories) => {
       status: pick(statusFilters, saved.status, DEFAULT_FILTERS.status),
       availability: pick(availabilityFilters, saved.availability, DEFAULT_FILTERS.availability),
       sort: pick(sortOptions, saved.sort, DEFAULT_FILTERS.sort),
+      layout: pick(layouts, saved.layout, DEFAULT_FILTERS.layout),
     };
   } catch {
     return { ...DEFAULT_FILTERS };

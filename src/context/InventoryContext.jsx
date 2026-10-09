@@ -68,6 +68,7 @@ export function InventoryProvider({ children }) {
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
   const [selectedAvailability, setSelectedAvailability] = useState(initialFilters.availability);
   const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
+  const [layout, setLayout] = useState(initialFilters.layout);
 
   // Read by event handlers without making the actions unstable.
   const latest = useRef({ userData, catalog, t, setName });
@@ -92,8 +93,9 @@ export function InventoryProvider({ children }) {
       status: selectedStatus,
       availability: selectedAvailability,
       sort: selectedSort,
+      layout,
     });
-  }, [selectedCategory, selectedStatus, selectedAvailability, selectedSort]);
+  }, [selectedCategory, selectedStatus, selectedAvailability, selectedSort, layout]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
@@ -126,11 +128,12 @@ export function InventoryProvider({ children }) {
     // Build and Sell only touch one set, so undo restores just that set
     // instead of discarding edits made after the toast appeared.
     const consumeSet = (type, set, message) => {
-      const { counts, mastered } = latest.current.userData;
+      const { counts, mastered, arsenal } = latest.current.userData;
       if (!isSetComplete(set, counts)) return;
       const previous = {
         counts: set.components.map((part) => getCount(counts, part.uniqueName)),
         isMastered: Boolean(mastered[set.uniqueName]),
+        inArsenal: Boolean(arsenal[set.uniqueName]),
       };
       dispatch({ type, set });
       undoable(message, () => dispatch({ type: "restoreSet", set, ...previous }));
@@ -146,6 +149,7 @@ export function InventoryProvider({ children }) {
       updatePart: (uniqueName, count) => dispatch({ type: "setCount", uniqueName, count }),
       adjustPart: (uniqueName, delta) => dispatch({ type: "adjustCount", uniqueName, delta }),
       toggleMastery: (set) => dispatch({ type: "toggleMastery", set }),
+      toggleArsenal: (set) => dispatch({ type: "toggleArsenal", set }),
       build: (set) => consumeSet("build", set, translate("built", { name: nameOf(set) })),
       sell: (set) => consumeSet("sell", set, translate("sold", { name: nameOf(set) })),
 
@@ -192,7 +196,8 @@ export function InventoryProvider({ children }) {
     for (const set of catalog.sets) {
       const owned = getOwnedCounts(set, userData.counts);
       const isMastered = Boolean(userData.mastered[set.uniqueName]);
-      map.set(set.uniqueName, { owned, isMastered, ...summarizeSet(set, owned, isMastered) });
+      const inArsenal = Boolean(userData.arsenal[set.uniqueName]);
+      map.set(set.uniqueName, { owned, isMastered, inArsenal, ...summarizeSet(set, owned, isMastered) });
     }
     return map;
   }, [catalog, userData]);
@@ -254,6 +259,8 @@ export function InventoryProvider({ children }) {
       missingParts,
       view,
       setView,
+      layout,
+      setLayout,
     }),
     [
       catalog,
@@ -269,6 +276,7 @@ export function InventoryProvider({ children }) {
       filteredSets,
       missingParts,
       view,
+      layout,
     ]
   );
 

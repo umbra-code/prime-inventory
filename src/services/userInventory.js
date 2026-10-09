@@ -1,13 +1,14 @@
 // User inventory, kept separate from the item catalog:
 //   counts:   { [partUniqueName]: number }   only parts the user owns
 //   mastered: { [setUniqueName]: true }
+//   arsenal:  { [setUniqueName]: true }      sets the user has built and still keeps
 // Counts for parts missing from the current catalog are kept untouched.
 
 export const STORAGE_KEY = "primeInventory";
 const STORAGE_VERSION = 2;
 const EXPORT_APP_ID = "prime-inventory";
 
-export const emptyUserData = () => ({ counts: {}, mastered: {} });
+export const emptyUserData = () => ({ counts: {}, mastered: {}, arsenal: {} });
 
 export const getCount = (counts, uniqueName) => counts[uniqueName] ?? 0;
 
@@ -80,26 +81,26 @@ const countsFromEntries = (entries) => {
   return counts;
 };
 
-const masteredFromKeys = (keys) =>
+const setFromKeys = (keys) =>
   Object.fromEntries(keys.filter((key) => typeof key === "string").map((key) => [key, true]));
 
 /**
  * Converts any known inventory format to user data, or returns null when the
  * data is not recognized. Supported formats:
- *   - v2 (current storage and export files)
+ *   - v2 (current storage and export files; `arsenal` is optional, added in 2.6)
  *   - v1 storage: { masteredSets: [setName], partCounts: [{ uniqueName, userCount }] }
  *   - v1 export: the full inventory array with userCount/isMastered merged in
  * Legacy formats reference sets by name, so the catalog is needed to map them.
  */
 export const normalizeUserData = (raw, catalogSets) => {
   const setUniqueNameByName = new Map(catalogSets.map((set) => [set.name, set.uniqueName]));
-  const masteredFromNames = (names) =>
-    masteredFromKeys(names.map((name) => setUniqueNameByName.get(name)));
+  const masteredFromNames = (names) => setFromKeys(names.map((name) => setUniqueNameByName.get(name)));
 
   if (raw?.version === STORAGE_VERSION && raw.counts && Array.isArray(raw.mastered)) {
     return {
       counts: countsFromEntries(Object.entries(raw.counts)),
-      mastered: masteredFromKeys(raw.mastered),
+      mastered: setFromKeys(raw.mastered),
+      arsenal: setFromKeys(Array.isArray(raw.arsenal) ? raw.arsenal : []),
     };
   }
 
@@ -107,6 +108,7 @@ export const normalizeUserData = (raw, catalogSets) => {
     return {
       counts: countsFromEntries(raw.partCounts.map((p) => [p?.uniqueName, p?.userCount])),
       mastered: masteredFromNames(raw.masteredSets),
+      arsenal: {},
     };
   }
 
@@ -115,17 +117,33 @@ export const normalizeUserData = (raw, catalogSets) => {
     return {
       counts: countsFromEntries(parts.map((p) => [p?.uniqueName, p?.userCount])),
       mastered: masteredFromNames(raw.filter((set) => set.isMastered).map((set) => set.name)),
+      arsenal: {},
     };
   }
 
   return null;
 };
 
-const serialize = ({ counts, mastered }) => ({
+const serialize = ({ counts, mastered, arsenal }) => ({
   version: STORAGE_VERSION,
   counts,
   mastered: Object.keys(mastered),
+  arsenal: Object.keys(arsenal),
 });
+
+const toggleKey = (flags, key) => {
+  const next = { ...flags };
+  if (next[key]) delete next[key];
+  else next[key] = true;
+  return next;
+};
+
+const setFlag = (flags, key, value) => {
+  const next = { ...flags };
+  if (value) next[key] = true;
+  else delete next[key];
+  return next;
+};
 
 /** Parses a stored inventory string; null or unreadable values become an empty inventory. */
 export const parseStoredUserData = (value, catalogSets) => {
@@ -175,34 +193,36 @@ export const userDataReducer = (state, action) => {
         ),
       };
 
-    case "toggleMastery": {
-      const mastered = { ...state.mastered };
-      if (mastered[action.set.uniqueName]) delete mastered[action.set.uniqueName];
-      else mastered[action.set.uniqueName] = true;
-      return { ...state, mastered };
-    }
+    case "toggleMastery":
+      return { ...state, mastered: toggleKey(state.mastered, action.set.uniqueName) };
 
+    case "toggleArsenal":
+      return { ...state, arsenal: toggleKey(state.arsenal, action.set.uniqueName) };
+
+    // Building a set masters it and puts it in the arsenal.
     case "build":
       if (!isSetComplete(action.set, state.counts)) return state;
       return {
         counts: consumeSet(state.counts, action.set),
-        mastered: { ...state.mastered, [action.set.uniqueName]: true },
+        mastered: setFlag(state.mastered, action.set.uniqueName, true),
+        arsenal: setFlag(state.arsenal, action.set.uniqueName, true),
       };
 
     case "sell":
       if (!isSetComplete(action.set, state.counts)) return state;
       return { ...state, counts: consumeSet(state.counts, action.set) };
 
-    // Undo for build/sell: puts back the set's previous part counts and mastery.
+    // Undo for build/sell: puts back the set's previous part counts, mastery and arsenal flag.
     case "restoreSet": {
       const counts = action.set.components.reduce(
         (next, part, i) => setCount(next, part.uniqueName, action.counts[i]),
         state.counts
       );
-      const mastered = { ...state.mastered };
-      if (action.isMastered) mastered[action.set.uniqueName] = true;
-      else delete mastered[action.set.uniqueName];
-      return { counts, mastered };
+      return {
+        counts,
+        mastered: setFlag(state.mastered, action.set.uniqueName, action.isMastered),
+        arsenal: setFlag(state.arsenal, action.set.uniqueName, action.inArsenal),
+      };
     }
 
     case "replace":

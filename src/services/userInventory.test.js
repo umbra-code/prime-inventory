@@ -81,14 +81,21 @@ describe("userDataReducer", () => {
     expect(reduce(on, { type: "toggleMastery", set: ash }).mastered).toEqual({});
   });
 
-  it("build consumes one set of parts and marks it mastered", () => {
-    const state = reduce({ counts: fullCounts(akbronco, 1), mastered: {} }, { type: "build", set: akbronco });
-    expect(state.counts).toEqual({ "/Parts/AkbroncoPrimeBlueprint": 1, "/Parts/AkbroncoPrimeLink": 1 });
-    expect(state.mastered[akbronco.uniqueName]).toBe(true);
+  it("toggleArsenal flips whether the set is kept, independently of mastery", () => {
+    const on = reduce(emptyUserData(), { type: "toggleArsenal", set: ash });
+    expect(on).toEqual({ counts: {}, mastered: {}, arsenal: { [ash.uniqueName]: true } });
+    expect(reduce(on, { type: "toggleArsenal", set: ash }).arsenal).toEqual({});
   });
 
-  it("sell consumes parts without touching mastery", () => {
-    const state = reduce({ counts: fullCounts(ash), mastered: {} }, { type: "sell", set: ash });
+  it("build consumes one set of parts, masters it and puts it in the arsenal", () => {
+    const state = reduce({ ...emptyUserData(), counts: fullCounts(akbronco, 1) }, { type: "build", set: akbronco });
+    expect(state.counts).toEqual({ "/Parts/AkbroncoPrimeBlueprint": 1, "/Parts/AkbroncoPrimeLink": 1 });
+    expect(state.mastered[akbronco.uniqueName]).toBe(true);
+    expect(state.arsenal[akbronco.uniqueName]).toBe(true);
+  });
+
+  it("sell consumes parts without touching mastery or the arsenal", () => {
+    const state = reduce({ ...emptyUserData(), counts: fullCounts(ash) }, { type: "sell", set: ash });
     expect(state).toEqual(emptyUserData());
   });
 
@@ -99,11 +106,11 @@ describe("userDataReducer", () => {
   });
 
   it("restoreSet undoes a build for that set only", () => {
-    const before = { counts: { ...fullCounts(ash), other: 4 }, mastered: {} };
-    const previous = { counts: getOwnedCounts(ash, before.counts), isMastered: false };
+    const before = { counts: { ...fullCounts(ash), other: 4 }, mastered: {}, arsenal: {} };
+    const previous = { counts: getOwnedCounts(ash, before.counts), isMastered: false, inArsenal: false };
     const built = reduce(before, { type: "build", set: ash }, { type: "setCount", uniqueName: "other", count: 9 });
     const restored = reduce(built, { type: "restoreSet", set: ash, ...previous });
-    expect(restored).toEqual({ counts: { ...fullCounts(ash), other: 9 }, mastered: {} });
+    expect(restored).toEqual({ counts: { ...fullCounts(ash), other: 9 }, mastered: {}, arsenal: {} });
   });
 
   it("replace and reset swap the whole inventory", () => {
@@ -119,11 +126,17 @@ describe("userDataReducer", () => {
 
 describe("normalizeUserData", () => {
   it("reads the current v2 format", () => {
-    const raw = { version: 2, counts: { a: 2 }, mastered: [ash.uniqueName] };
+    const raw = { version: 2, counts: { a: 2 }, mastered: [ash.uniqueName], arsenal: [akbronco.uniqueName] };
     expect(normalizeUserData(raw, catalogSets)).toEqual({
       counts: { a: 2 },
       mastered: { [ash.uniqueName]: true },
+      arsenal: { [akbronco.uniqueName]: true },
     });
+  });
+
+  it("reads v2 data saved before the arsenal existed", () => {
+    const raw = { version: 2, counts: { a: 2 }, mastered: [ash.uniqueName] };
+    expect(normalizeUserData(raw, catalogSets).arsenal).toEqual({});
   });
 
   it("migrates v1 storage, mapping set names and keeping unknown parts", () => {
@@ -138,6 +151,7 @@ describe("normalizeUserData", () => {
     expect(normalizeUserData(raw, catalogSets)).toEqual({
       counts: { "/Parts/AshPrimeChassis": 2, "/Old/Part": 1 },
       mastered: { [ash.uniqueName]: true },
+      arsenal: {},
     });
   });
 
@@ -149,6 +163,7 @@ describe("normalizeUserData", () => {
     expect(normalizeUserData(raw, catalogSets)).toEqual({
       counts: fullCounts(ash),
       mastered: { [ash.uniqueName]: true },
+      arsenal: {},
     });
   });
 
@@ -160,7 +175,11 @@ describe("normalizeUserData", () => {
   );
 
   it("round-trips export files", () => {
-    const data = { counts: fullCounts(akbronco), mastered: { [ash.uniqueName]: true } };
+    const data = {
+      counts: fullCounts(akbronco),
+      mastered: { [ash.uniqueName]: true },
+      arsenal: { [akbronco.uniqueName]: true },
+    };
     const file = JSON.parse(JSON.stringify(toExportFile(data)));
     expect(file.app).toBe("prime-inventory");
     expect(normalizeUserData(file, catalogSets)).toEqual(data);
@@ -174,7 +193,7 @@ describe("storage", () => {
   });
 
   it("saves and loads the same data", () => {
-    const data = { counts: { a: 2 }, mastered: { [ash.uniqueName]: true } };
+    const data = { counts: { a: 2 }, mastered: { [ash.uniqueName]: true }, arsenal: { [ash.uniqueName]: true } };
     saveUserData(data);
     expect(JSON.parse(localStorage.getItem(STORAGE_KEY)).version).toBe(2);
     expect(loadUserData(catalogSets)).toEqual(data);

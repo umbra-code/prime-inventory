@@ -5,8 +5,9 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 ## Features
 
 - **Inventory at a glance:** every Prime set with its parts, owned vs. required counts and a progress bar.
-- **Mastery tracking:** mark sets as mastered; sets you can build again show up as extra sets.
-- **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered).
+- **Mastery and arsenal tracking:** mark sets as mastered, and separately whether you still keep them built (In Arsenal). Sets you can build again show up as extra sets.
+- **Cards or table:** browse sets as detailed cards, or switch to a compact table (one row per set) to update many counts quickly. The choice is remembered.
+- **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered and in your arsenal).
 - **Search, filters and sorting:** by name, category, status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
 - **Missing Parts:** a separate tab lists the parts you still need for the sets you have not mastered, grouped by the relics you can open right now (the ones that drop the most of them first), plus the parts that only drop from vaulted relics.
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
