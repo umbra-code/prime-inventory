@@ -59,7 +59,7 @@ npm install -D @wfcd/items@latest
 
 Unit tests live next to the code they cover (`*.test.js`) and focus on the logic in `src/services` and `src/lib`: the inventory reducer, storage migrations, filters and sorting, and the catalog refresh (with `fetch` and `localStorage` mocked).
 
-GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production build on every push to `master` and on pull requests. Dependabot (`.github/dependabot.yml`) keeps dependencies up to date.
+GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production build on every push to `master` or `development` and on pull requests. Work happens on `development`; `master` only receives tested, tagged releases. Dependabot (`.github/dependabot.yml`) keeps dependencies up to date.
 
 ## Project structure
 

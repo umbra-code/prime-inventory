@@ -1,7 +1,10 @@
 version: 2
+# master only receives tested, tagged releases; updates go through development.
+# Note: Dependabot reads this file from the default branch (master).
 updates:
   - package-ecosystem: npm
     directory: /
+    target-branch: development
     schedule:
       interval: weekly
     groups:
@@ -15,5 +18,6 @@ updates:
 
   - package-ecosystem: github-actions
     directory: /
+    target-branch: development
     schedule:
       interval: monthly
