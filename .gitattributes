@@ -1,0 +1,9 @@
+# Store and check out text files with LF line endings on every machine,
+# regardless of its core.autocrlf setting.
+* text=auto eol=lf
+
+# Binary files: never touch their bytes.
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
