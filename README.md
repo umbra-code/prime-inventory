@@ -69,6 +69,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | Run ESLint |
 | `npm test` | Run the unit tests once (Vitest) |
 | `npm run test:watch` | Run the unit tests in watch mode |
+| `npm run release -- <patch|minor|major>` | Release a new version (see [Releasing](#releasing)) |
 
 To pick up new Primes in the bundled catalog, update the package (Dependabot opens a weekly PR for it):
 
@@ -81,6 +82,17 @@ npm install -D @wfcd/items@latest
 Unit tests live next to the code they cover (`*.test.js`) and focus on the logic in `src/services` and `src/lib`: the inventory reducer, storage migrations, filters and sorting, and the catalog refresh (with `fetch` and `localStorage` mocked).
 
 GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production build on every push to `master` or `development` and on pull requests. Work happens on `development`; `master` only receives tested, tagged releases. Dependabot (`.github/dependabot.yml`) keeps dependencies up to date.
+
+## Releasing
+
+Work happens on `development`; `master` only receives tested, tagged releases. From a clean `development`:
+
+```bash
+npm run release -- minor            # or patch / major
+npm run release -- minor --dry-run  # show the steps without changing anything
+```
+
+The script (`scripts/release.mjs`) pulls, runs lint and tests, asks for confirmation, runs `npm version` (version commit + tag), pushes `development` with the tag, waits for CI on that commit, and only if CI passes fast-forwards `master` to it and pushes. It always switches back to `development`. Set `GITHUB_TOKEN` to raise the GitHub API rate limit while it waits for CI.
 
 ## Project structure
 
