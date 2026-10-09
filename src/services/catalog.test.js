@@ -86,6 +86,11 @@ describe("getInitialCatalog", () => {
     expect(getInitialCatalog().version).toBe("999.0.0");
   });
 
+  it("ignores cached catalogs in an older format", () => {
+    cache({ ...bundledCatalog, version: "999.0.0", format: bundledCatalog.format - 1 });
+    expect(getInitialCatalog()).toBe(bundledCatalog);
+  });
+
   it("ignores cached catalogs that are older, truncated or corrupt", () => {
     cache({ ...bundledCatalog, version: "0.0.1" });
     expect(getInitialCatalog()).toBe(bundledCatalog);
@@ -117,9 +122,11 @@ describe("refreshCatalog", () => {
 
     expect(catalog.version).toBe("999.0.0");
     expect(catalog.sets).toHaveLength(bundledCatalog.sets.length);
+    expect(catalog.format).toBe(bundledCatalog.format);
     expect(catalog.sets[0].components).toEqual([
-      { uniqueName: "/Parts/Test0Barrel", name: "Barrel", imageName: "barrel.png", required: 2, ducats: 45 },
+      { uniqueName: "/Parts/Test0Barrel", name: "Barrel", imageName: "barrel.png", required: 2, ducats: 45, relics: [] },
     ]);
+    expect(fetch.mock.calls.some(([url]) => url.endsWith("/Relics.json"))).toBe(true);
     expect(fetch.mock.calls.some(([url]) => url.includes("@wfcd/items@999.0.0/"))).toBe(true);
     expect(JSON.parse(localStorage.getItem(CACHE_KEY))).toEqual(catalog);
     expect(getInitialCatalog().version).toBe("999.0.0");

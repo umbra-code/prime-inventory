@@ -6,6 +6,7 @@ import { InventoryActionsContext } from "@/context/InventoryContext";
 import { imageUrl } from "@/lib/images";
 import { memo, use, useState } from "react";
 import { Ducats } from "./Ducats";
+import { RelicsPopover } from "./RelicsPopover";
 
 export const PrimePart = memo(function PrimePart({ part, count, setName }) {
   const { updatePart, adjustPart } = use(InventoryActionsContext);
@@ -35,11 +36,14 @@ export const PrimePart = memo(function PrimePart({ part, count, setName }) {
         </div>
         <div className='flex flex-col'>
           <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{part.name}</span>
-          <Ducats
-            value={part.ducats}
-            label='ducats each'
-            className='text-[11px] text-gray-500 dark:text-gray-400'
-          />
+          <div className='flex items-center gap-2.5'>
+            <Ducats
+              value={part.ducats}
+              label='ducats each'
+              className='text-[11px] text-gray-500 dark:text-gray-400'
+            />
+            <RelicsPopover relics={part.relics} label={label} />
+          </div>
         </div>
       </div>
 

@@ -8,7 +8,10 @@ const part = (uniqueName, overrides = {}) => ({
   tradable: true,
   ducats: 45,
   itemCount: 1,
-  drops: [{ location: "Lith A1 Relic" }],
+  drops: [
+    { location: "Lith A1 Relic", chance: 25.33, rarity: "Uncommon" },
+    { location: "Lith A1 Relic (Radiant)", chance: 16.67, rarity: "Uncommon" },
+  ],
   ...overrides,
 });
 
@@ -34,7 +37,14 @@ describe("slimCatalog", () => {
       imageName: "Braton Prime.png",
       vaulted: true,
       components: [
-        { uniqueName: "/Parts/Barrel", name: "Barrel", imageName: "/Parts/Barrel.png", required: 1, ducats: 45 },
+        {
+          uniqueName: "/Parts/Barrel",
+          name: "Barrel",
+          imageName: "/Parts/Barrel.png",
+          required: 1,
+          ducats: 45,
+          relics: [{ name: "Lith A1", rarity: "Common" }],
+        },
       ],
     });
   });
@@ -75,6 +85,68 @@ describe("slimCatalog", () => {
       item("Braton Prime", [part("/Parts/Barrel", { itemCount: undefined, ducats: undefined })]),
     ]);
     expect(set.components[0]).toMatchObject({ required: 1, ducats: 0 });
+  });
+
+  describe("relics", () => {
+    const relic = (name, vaulted) => ({ name: `${name} Intact`, category: "Relics", vaulted });
+    const drops = (...entries) =>
+      entries.flatMap(([relicName, chance]) => [
+        { location: `${relicName} Relic`, chance, rarity: "Uncommon" },
+        { location: `${relicName} Relic (Radiant)`, chance: 10, rarity: "Uncommon" },
+      ]);
+
+    it("derives rarity from the Intact chance and lists each relic once", () => {
+      const [set] = slimCatalog([
+        item("Braton Prime", [part("/Parts/Barrel", { drops: drops(["Lith A1", 25.33], ["Meso B2", 11], ["Neo C3", 2]) })]),
+      ]);
+      expect(set.components[0].relics).toEqual([
+        { name: "Lith A1", rarity: "Common" },
+        { name: "Meso B2", rarity: "Uncommon" },
+        { name: "Neo C3", rarity: "Rare" },
+      ]);
+    });
+
+    it("flags relics that currently drop and lists them first", () => {
+      const [set] = slimCatalog([
+        relic("Lith A1", true),
+        relic("Axi Z9", false),
+        item("Braton Prime", [part("/Parts/Barrel", { drops: drops(["Lith A1", 25.33], ["Axi Z9", 2]) })]),
+      ]);
+      expect(set.components[0].relics).toEqual([
+        { name: "Axi Z9", rarity: "Rare", available: true },
+        { name: "Lith A1", rarity: "Common" },
+      ]);
+    });
+
+    it("sorts by rarity, then tier, then relic number", () => {
+      const [set] = slimCatalog([
+        item("Braton Prime", [
+          part("/Parts/Barrel", {
+            drops: drops(["Axi A1", 25.33], ["Lith A10", 25.33], ["Lith A2", 25.33], ["Meso A1", 2]),
+          }),
+        ]),
+      ]);
+      expect(set.components[0].relics.map((r) => r.name)).toEqual(["Lith A2", "Lith A10", "Axi A1", "Meso A1"]);
+    });
+
+    it("treats a vaulted set as available when one of its relics drops", () => {
+      const sets = slimCatalog([
+        relic("Axi Z9", false),
+        item("Cernos Prime", [part("/Parts/Grip", { drops: drops(["Axi Z9", 25.33]) })], { vaulted: true }),
+        item("Nyx Prime", [part("/Parts/Chassis", { drops: drops(["Lith A1", 25.33]) })], { vaulted: true }),
+        item("Citrine Prime", [part("/Parts/Systems", { drops: drops(["Lith A1", 25.33]) })], { vaulted: false }),
+      ]);
+      expect(Object.fromEntries(sets.map((s) => [s.name, s.vaulted]))).toEqual({
+        "Cernos Prime": false,
+        "Citrine Prime": false,
+        "Nyx Prime": true,
+      });
+    });
+
+    it("handles parts without drops", () => {
+      const [set] = slimCatalog([item("Odonata Prime", [part("/Parts/Blueprint", { drops: undefined })])]);
+      expect(set.components[0].relics).toEqual([]);
+    });
   });
 
   it("sorts sets by name", () => {

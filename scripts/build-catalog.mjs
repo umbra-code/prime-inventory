@@ -4,7 +4,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { isDeepStrictEqual } from "node:util";
-import { slimCatalog } from "../src/lib/slimCatalog.mjs";
+import { CATALOG_FORMAT, slimCatalog } from "../src/lib/slimCatalog.mjs";
 
 const require = createRequire(import.meta.url);
 const Items = require("@wfcd/items");
@@ -22,10 +22,15 @@ try {
   // First run: no existing catalog.
 }
 
-if (previous?.version === version && isDeepStrictEqual(previous.sets, sets)) {
+if (
+  previous?.format === CATALOG_FORMAT &&
+  previous.version === version &&
+  isDeepStrictEqual(previous.sets, sets)
+) {
   console.log(`Catalog unchanged (${sets.length} sets).`);
 } else {
   const catalog = {
+    format: CATALOG_FORMAT,
     version,
     generatedAt: new Date().toISOString(),
     sets,

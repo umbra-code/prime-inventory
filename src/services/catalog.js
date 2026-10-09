@@ -1,5 +1,5 @@
 import bundledCatalog from "@/data/primes.json";
-import { slimCatalog } from "@/lib/slimCatalog.mjs";
+import { CATALOG_FORMAT, slimCatalog } from "@/lib/slimCatalog.mjs";
 
 // Catalog sources, in order of preference:
 //   1. A newer @wfcd/items release downloaded from jsDelivr (checked at most daily)
@@ -17,8 +17,10 @@ const dataUrl = (version, file) =>
   `https://cdn.jsdelivr.net/npm/${PACKAGE}@${version}/data/json/${file}.json`;
 
 // Category files that contain Prime sets; they also resolve sets used as
-// components (e.g. Bronco Prime inside Akbronco Prime).
+// components (e.g. Bronco Prime inside Akbronco Prime). Relics tells which
+// relics currently drop.
 const CATEGORY_FILES = [
+  "Relics",
   "Primary",
   "Secondary",
   "Melee",
@@ -40,7 +42,8 @@ export const compareVersions = (a, b) => {
 };
 
 const isValidCatalog = (catalog) =>
-  typeof catalog?.version === "string" &&
+  catalog?.format === CATALOG_FORMAT &&
+  typeof catalog.version === "string" &&
   Array.isArray(catalog.sets) &&
   // Guard against truncated or broken upstream data.
   catalog.sets.length >= bundledCatalog.sets.length * 0.9;
@@ -89,7 +92,12 @@ export const downloadCatalog = async (version, signal) => {
     ["Components", ...CATEGORY_FILES].map((file) => fetchJson(dataUrl(version, file), signal))
   );
   const items = resolveComponents(categories.flat(), componentsCatalog);
-  return { version, generatedAt: new Date().toISOString(), sets: slimCatalog(items) };
+  return {
+    format: CATALOG_FORMAT,
+    version,
+    generatedAt: new Date().toISOString(),
+    sets: slimCatalog(items),
+  };
 };
 
 /**

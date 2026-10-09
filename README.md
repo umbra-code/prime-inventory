@@ -8,6 +8,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Mastery tracking:** mark sets as mastered; sets you can build again show up as extra sets.
 - **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered).
 - **Search, filters and sorting:** by name, category, status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
+- **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **Light and dark themes:** follows your system setting by default.
@@ -19,6 +20,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
   1. A slim catalog (`src/data/primes.json`) is generated from the installed `@wfcd/items` before `dev`, `build` and `test`, and bundled with the app, so it is always available. It is not committed.
   2. Once a day the app checks jsDelivr for a newer `@wfcd/items` release. If there is one, it downloads it and caches it in the browser, so new Primes appear without redeploying.
   3. If the check fails (offline, network errors), the app keeps using the cached or bundled catalog.
+- **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
 
 ## Tech stack
 
