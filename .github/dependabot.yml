@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # New Primes arrive through this package; keep it in its own PR.
+      warframe-data:
+        patterns: ["@wfcd/items"]
+      minor-and-patch:
+        patterns: ["*"]
+        exclude-patterns: ["@wfcd/items"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

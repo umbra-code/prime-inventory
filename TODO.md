@@ -40,6 +40,6 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 
 ## Tooling
 
-- [ ] Vitest for `src/services` (reducer, migrations, catalog)
-- [ ] GitHub Actions: lint + build
-- [ ] Dependabot/Renovate to keep `@wfcd/items` current
+- [x] Vitest for `src/services` and `src/lib` (reducer, migrations, filters, catalog)
+- [x] GitHub Actions: lint + test + build
+- [x] Dependabot to keep `@wfcd/items` and other dependencies current

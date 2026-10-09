@@ -1,7 +1,7 @@
 // Generates src/data/primes.json, the catalog bundled with the app.
 // Runs before every build; `generatedAt` only changes when the data does.
 
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { isDeepStrictEqual } from "node:util";
 import { slimCatalog } from "../src/lib/slimCatalog.mjs";
@@ -30,6 +30,7 @@ if (previous?.version === version && isDeepStrictEqual(previous.sets, sets)) {
     generatedAt: new Date().toISOString(),
     sets,
   };
+  await mkdir(new URL(".", OUTPUT), { recursive: true });
   await writeFile(OUTPUT, JSON.stringify(catalog, null, 2) + "\n");
   console.log(`Catalog written: ${sets.length} sets from @wfcd/items@${version}.`);
 }

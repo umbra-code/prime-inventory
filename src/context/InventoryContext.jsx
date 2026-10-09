@@ -4,6 +4,14 @@ import { createContext, useEffect, useMemo, useReducer, useRef, useState } from 
 import { toast } from "sonner";
 import { getInitialCatalog, refreshCatalog } from "@/services/catalog";
 import {
+  filterAndSortSets,
+  getCategories,
+  loadFilters,
+  saveFilters,
+  sortOptions,
+  statusFilters,
+} from "@/services/filters";
+import {
   emptyUserData,
   getCount,
   getOwnedCounts,
@@ -22,60 +30,6 @@ import {
 // consume actions skip re-rendering when other sets change.
 export const InventoryStateContext = createContext(undefined);
 export const InventoryActionsContext = createContext(undefined);
-
-const ALMOST_COMPLETE_PERCENT = 75;
-
-const statusFilters = [
-  "All",
-  "Ready to Build",
-  "Extra Sets",
-  "Almost Complete",
-  "Incomplete",
-  "Mastered",
-];
-
-const matchesStatus = (filter, { status, progress, isMastered }) => {
-  switch (filter) {
-    case "Ready to Build":
-      return status === "ready";
-    case "Extra Sets":
-      return status === "extra";
-    case "Almost Complete":
-      return status === "incomplete" && progress >= ALMOST_COMPLETE_PERCENT;
-    case "Incomplete":
-      return status === "incomplete";
-    case "Mastered":
-      return isMastered;
-    default:
-      return true;
-  }
-};
-
-const STATUS_RANK = { ready: 0, extra: 1, incomplete: 2 };
-
-// The catalog is already sorted by name and Array#sort is stable, so ties keep name order.
-const sortOptions = {
-  Name: null,
-  Progress: (a, b) => b.progress - a.progress,
-  "Ready First": (a, b) => STATUS_RANK[a.status] - STATUS_RANK[b.status] || b.progress - a.progress,
-};
-
-const FILTERS_KEY = "primeInventoryFilters";
-
-const loadFilters = (categories) => {
-  try {
-    const { category, status, sort } = JSON.parse(localStorage.getItem(FILTERS_KEY)) ?? {};
-    return {
-      category: categories.includes(category) ? category : "All",
-      status: statusFilters.includes(status) ? status : "All",
-      sort: sort in sortOptions ? sort : "Name",
-    };
-  } catch {
-    return { category: "All", status: "All", sort: "Name" };
-  }
-};
-
-const getCategories = (catalog) => ["All", ...new Set(catalog.sets.map((set) => set.category))];
 
 const pickJsonFile = () =>
   new Promise((resolve) => {
@@ -102,7 +56,7 @@ export function InventoryProvider({ children }) {
   const [catalog, setCatalog] = useState(getInitialCatalog);
   const [userData, dispatch] = useReducer(userDataReducer, catalog.sets, loadUserData);
   const [searchTerm, setSearchTerm] = useState("");
-  const [initialFilters] = useState(() => loadFilters(getCategories(catalog)));
+  const [initialFilters] = useState(() => loadFilters(getCategories(catalog.sets)));
   const [selectedCategory, setSelectedCategory] = useState(initialFilters.category);
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
   const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
@@ -121,14 +75,7 @@ export function InventoryProvider({ children }) {
   }, [userData]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(
-        FILTERS_KEY,
-        JSON.stringify({ category: selectedCategory, status: selectedStatus, sort: selectedSort })
-      );
-    } catch {
-      // Filters are a convenience; ignore storage failures.
-    }
+    saveFilters({ category: selectedCategory, status: selectedStatus, sort: selectedSort });
   }, [selectedCategory, selectedStatus, selectedSort]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
@@ -207,7 +154,7 @@ export function InventoryProvider({ children }) {
     };
   }, []);
 
-  const categories = useMemo(() => getCategories(catalog), [catalog]);
+  const categories = useMemo(() => getCategories(catalog.sets), [catalog]);
 
   // One entry per set: owned counts per component, progress and status.
   const summaries = useMemo(() => {
@@ -230,21 +177,16 @@ export function InventoryProvider({ children }) {
     return stats;
   }, [catalog, summaries]);
 
-  const filteredSets = useMemo(() => {
-    const search = searchTerm.trim().toLowerCase();
-    const sets = catalog.sets.filter((set) => {
-      const summary = summaries.get(set.uniqueName);
-      return (
-        set.name.toLowerCase().includes(search) &&
-        (selectedCategory === "All" || set.category === selectedCategory) &&
-        matchesStatus(selectedStatus, summary)
-      );
-    });
-    const compare = sortOptions[selectedSort];
-    return compare
-      ? sets.sort((a, b) => compare(summaries.get(a.uniqueName), summaries.get(b.uniqueName)))
-      : sets;
-  }, [catalog, summaries, searchTerm, selectedCategory, selectedStatus, selectedSort]);
+  const filteredSets = useMemo(
+    () =>
+      filterAndSortSets(catalog.sets, summaries, {
+        search: searchTerm,
+        category: selectedCategory,
+        status: selectedStatus,
+        sort: selectedSort,
+      }),
+    [catalog, summaries, searchTerm, selectedCategory, selectedStatus, selectedSort]
+  );
 
   const state = useMemo(
     () => ({
@@ -258,7 +200,7 @@ export function InventoryProvider({ children }) {
       setSelectedStatus,
       selectedSort,
       setSelectedSort,
-      sortOptions: Object.keys(sortOptions),
+      sortOptions,
       categories,
       statusFilters,
       stats,

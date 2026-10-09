@@ -15,7 +15,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 
 - **Your inventory** (part counts and mastered sets) is stored in `localStorage`. Nothing is sent to a server.
 - **The item catalog** comes from [`@wfcd/items`](https://github.com/WFCD/warframe-items):
-  1. A slim catalog (`src/data/primes.json`) is generated at build time and bundled with the app, so it is always available.
+  1. A slim catalog (`src/data/primes.json`) is generated from the installed `@wfcd/items` before `dev`, `build` and `test`, and bundled with the app, so it is always available. It is not committed.
   2. Once a day the app checks jsDelivr for a newer `@wfcd/items` release. If there is one, it downloads it and caches it in the browser, so new Primes appear without redeploying.
   3. If the check fails (offline, network errors), the app keeps using the cached or bundled catalog.
 
@@ -42,28 +42,37 @@ Then open [http://localhost:3000](http://localhost:3000).
 | Script | Description |
 |---|---|
 | `npm run dev` | Start the development server |
-| `npm run build` | Regenerate the catalog and build for production |
+| `npm run build` | Build for production |
 | `npm run start` | Serve the production build |
-| `npm run catalog` | Regenerate `src/data/primes.json` from the installed `@wfcd/items` |
+| `npm run catalog` | Regenerate `src/data/primes.json` (runs automatically before dev, build and test) |
 | `npm run lint` | Run ESLint |
+| `npm test` | Run the unit tests once (Vitest) |
+| `npm run test:watch` | Run the unit tests in watch mode |
 
-To pick up new Primes in the bundled catalog, update the package and regenerate:
+To pick up new Primes in the bundled catalog, update the package (Dependabot opens a weekly PR for it):
 
 ```bash
 npm install -D @wfcd/items@latest
-npm run catalog
 ```
+
+## Tests and CI
+
+Unit tests live next to the code they cover (`*.test.js`) and focus on the logic in `src/services` and `src/lib`: the inventory reducer, storage migrations, filters and sorting, and the catalog refresh (with `fetch` and `localStorage` mocked).
+
+GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production build on every push to `master` and on pull requests. Dependabot (`.github/dependabot.yml`) keeps dependencies up to date.
 
 ## Project structure
 
 ```
 scripts/build-catalog.mjs   Generates the bundled catalog
-src/data/primes.json        Bundled catalog (generated, committed)
+src/data/primes.json        Bundled catalog (generated, git-ignored)
 src/lib/slimCatalog.mjs     Raw @wfcd/items data -> app catalog (shared by build and browser)
 src/services/catalog.js     Catalog selection and daily refresh
 src/services/userInventory.js  User data reducer, storage, migrations, backups
+src/services/filters.js     Search, status filters and sorting
 src/context/InventoryContext.jsx  App state (state + stable actions contexts)
 src/components/             UI (inventory cards, layout, shadcn/ui primitives)
+src/test/                   Shared test fixtures
 ```
 
 ## License
