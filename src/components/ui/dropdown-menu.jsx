@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { CircleIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -21,7 +20,7 @@ function DropdownMenuContent({ className, sideOffset = 4, ...props }) {
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md",
+          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 z-50 min-w-[8rem] overflow-hidden border border-oro-line-strong p-1 shadow-lg",
           className
         )}
         {...props}
@@ -46,7 +45,7 @@ function DropdownMenuRadioItem({ className, children, ...props }) {
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
+          <span className="oro-diamond bg-oro-gold !size-[7px]" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -58,7 +57,7 @@ function DropdownMenuLabel({ className, ...props }) {
   return (
     <DropdownMenuPrimitive.Label
       data-slot="dropdown-menu-label"
-      className={cn("px-2 py-1.5 text-xs font-semibold text-muted-foreground", className)}
+      className={cn("px-2 py-1.5 font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-oro-gold", className)}
       {...props}
     />
   );

@@ -37,7 +37,7 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] Installable PWA: manifest, original app icon, offline service worker, offline badge
 - [x] i18n: English and Spanish interface, item names in English or the game's language
 - [x] Original logo and app icon (replaces the official Lotus emblem)
-- [ ] Visual identity rework (after features settle)
+- [x] Orokin visual identity: Prime gold on warm black or white marble, beveled frames, Cinzel display type, Void cyan for relics available now
 
 ## Tooling
 

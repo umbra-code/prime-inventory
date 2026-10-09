@@ -18,51 +18,35 @@ export const PrimePart = memo(function PrimePart({ part, count, set }) {
   // new number; null when not editing (the stored count is shown).
   const [draft, setDraft] = useState(null);
 
-  const getPartStatus = () => {
-    if (count === 0) return "missing";
-    if (count < part.required) return "partial";
-    return "complete";
-  };
+  const status = count === 0 ? "missing" : count < part.required ? "partial" : "complete";
+  const STATUS_COLOR = { missing: "bg-oro-danger", partial: "bg-oro-gold", complete: "bg-oro-ready" };
 
   return (
-    <div className='flex items-center justify-between py-2 px-3 border-l-4 border-l-gray-200 hover:border-l-amber-500 hover:bg-gray-50 transition-colors dark:border-l-gray-700 dark:hover:bg-gray-800'>
-      <div className='flex items-center space-x-3'>
-        <div className='p-px bg-gray-100/50 rounded dark:bg-gray-800/50'>
-          {part.imageName && (
-            <Image
-              src={imageUrl(part.imageName)}
-              alt={name}
-              width={32}
-              height={32}
-            />
-          )}
-        </div>
-        <div className='flex flex-col'>
-          <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{name}</span>
-          <div className='flex items-center gap-2.5'>
-            <Ducats
-              value={part.ducats}
-              label={t("partDucatsLabel")}
-              className='text-[11px] text-gray-500 dark:text-gray-400'
-            />
-            <RelicsPopover relics={part.relics} label={label} />
-          </div>
-        </div>
-      </div>
+    <li className='grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-3 px-2 py-1.5 transition-colors hover:bg-oro-surface-2'>
+      <span className='bevel grid size-[34px] place-items-center bg-oro-surface-2 [--cut:6px]'>
+        {part.imageName && <Image src={imageUrl(part.imageName)} alt={name} width={30} height={30} className='size-[30px] object-contain' />}
+      </span>
 
-      <div className='flex items-center space-x-2'>
+      <span className='min-w-0'>
+        <span className='block truncate text-sm font-medium text-oro-ink'>{name}</span>
+        <span className='flex items-center gap-2.5'>
+          <Ducats value={part.ducats} label={t("partDucatsLabel")} className='text-[11px] text-oro-ink-muted' />
+          <RelicsPopover relics={part.relics} label={label} />
+        </span>
+      </span>
+
+      <span className='flex items-center gap-1'>
         <Button
-          size='sm'
+          size='icon-sm'
           variant='outline'
           onClick={() => adjustPart(part.uniqueName, -1)}
           disabled={count === 0}
           aria-label={t("decreasePart", { name: label })}
-          className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
-          <Minus className='h-3 w-3' />
+          <Minus className='size-3' />
         </Button>
 
-        <div className='flex items-center space-x-1 min-w-[60px] justify-center'>
+        <span className='flex min-w-[46px] items-baseline justify-center font-mono text-[13px] tabular-nums'>
           <Input
             type='text'
             value={draft ?? count}
@@ -83,31 +67,22 @@ export const PrimePart = memo(function PrimePart({ part, count, set }) {
             inputMode='numeric'
             pattern='[0-9]*'
             aria-label={t("ownedPart", { name: label })}
-            className='w-10 h-7 text-center text-xs border-gray-300 dark:bg-gray-900 dark:border-gray-600'
+            className='h-7 w-7 rounded-none border-0 bg-transparent p-0 text-right font-mono text-[13px] text-oro-ink shadow-none focus-visible:ring-0 focus-visible:bg-oro-surface-2 dark:bg-transparent md:text-[13px]'
           />
-          <span className='text-xs text-gray-500 dark:text-gray-400'>/{part.required}</span>
-        </div>
+          <span className='text-[11px] text-oro-ink-faint'>/{part.required}</span>
+        </span>
 
         <Button
-          size='sm'
+          size='icon-sm'
           variant='outline'
           onClick={() => adjustPart(part.uniqueName, 1)}
           aria-label={t("increasePart", { name: label })}
-          className='h-7 w-7 p-0 border-gray-300 dark:border-gray-600'
         >
-          <Plus className='h-3 w-3' />
+          <Plus className='size-3' />
         </Button>
+      </span>
 
-        <div
-          className={`w-2 h-2 rounded-full ml-2 ${
-            getPartStatus() === "missing"
-              ? "bg-red-500"
-              : getPartStatus() === "partial"
-              ? "bg-yellow-500"
-              : "bg-green-500"
-          }`}
-        />
-      </div>
-    </div>
+      <span aria-hidden='true' className={`oro-diamond ${STATUS_COLOR[status]}`} />
+    </li>
   );
 });

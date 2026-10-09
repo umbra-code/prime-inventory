@@ -14,10 +14,10 @@ export function InventoryGrid() {
     return (
       <div className='text-center py-12'>
         <Image src='/icons/logo.svg' alt='' width={48} height={49} className='size-12 mx-auto mb-4 opacity-60' />
-        <h3 className='text-lg font-medium text-gray-900 dark:text-gray-100 mb-2'>
+        <h3 className='mb-2 font-display text-lg font-bold uppercase tracking-[0.12em] text-oro-ink'>
           {t("noSetsTitle")}
         </h3>
-        <p className='text-gray-500 dark:text-gray-400'>{t("noSetsHint")}</p>
+        <p className='text-oro-ink-muted'>{t("noSetsHint")}</p>
       </div>
     );
   }

@@ -12,7 +12,7 @@ const InventoryApp = dynamic(() => import("@/components/layout/InventoryApp"), {
     <div
       role='status'
       aria-label='Loading'
-      className='flex min-h-screen items-center justify-center bg-gray-50 text-amber-600 dark:bg-gray-950'
+      className='flex min-h-screen items-center justify-center bg-oro-bg text-oro-gold'
     >
       <LoaderCircle className='size-8 animate-spin' aria-hidden='true' />
     </div>

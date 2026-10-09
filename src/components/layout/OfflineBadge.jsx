@@ -23,7 +23,7 @@ export function OfflineBadge() {
     <span
       role='status'
       title={t("offlineHint")}
-      className='inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300'
+      className='chip inline-flex items-center gap-1 bg-oro-void/15 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-oro-void'
     >
       <WifiOff className='size-3' aria-hidden='true' />
       {t("offline")}

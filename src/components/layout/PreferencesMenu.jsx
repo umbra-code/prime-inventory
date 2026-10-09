@@ -29,8 +29,8 @@ export function PreferencesMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline' size='icon' aria-label={t("preferences")}>
-          <Settings2 className='h-[1.2rem] w-[1.2rem]' />
+        <Button variant='outline' size='icon' className='size-8' aria-label={t("preferences")}>
+          <Settings2 />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='min-w-52'>

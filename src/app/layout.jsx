@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cinzel, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { ServiceWorkerRegistration } from "@/components/layout/ServiceWorkerRegistration";
@@ -12,6 +12,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Display face for the brand, set and relic names and figures.
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata = {
@@ -32,7 +39,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={cn(geistSans.variable, geistMono.variable, "antialiased")}
+        className={cn(geistSans.variable, geistMono.variable, cinzel.variable, "antialiased")}
       >
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           {children}

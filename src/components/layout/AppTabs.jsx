@@ -14,12 +14,12 @@ export function AppTabs() {
 
   return (
     <Tabs value={view} onValueChange={setView} className='gap-6'>
-      <TabsList className='w-full sm:w-fit'>
+      <TabsList>
         <TabsTrigger value='inventory'>{t("tab.inventory")}</TabsTrigger>
         <TabsTrigger value='missing'>
           {t("tab.missing")}
           {missingParts.totalParts > 0 && (
-            <span className='rounded-full bg-sky-100 px-1.5 text-xs font-semibold text-sky-800 tabular-nums dark:bg-sky-900/60 dark:text-sky-200'>
+            <span className='font-mono text-[11px] font-medium tracking-normal text-oro-void tabular-nums'>
               {missingParts.totalParts}
             </span>
           )}

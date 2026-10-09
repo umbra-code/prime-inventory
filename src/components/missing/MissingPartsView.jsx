@@ -18,7 +18,7 @@ function PartButton({ entry, children }) {
       type='button'
       onClick={() => showSetInInventory(entry.set)}
       title={t("showInInventory", { name: setName(entry.set) })}
-      className='flex min-w-0 flex-1 items-center gap-3 rounded text-left hover:bg-gray-50 dark:hover:bg-gray-800'
+      className='flex min-w-0 flex-1 cursor-pointer items-center gap-3 text-left hover:text-oro-gold'
     >
       {entry.part.imageName && (
         <Image
@@ -26,11 +26,11 @@ function PartButton({ entry, children }) {
           alt=''
           width={32}
           height={32}
-          className='size-8 shrink-0 rounded bg-gray-100 dark:bg-gray-800'
+          className='bevel size-[34px] shrink-0 bg-oro-surface-2 object-contain p-0.5 [--cut:6px]'
         />
       )}
       <span className='min-w-0'>
-        <span className='block truncate text-sm font-medium text-gray-900 dark:text-gray-100'>
+        <span className='block truncate text-sm font-medium'>
           {fullPartName(entry.set, entry.part)}
         </span>
         {children}
@@ -41,30 +41,40 @@ function PartButton({ entry, children }) {
 
 function MissingCount({ missing }) {
   if (missing <= 1) return null;
-  return <span className='shrink-0 text-xs font-medium text-gray-500 dark:text-gray-400'>×{missing}</span>;
+  return <span className='shrink-0 font-mono text-xs text-oro-ink-muted'>×{missing}</span>;
 }
 
 function RelicCard({ relic }) {
   const { t } = useI18n();
+  // Void cyan marks relics that drop right now.
   return (
-    <section className='rounded-lg border border-sky-200 bg-white dark:border-sky-900 dark:bg-gray-900'>
-      <header className='flex items-baseline justify-between gap-2 border-b border-gray-100 px-4 py-3 dark:border-gray-800'>
-        <h3 className='font-semibold text-gray-900 dark:text-gray-100'>{t("relicTitle", { name: relic.name })}</h3>
-        <span className='text-xs font-medium text-sky-700 dark:text-sky-300'>
-          {t("partsYouNeed", { count: relic.entries.length })}
-        </span>
-      </header>
-      <ul className='space-y-1 p-2'>
-        {relic.entries.map((entry) => (
-          <li key={entry.part.uniqueName} className='flex items-center gap-2 px-2 py-1'>
-            <PartButton entry={entry}>
-              <span className={`text-xs ${RARITY_CLASS[entry.rarity]}`}>{t(`rarity.${entry.rarity}`)}</span>
-            </PartButton>
-            <MissingCount missing={entry.missing} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <div className='oro-glow' style={{ "--accent": "var(--oro-void)", "--strength": 0.6 }}>
+      <section className='oro-frame'>
+        <div className='oro-frame-inner'>
+          <header className='flex items-baseline justify-between gap-3 px-[18px] pb-3 pt-4'>
+            <h3 className='font-display text-base font-bold uppercase tracking-[0.12em] text-oro-ink'>
+              {t("relicTitle", { name: relic.name })}
+            </h3>
+            <span className='text-[11px] font-semibold uppercase tracking-[0.08em] whitespace-nowrap text-oro-void'>
+              {t("partsYouNeed", { count: relic.entries.length })}
+            </span>
+          </header>
+          <ul className='space-y-0.5 px-2.5 pb-3.5'>
+            {relic.entries.map((entry) => (
+              <li key={entry.part.uniqueName} className='flex items-center gap-3 px-2 py-1.5 hover:bg-oro-surface-2'>
+                <PartButton entry={entry} />
+                <MissingCount missing={entry.missing} />
+                <span
+                  className={`text-[10px] font-semibold uppercase tracking-[0.1em] whitespace-nowrap ${RARITY_CLASS[entry.rarity]}`}
+                >
+                  {t(`rarity.${entry.rarity}`)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -74,24 +84,24 @@ function VaultedOnly({ entries }) {
   const setCount = new Set(entries.map((entry) => entry.set.uniqueName)).size;
 
   return (
-    <details className='group mt-8 rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900'>
-      <summary className='flex cursor-pointer list-none items-center gap-2 px-4 py-3 font-semibold text-gray-900 dark:text-gray-100'>
-        <ChevronRight className='size-4 transition-transform group-open:rotate-90' aria-hidden='true' />
+    <details className='group mt-8 border border-oro-line bg-oro-surface'>
+      <summary className='flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 px-[18px] py-3.5 font-display text-sm font-bold uppercase tracking-[0.12em] text-oro-ink'>
+        <ChevronRight className='size-4 text-oro-gold transition-transform group-open:rotate-90' aria-hidden='true' />
         {t("vaultedOnlyTitle")}
-        <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
+        <span className='font-sans text-sm font-normal normal-case tracking-normal text-oro-ink-muted'>
           {t("vaultedOnlyCount", {
             parts: t("partsCount", { count: entries.length }),
             sets: t("setsCount", { count: setCount }),
           })}
         </span>
       </summary>
-      <p className='px-4 pb-2 text-sm text-gray-500 dark:text-gray-400'>{t("vaultedOnlyHint")}</p>
+      <p className='max-w-[70ch] px-[18px] pb-3 text-sm text-oro-ink-muted'>{t("vaultedOnlyHint")}</p>
       <ul className='grid gap-x-6 gap-y-1 px-2 pb-4 sm:grid-cols-2 lg:grid-cols-3'>
         {entries.map((entry) => (
-          <li key={entry.part.uniqueName} className='flex items-center gap-2 px-2 py-1'>
+          <li key={entry.part.uniqueName} className='flex items-center gap-2 px-2 py-1.5 hover:bg-oro-surface-2'>
             <PartButton entry={entry}>
               {!entry.part.relics?.length && (
-                <span className='block text-xs text-gray-500 dark:text-gray-400'>{t("noKnownRelic")}</span>
+                <span className='block text-xs text-oro-ink-faint'>{t("noKnownRelic")}</span>
               )}
             </PartButton>
             <RelicsPopover relics={entry.part.relics} label={fullPartName(entry.set, entry.part)} />
@@ -111,9 +121,11 @@ export function MissingPartsView() {
   if (totalParts === 0) {
     return (
       <div className='py-16 text-center'>
-        <PartyPopper className='mx-auto mb-4 size-10 text-amber-500' aria-hidden='true' />
-        <h2 className='mb-2 text-lg font-medium text-gray-900 dark:text-gray-100'>{t("nothingMissingTitle")}</h2>
-        <p className='text-gray-500 dark:text-gray-400'>{t("nothingMissingHint")}</p>
+        <PartyPopper className='mx-auto mb-4 size-10 text-oro-gold' aria-hidden='true' />
+        <h2 className='mb-2 font-display text-lg font-bold uppercase tracking-[0.12em] text-oro-ink'>
+          {t("nothingMissingTitle")}
+        </h2>
+        <p className='text-oro-ink-muted'>{t("nothingMissingHint")}</p>
       </div>
     );
   }
@@ -122,7 +134,7 @@ export function MissingPartsView() {
 
   return (
     <div>
-      <div className='mb-6 rounded-lg border border-gray-200 bg-white p-4 text-sm text-gray-600 sm:p-6 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300'>
+      <div className='mb-6 border-l-2 border-oro-gold bg-oro-surface px-4 py-3.5 text-sm text-oro-ink-muted sm:px-5'>
         <p>
           {rich(
             "missingSummary",
@@ -134,23 +146,23 @@ export function MissingPartsView() {
             },
             {
               b: (text, key) => (
-                <strong key={key} className='text-gray-900 dark:text-gray-100'>
+                <strong key={key} className='font-semibold text-oro-ink'>
                   {text}
                 </strong>
               ),
               em: (text, key) => (
-                <strong key={key} className='text-sky-700 dark:text-sky-300'>
+                <strong key={key} className='font-semibold text-oro-void'>
                   {text}
                 </strong>
               ),
             }
           )}
         </p>
-        <p className='mt-1 text-xs text-gray-500 dark:text-gray-400'>{t("missingSummaryHint")}</p>
+        <p className='mt-1 text-xs text-oro-ink-faint'>{t("missingSummaryHint")}</p>
       </div>
 
       {relics.length > 0 && (
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3'>
           {relics.map((relic) => (
             <RelicCard key={relic.name} relic={relic} />
           ))}

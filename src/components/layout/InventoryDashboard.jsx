@@ -14,23 +14,23 @@ import { useI18n } from "@/i18n/I18nContext";
 import { ArrowUpDown, Search, X } from "lucide-react";
 import { use } from "react";
 
+// Beveled field; the border is an inset shadow so the bevel does not cut it.
+const FIELD =
+  "bevel [--cut:6px] h-[38px] rounded-none border-0 bg-oro-surface dark:bg-oro-surface dark:hover:bg-oro-surface text-oro-ink shadow-[inset_0_0_0_1px_var(--oro-line)] hover:shadow-[inset_0_0_0_1px_var(--oro-line-strong)] focus-visible:ring-0 focus-visible:shadow-[inset_0_0_0_1px_var(--oro-gold)]";
+
 function FilterSelect({ value, onValueChange, options, optionLabel, label, icon, className = "" }) {
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         aria-label={label}
-        className={`w-full sm:w-44 justify-start [&>svg:last-child]:ml-auto border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${className}`}
+        className={`${FIELD} w-full justify-start lg:w-44 data-[size=default]:h-[38px] [&>svg:last-child]:ml-auto ${className}`}
       >
         {icon}
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className='dark:bg-gray-800 dark:border-gray-700'>
+      <SelectContent>
         {options.map((option) => (
-          <SelectItem
-            key={option}
-            value={option}
-            className='dark:text-gray-100 dark:hover:bg-gray-700'
-          >
+          <SelectItem key={option} value={option}>
             {optionLabel(option)}
           </SelectItem>
         ))}
@@ -64,49 +64,56 @@ export function InventoryDashboard() {
     option === "All" ? t(allKey) : t(`${prefix}.${option}`);
 
   const statTiles = [
-    { label: t("stat.total"), value: stats.total, className: "text-gray-900 dark:text-gray-100" },
-    { label: t("stat.ready"), value: stats.ready, className: "text-green-600 dark:text-green-500" },
-    { label: t("stat.extra"), value: stats.extra, className: "text-violet-600 dark:text-violet-400" },
-    { label: t("stat.mastered"), value: stats.mastered, className: "text-amber-600" },
+    { label: t("stat.total"), value: stats.total, className: "text-oro-ink" },
+    { label: t("stat.ready"), value: stats.ready, className: "text-oro-ready" },
+    { label: t("stat.extra"), value: stats.extra, className: "text-oro-extra" },
+    { label: t("stat.mastered"), value: stats.mastered, className: "text-oro-gold" },
     {
       label: t("stat.spareDucats"),
       value: (
-        <Ducats value={stats.spareDucats} label={t("spareDucatsLabel")} className='[&_img]:size-6 gap-1.5' />
+        <Ducats
+          value={stats.spareDucats}
+          label={t("spareDucatsLabel")}
+          className='gap-2 text-[length:inherit] text-oro-ink [&_img]:size-6'
+        />
       ),
-      className: "text-gray-900 dark:text-gray-100 col-span-2 sm:col-span-1",
+      className: "text-oro-ink col-span-2 sm:col-span-1",
     },
   ];
 
   return (
-    <div className='bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-8 dark:bg-gray-900 dark:border-gray-800'>
-      {/* Stats */}
-      <div className='grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-6 mb-6'>
+    <div className='mb-8 grid gap-6'>
+      {/* Stats: Cinzel figures between thin dividers */}
+      <div className='grid grid-cols-2 gap-y-4 sm:grid-cols-5'>
         {statTiles.map(({ label, value, className }) => (
-          <div key={label} className={`text-center ${className}`}>
-            <div className='text-2xl sm:text-3xl font-bold'>{value}</div>
-            <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>{label}</div>
+          <div
+            key={label}
+            className={`px-2 text-center sm:border-l sm:border-oro-line sm:first:border-l-0 ${className}`}
+          >
+            <div className='font-display text-2xl font-semibold tabular-nums sm:text-[34px] sm:leading-tight'>{value}</div>
+            <div className='text-[11px] uppercase tracking-[0.12em] text-oro-ink-muted'>{label}</div>
           </div>
         ))}
       </div>
 
       {/* Filters */}
-      <div className='flex flex-col lg:flex-row gap-4 lg:items-center'>
+      <div className='flex flex-col gap-3 lg:flex-row lg:items-center'>
         <div className='w-full lg:flex-1'>
           <div className='relative'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4' />
+            <Search className='pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-oro-ink-faint' />
             <Input
               type='search'
               placeholder={t("searchPlaceholder")}
               aria-label={t("searchLabel")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className='pl-10 pr-10 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 [&::-webkit-search-cancel-button]:appearance-none'
+              className={`${FIELD} pl-10 pr-10 placeholder:text-oro-ink-faint [&::-webkit-search-cancel-button]:appearance-none`}
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
                 aria-label={t("clearSearch")}
-                className='absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1'
+                className='absolute right-2 top-1/2 -translate-y-1/2 p-1 text-oro-ink-faint hover:text-oro-gold'
               >
                 <X size={20} />
               </button>
@@ -114,7 +121,7 @@ export function InventoryDashboard() {
           </div>
         </div>
 
-        <div className='grid grid-cols-2 gap-3 sm:flex'>
+        <div className='grid grid-cols-2 gap-3 sm:grid-cols-4 lg:flex'>
           <FilterSelect
             label={t("filterCategory")}
             value={selectedCategory}
@@ -142,12 +149,12 @@ export function InventoryDashboard() {
             onValueChange={setSelectedSort}
             options={sortOptions}
             optionLabel={(option) => t(`sort.${option}`)}
-            icon={<ArrowUpDown className='size-4 opacity-60' />}
+            icon={<ArrowUpDown className='size-4 text-oro-ink-faint' />}
           />
         </div>
       </div>
 
-      <div className='mt-4 text-sm text-gray-500 dark:text-gray-400'>
+      <div className='text-sm text-oro-ink-muted'>
         {t("showing", { shown: filteredSets.length, total: stats.total })}
       </div>
     </div>

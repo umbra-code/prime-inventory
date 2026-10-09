@@ -43,7 +43,8 @@ Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo 
 ## Tech stack
 
 - [Next.js 16](https://nextjs.org/) (App Router) and React 19
-- Tailwind CSS 4 with [shadcn/ui](https://ui.shadcn.com/) components
+- Tailwind CSS 4 with [shadcn/ui](https://ui.shadcn.com/) components, restyled with the Orokin theme (`src/app/globals.css`): every color is an `oro-*` token that switches with light/dark, plus `bevel`, `chip` and card-frame utilities
+- Cinzel (display) and Geist (body) via `next/font`
 - `next-themes` for theming
 - JavaScript (no TypeScript)
 
