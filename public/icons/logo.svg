@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="128 124 264 270" width="264" height="270">
+  <!-- Prime Inventory logo: the app icon's gem without the background (see scripts/icon.svg). -->
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe7a3"/>
+      <stop offset="0.45" stop-color="#e2ad3f"/>
+      <stop offset="1" stop-color="#9a6a1c"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c58f2c"/>
+      <stop offset="1" stop-color="#7a5212"/>
+    </linearGradient>
+    <linearGradient id="goldLight" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff2c7"/>
+      <stop offset="1" stop-color="#e9b84f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gem: crown (top) and pavilion (bottom) facets -->
+  <g transform="translate(256 262)" stroke="#2a1a03" stroke-width="3" stroke-linejoin="round">
+    <polygon points="-118,-42 -70,-104 70,-104 118,-42" fill="url(#gold)"/>
+    <polygon points="-70,-104 -30,-42 -118,-42" fill="url(#goldLight)"/>
+    <polygon points="70,-104 30,-42 118,-42" fill="url(#goldDark)"/>
+    <polygon points="-70,-104 70,-104 30,-42 -30,-42" fill="url(#goldLight)" opacity="0.85"/>
+    <polygon points="-118,-42 0,122 -30,-42" fill="url(#goldDark)"/>
+    <polygon points="-30,-42 0,122 30,-42" fill="url(#gold)"/>
+    <polygon points="30,-42 0,122 118,-42" fill="url(#goldDark)" opacity="0.8"/>
+  </g>
+
+  <!-- Spark -->
+  <path d="M352 132 l8 22 22 8 -22 8 -8 22 -8 -22 -22 -8 22 -8z" fill="#f2c14e" stroke="#7a5212" stroke-width="2"/>
+</svg>

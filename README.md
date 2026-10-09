@@ -13,6 +13,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **Light and dark themes:** follows your system setting by default.
+- **Installable and offline:** install it as an app from the browser (Install app / Add to Home Screen). After the first visit it works without a connection; images you have already seen stay available.
 
 ## How data works
 
@@ -22,6 +23,16 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
   2. Once a day the app checks jsDelivr for a newer `@wfcd/items` release. If there is one, it downloads it and caches it in the browser, so new Primes appear without redeploying.
   3. If the check fails (offline, network errors), the app keeps using the cached or bundled catalog.
 - **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
+
+## Offline support
+
+`public/sw.js` is a small hand-written service worker, registered in production builds only:
+
+- **Pages:** network first, falling back to the cached page when offline or after 3 seconds.
+- **Build assets** (`/_next/static`) and **images** (`/_next/image`): cache first, trimmed to the newest entries. Images never loaded while online are replaced with an empty placeholder.
+- The catalog refresh is not handled by the service worker; the app caches it in `localStorage`.
+
+Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo are original artwork (`scripts/icon.svg`); the PNGs in `public/icons/` and `src/app/` and the transparent `public/icons/logo.svg` are derived from it.
 
 ## Tech stack
 

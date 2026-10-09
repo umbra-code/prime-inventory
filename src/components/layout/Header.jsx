@@ -17,6 +17,7 @@ import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Download, RotateCcw, Upload } from "lucide-react";
 import Image from "next/image";
 import { use } from "react";
+import { OfflineBadge } from "./OfflineBadge";
 import { ThemeToggler } from "./ThemeToggler";
 
 export function Header() {
@@ -28,11 +29,14 @@ export function Header() {
         <div className='flex items-center justify-between gap-3 h-16'>
           {/* Logo and title */}
           <div className='flex items-center gap-3 min-w-0'>
-            <Image src='/wf.png' alt='' width={32} height={32} className='size-8 shrink-0' />
+            <Image src='/icons/logo.svg' alt='' width={32} height={33} className='size-8 shrink-0' />
             <div className='min-w-0'>
-              <h1 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 truncate'>
-                Prime Inventory
-              </h1>
+              <div className='flex items-center gap-2'>
+                <h1 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 truncate'>
+                  Prime Inventory
+                </h1>
+                <OfflineBadge />
+              </div>
               <p className='hidden sm:block text-xs text-gray-500 dark:text-gray-400'>
                 Warframe Management Tool
               </p>

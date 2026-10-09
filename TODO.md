@@ -22,7 +22,7 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] Replace `window.confirm` on reset with an in-app dialog
 - [x] Persist category and status filters
 - [x] Sync inventory across tabs (`storage` event)
-- [x] Use `next/image` for local images (`wf.png`)
+- [x] Use `next/image` for local images
 
 ## Features
 
@@ -33,9 +33,10 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] Distinct card states (ready, extra set, progress-scaled accent) and "Almost Complete" filter
 - [x] Theme selector (System / Light / Dark)
 - [x] Missing Parts tab: parts of non-mastered sets grouped by the relics available now
-- [ ] warframe.market prices (needs a proxy because of CORS)
-- [ ] Installable PWA with full offline support
+- [ ] Platinum prices (deferred). Plan: WFInfo's `https://api.warframestat.us/wfinfo/prices/` covers every set and part in one CORS-enabled JSON; refresh in the browser every few hours with a build-time fallback, credit "warframe.market via WFInfo", keep the app free
+- [x] Installable PWA: manifest, original app icon, offline service worker, offline badge
 - [ ] i18n
+- [x] Original logo and app icon (replaces the official Lotus emblem)
 - [ ] Visual identity rework (after features settle)
 
 ## Tooling
