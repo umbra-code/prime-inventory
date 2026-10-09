@@ -18,6 +18,7 @@ import { Download, RotateCcw, Upload } from "lucide-react";
 import Image from "next/image";
 import { use } from "react";
 import { useI18n } from "@/i18n/I18nContext";
+import { AppVersion } from "./AppVersion";
 import { OfflineBadge } from "./OfflineBadge";
 import { PreferencesMenu } from "./PreferencesMenu";
 
@@ -40,7 +41,7 @@ export function Header() {
                 <OfflineBadge />
               </div>
               <p className='hidden sm:block text-xs text-gray-500 dark:text-gray-400'>
-                {t("appTagline")}
+                {t("appTagline")} · <AppVersion className='text-[11px]' />
               </p>
             </div>
           </div>

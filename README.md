@@ -94,6 +94,8 @@ npm run release -- minor --dry-run  # show the steps without changing anything
 
 The script (`scripts/release.mjs`) pulls, runs lint and tests, asks for confirmation, runs `npm version` (version commit + tag), pushes `development` with the tag, waits for CI on that commit, and only if CI passes fast-forwards `master` to it and pushes. It always switches back to `development`. Set `GITHUB_TOKEN` to raise the GitHub API rate limit while it waits for CI.
 
+The app shows the build's version in the header, the footer and the Preferences menu, computed at build time from `git describe` (`src/lib/buildVersion.mjs`): `v2.3.0` for a release, `v2.3.0-4-gabc1234` for a build 4 commits later, with `-dirty` if it had uncommitted changes. It links to the release or commit on GitHub, so a screenshot tells you exactly which code it shows.
+
 ## Project structure
 
 ```

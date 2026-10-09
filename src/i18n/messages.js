@@ -20,6 +20,7 @@ const en = {
     "All part counts and mastered sets will be cleared. Export a backup first if you might want them back later.",
   cancel: "Cancel",
   sourceCode: "Source code on GitHub",
+  versionLink: "Version {version} on GitHub",
   offline: "Offline",
   offlineHint: "You are offline. Your inventory still works; images you have not seen yet will not load.",
 
@@ -157,6 +158,7 @@ const es = {
     "Se borrarán todas las cantidades de partes y los sets masterizados. Exporta un respaldo antes si quieres poder recuperarlos.",
   cancel: "Cancelar",
   sourceCode: "Código fuente en GitHub",
+  versionLink: "Versión {version} en GitHub",
   offline: "Sin conexión",
   offlineHint:
     "No tienes conexión. Tu inventario sigue funcionando; las imágenes que aún no has visto no se cargarán.",

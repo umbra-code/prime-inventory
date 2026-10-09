@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useI18n } from "@/i18n/I18nContext";
+import { AppVersion } from "./AppVersion";
 import { Monitor, Moon, Settings2, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -59,6 +60,11 @@ export function PreferencesMenu() {
           <DropdownMenuRadioItem value='en'>{t("itemNames.en")}</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value='localized'>{t("itemNames.localized")}</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
+
+        <DropdownMenuSeparator />
+        <div className='px-2 py-1 text-right text-xs text-muted-foreground'>
+          <AppVersion />
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
