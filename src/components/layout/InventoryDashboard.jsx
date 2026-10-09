@@ -52,6 +52,9 @@ export function InventoryDashboard() {
     selectedSort,
     setSelectedSort,
     categories,
+    types,
+    selectedType,
+    setSelectedType,
     statusFilters,
     availabilityFilters,
     sortOptions,
@@ -131,6 +134,15 @@ export function InventoryDashboard() {
             options={categories}
             optionLabel={labelFor("category", "allCategories")}
           />
+          {types.length > 0 && (
+            <FilterSelect
+              label={t("filterType")}
+              value={selectedType}
+              onValueChange={setSelectedType}
+              options={types}
+              optionLabel={(option) => (option === "All" ? t("allTypes") : t(`type.${option}`, {}, option))}
+            />
+          )}
           <FilterSelect
             label={t("filterStatus")}
             value={selectedStatus}

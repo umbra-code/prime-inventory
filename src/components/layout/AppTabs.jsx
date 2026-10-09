@@ -2,6 +2,7 @@
 
 import { InventoryDashboard } from "@/components/layout/InventoryDashboard";
 import { InventoryGrid } from "@/components/layout/InventoryGrid";
+import { NowInGame } from "@/components/layout/NowInGame";
 import { MissingPartsView } from "@/components/missing/MissingPartsView";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InventoryStateContext } from "@/context/InventoryContext";
@@ -27,6 +28,7 @@ export function AppTabs() {
       </TabsList>
 
       <TabsContent value='inventory'>
+        <NowInGame />
         <InventoryDashboard />
         <InventoryGrid />
       </TabsContent>

@@ -26,9 +26,10 @@ describe("createTranslator", () => {
     expect(t("partsMissing", { count: 3, percent: 25 })).toBe("25% · faltan 3 partes");
   });
 
-  it("falls back to English, then to the key", () => {
+  it("falls back to English, then to the given fallback or the key", () => {
     expect(createTranslator("xx")("build")).toBe("Build");
     expect(createTranslator("es")("no.such.key")).toBe("no.such.key");
+    expect(createTranslator("es")("type.Laser Sword", {}, "Laser Sword")).toBe("Laser Sword");
   });
 
   it("leaves unknown placeholders untouched", () => {

@@ -16,7 +16,10 @@ const ITEM_NAME_LANGUAGES = ["es"];
 const packageJson = new URL("../node_modules/@wfcd/items/package.json", import.meta.url);
 
 const { version } = JSON.parse(await readFile(packageJson, "utf8"));
-const sets = slimCatalog(new Items());
+const { classes: meleeClasses } = JSON.parse(
+  await readFile(new URL("../src/data/meleeClasses.json", import.meta.url), "utf8")
+);
+const sets = slimCatalog(new Items(), { meleeClasses });
 
 let previous = null;
 try {

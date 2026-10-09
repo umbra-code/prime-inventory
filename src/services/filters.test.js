@@ -3,6 +3,7 @@ import { akbronco, ash, braton, catalogSets, createStorage } from "@/test/fixtur
 import {
   filterAndSortSets,
   getCategories,
+  getTypes,
   loadFilters,
   matchesStatus,
   saveFilters,
@@ -61,6 +62,11 @@ describe("filterAndSortSets", () => {
     expect(query({ status: "Mastered" })).toEqual(["Akbronco Prime", "Braton Prime"]);
   });
 
+  it("filters by weapon type", () => {
+    expect(query({ type: "Rifle" })).toEqual(["Braton Prime"]);
+    expect(query({ category: "Secondary", type: "Rifle" })).toEqual([]);
+  });
+
   it("filters by relic availability", () => {
     expect(query({ availability: "Vaulted" })).toEqual(["Ash Prime"]);
     expect(query({ availability: "Available" })).toEqual(["Akbronco Prime", "Braton Prime"]);
@@ -97,12 +103,30 @@ describe("getCategories", () => {
   });
 });
 
+describe("getTypes", () => {
+  const sets = [
+    { category: "Primary", type: "Rifle" },
+    { category: "Primary", type: "Bow" },
+    { category: "Primary", type: "Rifle" },
+    { category: "Warframes", type: "Warframe" },
+  ];
+
+  it("lists the category's types, most common first", () => {
+    expect(getTypes(sets, "Primary")).toEqual(["All", "Rifle", "Bow"]);
+  });
+
+  it("is empty for All and for single-type categories", () => {
+    expect(getTypes(sets, "All")).toEqual([]);
+    expect(getTypes(sets, "Warframes")).toEqual([]);
+  });
+});
+
 describe("saved filters", () => {
   afterEach(() => vi.unstubAllGlobals());
 
   it("round-trips valid filters", () => {
     vi.stubGlobal("localStorage", createStorage());
-    const filters = { category: "Primary", status: "Extra Sets", availability: "Vaulted", sort: "Progress", layout: "table" };
+    const filters = { category: "Primary", type: "Bow", status: "Extra Sets", availability: "Vaulted", sort: "Progress", layout: "table" };
     saveFilters(filters);
     expect(loadFilters(getCategories(catalogSets))).toEqual(filters);
   });
@@ -110,7 +134,7 @@ describe("saved filters", () => {
   it("falls back to defaults for unknown or missing values", () => {
     vi.stubGlobal("localStorage", createStorage());
     saveFilters({ category: "Gone", status: "Buildable", availability: "Maybe", sort: "Random", layout: "grid" });
-    expect(loadFilters(["All"])).toEqual({ category: "All", status: "All", availability: "All", sort: "Name", layout: "cards" });
+    expect(loadFilters(["All"])).toEqual({ category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards" });
   });
 
   it("survives storage being unavailable", () => {
@@ -123,6 +147,6 @@ describe("saved filters", () => {
       },
     });
     expect(() => saveFilters({ category: "All", status: "All", sort: "Name" })).not.toThrow();
-    expect(loadFilters(["All"])).toEqual({ category: "All", status: "All", availability: "All", sort: "Name", layout: "cards" });
+    expect(loadFilters(["All"])).toEqual({ category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards" });
   });
 });

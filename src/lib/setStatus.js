@@ -13,6 +13,11 @@ export const progressLabel = (t, { status, progress, missing }) => {
   return t("partsMissing", { percent: Math.floor(progress), count: missing });
 };
 
+// Weapon type shown next to the category for weapons ("Melee · Nikana").
+const WEAPON_CATEGORIES = new Set(["Primary", "Secondary", "Melee"]);
+export const weaponTypeLabel = (t, set) =>
+  set.type && WEAPON_CATEGORIES.has(set.category) ? t(`type.${set.type}`, {}, set.type) : null;
+
 // Complete sets get the full accent; incomplete ones fade in quadratically so
 // only the sets close to completion stand out.
 export const accentStrength = ({ status, progress }) =>

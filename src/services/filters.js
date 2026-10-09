@@ -54,11 +54,26 @@ export const layouts = ["cards", "table"];
 
 export const getCategories = (sets) => ["All", ...new Set(sets.map((set) => set.category))];
 
+/**
+ * Weapon types within a category (Rifle, Bow, Nikana…), most common first, or
+ * an empty list when the category has a single type or none is selected.
+ */
+export const getTypes = (sets, category) => {
+  if (category === "All") return [];
+  const counts = new Map();
+  for (const set of sets) {
+    if (set.category === category && set.type) counts.set(set.type, (counts.get(set.type) ?? 0) + 1);
+  }
+  if (counts.size < 2) return [];
+  const types = [...counts].sort(([a, countA], [b, countB]) => countB - countA || a.localeCompare(b, "en"));
+  return ["All", ...types.map(([type]) => type)];
+};
+
 /** Sets matching the filters, in the requested order. `summaries` is keyed by set uniqueName. */
 export const filterAndSortSets = (
   sets,
   summaries,
-  { search = "", category = "All", status = "All", availability = "All", sort = "Name", nameOf }
+  { search = "", category = "All", type = "All", status = "All", availability = "All", sort = "Name", nameOf }
 ) => {
   const term = search.trim().toLowerCase();
   // Matches the English name and, when given, the displayed (translated) one.
@@ -68,6 +83,7 @@ export const filterAndSortSets = (
     (set) =>
       matchesSearch(set) &&
       (category === "All" || set.category === category) &&
+      (type === "All" || set.type === type) &&
       matchesAvailability(availability, set) &&
       matchesStatus(status, summaries.get(set.uniqueName))
   );
@@ -77,7 +93,7 @@ export const filterAndSortSets = (
     : result;
 };
 
-const DEFAULT_FILTERS = { category: "All", status: "All", availability: "All", sort: "Name", layout: "cards" };
+const DEFAULT_FILTERS = { category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards" };
 
 /** Saved filters and sort, falling back to defaults for unknown values. */
 export const loadFilters = (categories) => {
@@ -86,6 +102,8 @@ export const loadFilters = (categories) => {
     const pick = (options, value, fallback) => (options.includes(value) ? value : fallback);
     return {
       category: pick(categories, saved.category, DEFAULT_FILTERS.category),
+      // Checked against the category's types by the caller.
+      type: typeof saved.type === "string" ? saved.type : DEFAULT_FILTERS.type,
       status: pick(statusFilters, saved.status, DEFAULT_FILTERS.status),
       availability: pick(availabilityFilters, saved.availability, DEFAULT_FILTERS.availability),
       sort: pick(sortOptions, saved.sort, DEFAULT_FILTERS.sort),

@@ -8,10 +8,12 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Mastery and arsenal tracking:** mark sets as mastered, and separately whether you still keep them built (In Arsenal). Sets you can build again show up as extra sets.
 - **Cards or table:** browse sets as detailed cards, or switch to a compact table (one row per set) to update many counts quickly. The choice is remembered.
 - **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered and in your arsenal).
-- **Search, filters and sorting:** by name, category, status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
+- **Now in Game:** a collapsible panel with the newest Primes and the vaulted Primes whose relics drop again, computed from the catalog. Click one to jump to it.
+- **Search, filters and sorting:** by name, category, weapon type (Rifle, Bow, Nikana, Heavy Blade…), status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
 - **Missing Parts:** a separate tab lists the parts you still need for the sets you have not mastered, grouped by the relics you can open right now (the ones that drop the most of them first), plus the parts that only drop from vaulted relics.
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
+- **Reset** lives in the Preferences menu under Danger zone, behind a confirmation and with undo.
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **English and Spanish:** the interface follows your browser language, and item names can stay in English (as on warframe.market) or use the game's own translations. Both are in the Preferences menu, next to the theme.
 - **Light and dark themes:** follows your system setting by default.
@@ -24,6 +26,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
   1. A slim catalog (`src/data/primes.json`) is generated from the installed `@wfcd/items` before `dev`, `build` and `test`, and bundled with the app, so it is always available. It is not committed.
   2. Once a day the app checks jsDelivr for a newer `@wfcd/items` release. If there is one, it downloads it and caches it in the browser, so new Primes appear without redeploying.
   3. If the check fails (offline, network errors), the app keeps using the cached or bundled catalog.
+- **Weapon types** come from `@wfcd/items`, except melee classes, which it does not provide: those come from the [Warframe Wiki](https://wiki.warframe.com/w/Module:Weapons/data/melee) into the committed `src/data/meleeClasses.json`. New melee Primes show as "Other Melee" until it is updated.
 - **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
 
 ## Translations
@@ -68,6 +71,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Build for production |
 | `npm run start` | Serve the production build |
 | `npm run catalog` | Regenerate `src/data/primes.json` (runs automatically before dev, build and test) |
+| `npm run melee-classes` | Update `src/data/meleeClasses.json` from the Warframe Wiki (run when a new Prime melee weapon is released) |
 | `npm run lint` | Run ESLint |
 | `npm test` | Run the unit tests once (Vitest) |
 | `npm run test:watch` | Run the unit tests in watch mode |

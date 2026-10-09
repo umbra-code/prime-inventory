@@ -1,4 +1,5 @@
 import bundledCatalog from "@/data/primes.json";
+import meleeClasses from "@/data/meleeClasses.json";
 import { CATALOG_FORMAT, slimCatalog } from "@/lib/slimCatalog.mjs";
 
 // Catalog sources, in order of preference:
@@ -96,7 +97,7 @@ export const downloadCatalog = async (version, signal) => {
     format: CATALOG_FORMAT,
     version,
     generatedAt: new Date().toISOString(),
-    sets: slimCatalog(items),
+    sets: slimCatalog(items, { meleeClasses: meleeClasses.classes }),
   };
 };
 

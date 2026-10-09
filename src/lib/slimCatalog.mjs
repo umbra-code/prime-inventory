@@ -2,7 +2,11 @@
 // (browser), so both sources produce the exact same shape.
 
 /** Bump when the catalog shape changes so cached catalogs in the old shape are ignored. */
-export const CATALOG_FORMAT = 2;
+export const CATALOG_FORMAT = 3;
+
+// @wfcd/items types every melee weapon as "Melee"; real classes come from
+// src/data/meleeClasses.json. Weapons missing there get this type.
+export const OTHER_MELEE = "Other Melee";
 
 const RARITY_ORDER = { Common: 0, Uncommon: 1, Rare: 2 };
 const TIER_ORDER = { Lith: 0, Meso: 1, Neo: 2, Axi: 3 };
@@ -72,9 +76,12 @@ const consolidateComponents = (components, availableRelics) => {
  * tradable component.
  *
  * A set counts as vaulted only when @wfcd/items marks it vaulted AND none of
- * its relics currently drop: each source has known errors on its own.
+ * its relics currently drop: each source has known errors on its own. A set
+ * marked vaulted whose relics drop again is flagged as `returned`.
+ *
+ * `meleeClasses` maps melee set names to their class (Nikana, Glaive…).
  */
-export const slimCatalog = (items) => {
+export const slimCatalog = (items, { meleeClasses = {} } = {}) => {
   const availableRelics = getAvailableRelics(items);
 
   return items
@@ -82,14 +89,19 @@ export const slimCatalog = (items) => {
     .map((item) => {
       const components = consolidateComponents(item.components, availableRelics);
       const hasAvailableRelic = components.some((part) => part.relics.some((r) => r.available));
-      return {
+      const set = {
         uniqueName: item.uniqueName,
         name: item.name,
         category: item.category,
+        type: item.category === "Melee" ? (meleeClasses[item.name] ?? OTHER_MELEE) : item.type,
         imageName: item.imageName,
         vaulted: Boolean(item.vaulted) && !hasAvailableRelic,
+        releaseDate: item.releaseDate,
+        update: item.introduced?.name,
         components,
       };
+      if (Boolean(item.vaulted) && hasAvailableRelic) set.returned = true;
+      return set;
     })
     .filter((set) => set.components.length > 0)
     .sort((a, b) => a.name.localeCompare(b.name, "en"));

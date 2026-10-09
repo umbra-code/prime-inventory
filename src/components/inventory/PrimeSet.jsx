@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { InventoryActionsContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
 import { imageUrl } from "@/lib/images";
-import { accentStrength, progressLabel, STATUS } from "@/lib/setStatus";
+import { accentStrength, progressLabel, STATUS, weaponTypeLabel } from "@/lib/setStatus";
 import { summarizeSet } from "@/services/userInventory";
 import { Lock } from "lucide-react";
 import Image from "next/image";
@@ -61,7 +61,10 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, i
                 {name}
               </h3>
               <p className='mt-0.5 flex flex-wrap items-center gap-x-1.5 text-xs text-oro-ink-muted'>
-                <span className='whitespace-nowrap'>{t(`category.${primeSet.category}`)}</span>
+                <span className='whitespace-nowrap'>
+                  {t(`category.${primeSet.category}`)}
+                  {weaponTypeLabel(t, primeSet) && ` · ${weaponTypeLabel(t, primeSet)}`}
+                </span>
                 {primeSet.vaulted && (
                   <span className='inline-flex items-center gap-1 whitespace-nowrap' title={t("vaultedHint")}>
                     <Lock className='size-3' aria-hidden='true' /> {t("vaulted")}

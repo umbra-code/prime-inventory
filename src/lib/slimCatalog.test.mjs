@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { slimCatalog } from "./slimCatalog.mjs";
+import { OTHER_MELEE, slimCatalog } from "./slimCatalog.mjs";
 
 const part = (uniqueName, overrides = {}) => ({
   uniqueName,
@@ -146,6 +146,45 @@ describe("slimCatalog", () => {
     it("handles parts without drops", () => {
       const [set] = slimCatalog([item("Odonata Prime", [part("/Parts/Blueprint", { drops: undefined })])]);
       expect(set.components[0].relics).toEqual([]);
+    });
+  });
+
+  it("uses the item type, and the given class for melee weapons", () => {
+    const sets = slimCatalog(
+      [
+        item("Braton Prime", [part("/A")], { type: "Rifle" }),
+        item("Nikana Prime", [part("/B")], { category: "Melee", type: "Melee" }),
+        item("Newblade Prime", [part("/C")], { category: "Melee", type: "Melee" }),
+      ],
+      { meleeClasses: { "Nikana Prime": "Nikana" } }
+    );
+    expect(Object.fromEntries(sets.map((s) => [s.name, s.type]))).toEqual({
+      "Braton Prime": "Rifle",
+      "Newblade Prime": OTHER_MELEE,
+      "Nikana Prime": "Nikana",
+    });
+  });
+
+  it("keeps the release date and the update that introduced the set", () => {
+    const [set] = slimCatalog([
+      item("Citrine Prime", [part("/A")], { releaseDate: "2026-09-23", introduced: { name: "Update 44.0", date: "2026-09-23" } }),
+    ]);
+    expect(set).toMatchObject({ releaseDate: "2026-09-23", update: "Update 44.0" });
+  });
+
+  it("flags vaulted sets whose relics drop again as returned", () => {
+    const relic = { name: "Axi Z9 Intact", category: "Relics", vaulted: false };
+    const drops = [{ location: "Axi Z9 Relic", chance: 25.33 }];
+    const sets = slimCatalog([
+      relic,
+      item("Cernos Prime", [part("/A", { drops })], { vaulted: true }),
+      item("Nyx Prime", [part("/B")], { vaulted: true }),
+      item("Braton Prime", [part("/C", { drops })], { vaulted: false }),
+    ]);
+    expect(Object.fromEntries(sets.map((s) => [s.name, Boolean(s.returned)]))).toEqual({
+      "Braton Prime": false,
+      "Cernos Prime": true,
+      "Nyx Prime": false,
     });
   });
 

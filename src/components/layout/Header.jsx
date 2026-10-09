@@ -1,20 +1,9 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { InventoryActionsContext } from "@/context/InventoryContext";
 import { GithubIcon } from "@/components/icons/GithubIcon";
-import { Download, RotateCcw, Upload } from "lucide-react";
+import { Download, Upload } from "lucide-react";
 import Image from "next/image";
 import { use } from "react";
 import { useI18n } from "@/i18n/I18nContext";
@@ -23,7 +12,7 @@ import { OfflineBadge } from "./OfflineBadge";
 import { PreferencesMenu } from "./PreferencesMenu";
 
 export function Header() {
-  const { importInventory, exportInventory, resetInventory } = use(InventoryActionsContext);
+  const { importInventory, exportInventory } = use(InventoryActionsContext);
   const { t } = useI18n();
 
   return (
@@ -62,26 +51,6 @@ export function Header() {
               <Download />
               <span className='hidden md:inline'>{t("export")}</span>
             </Button>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant='danger' size='sm' aria-label={t("resetInventory")}>
-                  <RotateCcw />
-                  <span className='hidden md:inline'>{t("reset")}</span>
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>{t("resetTitle")}</AlertDialogTitle>
-                  <AlertDialogDescription>{t("resetDescription")}</AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
-                  <AlertDialogAction onClick={resetInventory} variant='destructive'>
-                    {t("reset")}
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
             <Button asChild variant='outline' size='icon' className='hidden size-8 sm:inline-flex'>
               <a
                 href='https://github.com/umbra-code/prime-inventory'

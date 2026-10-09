@@ -43,8 +43,9 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 
 - [x] Compact table layout (one row per set), switchable with the cards
 - [x] In Arsenal flag, separate from Mastered, with its own status filter
-- [ ] Weapon type sub-filter (rifle, shotgun, bow, nikana…) from the catalog's `type`
-- [ ] "Now in game" panel: newest Primes and relics that just returned
+- [x] Weapon type sub-filter (melee classes from the Warframe Wiki)
+- [x] "Now in Game" panel: newest Primes and Primes back from the vault
+- [x] Move Reset out of the header into the Preferences menu (Danger zone)
 
 ## Tooling
 

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "catalog": "node scripts/build-catalog.mjs",
+    "melee-classes": "node scripts/update-melee-classes.mjs",
     "predev": "npm run catalog",
     "dev": "next dev",
     "prebuild": "npm run catalog",

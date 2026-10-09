@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import { createContext, useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useI18n } from "@/i18n/I18nContext";
 import { getInitialCatalog, refreshCatalog } from "@/services/catalog";
@@ -8,6 +8,7 @@ import {
   availabilityFilters,
   filterAndSortSets,
   getCategories,
+  getTypes,
   loadFilters,
   loadView,
   saveFilters,
@@ -15,6 +16,7 @@ import {
   sortOptions,
   statusFilters,
 } from "@/services/filters";
+import { getHighlights } from "@/services/highlights";
 import { groupMissingPartsByRelic } from "@/services/missingParts";
 import {
   emptyUserData,
@@ -64,7 +66,13 @@ export function InventoryProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [view, setView] = useState(loadView);
   const [initialFilters] = useState(() => loadFilters(getCategories(catalog.sets)));
-  const [selectedCategory, setSelectedCategory] = useState(initialFilters.category);
+  const [selectedCategory, setCategoryState] = useState(initialFilters.category);
+  const [selectedType, setSelectedType] = useState(initialFilters.type);
+  // A new category has its own types, so the type filter starts over.
+  const setSelectedCategory = useCallback((category) => {
+    setCategoryState(category);
+    setSelectedType("All");
+  }, []);
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
   const [selectedAvailability, setSelectedAvailability] = useState(initialFilters.availability);
   const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
@@ -90,12 +98,13 @@ export function InventoryProvider({ children }) {
   useEffect(() => {
     saveFilters({
       category: selectedCategory,
+      type: selectedType,
       status: selectedStatus,
       availability: selectedAvailability,
       sort: selectedSort,
       layout,
     });
-  }, [selectedCategory, selectedStatus, selectedAvailability, selectedSort, layout]);
+  }, [selectedCategory, selectedType, selectedStatus, selectedAvailability, selectedSort, layout]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
@@ -184,6 +193,10 @@ export function InventoryProvider({ children }) {
   }, []);
 
   const categories = useMemo(() => getCategories(catalog.sets), [catalog]);
+  const highlights = useMemo(() => getHighlights(catalog.sets), [catalog]);
+  const types = useMemo(() => getTypes(catalog.sets, selectedCategory), [catalog, selectedCategory]);
+  // A saved type that no longer fits the category is ignored.
+  const effectiveType = types.includes(selectedType) ? selectedType : "All";
 
   const missingParts = useMemo(
     () => groupMissingPartsByRelic(catalog.sets, userData),
@@ -218,6 +231,7 @@ export function InventoryProvider({ children }) {
       filterAndSortSets(catalog.sets, summaries, {
         search: searchTerm,
         category: selectedCategory,
+        type: effectiveType,
         status: selectedStatus,
         availability: selectedAvailability,
         sort: selectedSort,
@@ -229,6 +243,7 @@ export function InventoryProvider({ children }) {
       setName,
       searchTerm,
       selectedCategory,
+      effectiveType,
       selectedStatus,
       selectedAvailability,
       selectedSort,
@@ -243,6 +258,9 @@ export function InventoryProvider({ children }) {
       setSearchTerm,
       selectedCategory,
       setSelectedCategory,
+      types,
+      selectedType: effectiveType,
+      setSelectedType,
       selectedStatus,
       setSelectedStatus,
       selectedAvailability,
@@ -257,6 +275,7 @@ export function InventoryProvider({ children }) {
       summaries,
       filteredSets,
       missingParts,
+      highlights,
       view,
       setView,
       layout,
@@ -267,6 +286,9 @@ export function InventoryProvider({ children }) {
       userData,
       searchTerm,
       selectedCategory,
+      setSelectedCategory,
+      types,
+      effectiveType,
       selectedStatus,
       selectedAvailability,
       selectedSort,
@@ -275,6 +297,7 @@ export function InventoryProvider({ children }) {
       summaries,
       filteredSets,
       missingParts,
+      highlights,
       view,
       layout,
     ]

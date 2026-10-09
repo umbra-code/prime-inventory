@@ -9,9 +9,9 @@ export const detectLocale = (preferred = []) =>
   DEFAULT_LOCALE;
 
 /**
- * Returns t(key, vars): looks the key up in the locale (falling back to
- * English, then to the key itself), picks the plural form from vars.count and
- * fills {placeholders}. Numbers are formatted for the locale.
+ * Returns t(key, vars, fallback): looks the key up in the locale (falling back
+ * to English, then to `fallback` or the key itself), picks the plural form
+ * from vars.count and fills {placeholders}. Numbers are formatted for the locale.
  */
 export const createTranslator = (locale) => {
   const dictionary = messages[locale] ?? messages[DEFAULT_LOCALE];
@@ -20,8 +20,8 @@ export const createTranslator = (locale) => {
 
   const format = (value) => (typeof value === "number" ? numberFormat.format(value) : String(value));
 
-  return (key, vars = {}) => {
-    let message = dictionary[key] ?? messages[DEFAULT_LOCALE][key] ?? key;
+  return (key, vars = {}, fallback = key) => {
+    let message = dictionary[key] ?? messages[DEFAULT_LOCALE][key] ?? fallback;
     if (typeof message === "object") {
       message = message[pluralRules.select(vars.count ?? 0)] ?? message.other;
     }
