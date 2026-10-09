@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Ducats } from "@/components/inventory/Ducats";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { ArrowUpDown, Search, X } from "lucide-react";
 import { use } from "react";
@@ -45,10 +46,13 @@ export function InventoryDashboard() {
     setSelectedCategory,
     selectedStatus,
     setSelectedStatus,
+    selectedAvailability,
+    setSelectedAvailability,
     selectedSort,
     setSelectedSort,
     categories,
     statusFilters,
+    availabilityFilters,
     sortOptions,
     stats,
     filteredSets,
@@ -59,15 +63,20 @@ export function InventoryDashboard() {
     { label: "Ready to Build", value: stats.ready, className: "text-green-600 dark:text-green-500" },
     { label: "Extra Sets", value: stats.extra, className: "text-violet-600 dark:text-violet-400" },
     { label: "Mastered", value: stats.mastered, className: "text-amber-600" },
+    {
+      label: "Spare Ducats",
+      value: <Ducats value={stats.spareDucats} label='ducats in spare parts' className='[&_img]:size-6 gap-1.5' />,
+      className: "text-gray-900 dark:text-gray-100 col-span-2 sm:col-span-1",
+    },
   ];
 
   return (
     <div className='bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-8 dark:bg-gray-900 dark:border-gray-800'>
       {/* Stats */}
-      <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-6'>
+      <div className='grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-6 mb-6'>
         {statTiles.map(({ label, value, className }) => (
-          <div key={label} className='text-center'>
-            <div className={`text-2xl sm:text-3xl font-bold ${className}`}>{value}</div>
+          <div key={label} className={`text-center ${className}`}>
+            <div className='text-2xl sm:text-3xl font-bold'>{value}</div>
             <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>{label}</div>
           </div>
         ))}
@@ -114,12 +123,18 @@ export function InventoryDashboard() {
             allLabel='All Statuses'
           />
           <FilterSelect
+            label='Filter by relic availability'
+            value={selectedAvailability}
+            onValueChange={setSelectedAvailability}
+            options={availabilityFilters}
+            allLabel='Any Availability'
+          />
+          <FilterSelect
             label='Sort by'
             value={selectedSort}
             onValueChange={setSelectedSort}
             options={sortOptions}
             icon={<ArrowUpDown className='size-4 opacity-60' />}
-            className='col-span-2 sm:col-span-1'
           />
         </div>
       </div>

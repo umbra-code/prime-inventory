@@ -4,6 +4,7 @@ export const ash = {
   uniqueName: "/Sets/AshPrime",
   name: "Ash Prime",
   category: "Warframes",
+  vaulted: true,
   components: [
     { uniqueName: "/Parts/AshPrimeBlueprint", name: "Blueprint", required: 1, ducats: 45 },
     { uniqueName: "/Parts/AshPrimeChassis", name: "Chassis", required: 1, ducats: 45 },
@@ -14,6 +15,7 @@ export const akbronco = {
   uniqueName: "/Sets/AkbroncoPrime",
   name: "Akbronco Prime",
   category: "Secondary",
+  vaulted: false,
   components: [
     { uniqueName: "/Parts/AkbroncoPrimeBlueprint", name: "Blueprint", required: 1, ducats: 15 },
     { uniqueName: "/Parts/AkbroncoPrimeLink", name: "Link", required: 2, ducats: 15 },
@@ -24,6 +26,7 @@ export const braton = {
   uniqueName: "/Sets/BratonPrime",
   name: "Braton Prime",
   category: "Primary",
+  vaulted: false,
   components: [
     { uniqueName: "/Parts/BratonPrimeBarrel", name: "Barrel", required: 1, ducats: 15 },
     { uniqueName: "/Parts/BratonPrimeStock", name: "Stock", required: 1, ducats: 15 },

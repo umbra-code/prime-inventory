@@ -30,6 +30,11 @@ export const matchesStatus = (filter, { status, progress, isMastered }) => {
   }
 };
 
+export const availabilityFilters = ["All", "Available", "Vaulted"];
+
+const matchesAvailability = (filter, set) =>
+  filter === "All" || (filter === "Vaulted") === set.vaulted;
+
 const STATUS_RANK = { ready: 0, extra: 1, incomplete: 2 };
 
 // The catalog is already sorted by name and Array#sort is stable, so ties keep name order.
@@ -37,6 +42,7 @@ const comparators = {
   Name: null,
   Progress: (a, b) => b.progress - a.progress,
   "Ready First": (a, b) => STATUS_RANK[a.status] - STATUS_RANK[b.status] || b.progress - a.progress,
+  "Spare Ducats": (a, b) => b.spareDucats - a.spareDucats,
 };
 
 export const sortOptions = Object.keys(comparators);
@@ -44,12 +50,17 @@ export const sortOptions = Object.keys(comparators);
 export const getCategories = (sets) => ["All", ...new Set(sets.map((set) => set.category))];
 
 /** Sets matching the filters, in the requested order. `summaries` is keyed by set uniqueName. */
-export const filterAndSortSets = (sets, summaries, { search, category, status, sort }) => {
+export const filterAndSortSets = (
+  sets,
+  summaries,
+  { search = "", category = "All", status = "All", availability = "All", sort = "Name" }
+) => {
   const term = search.trim().toLowerCase();
   const result = sets.filter(
     (set) =>
       set.name.toLowerCase().includes(term) &&
       (category === "All" || set.category === category) &&
+      matchesAvailability(availability, set) &&
       matchesStatus(status, summaries.get(set.uniqueName))
   );
   const compare = comparators[sort];
@@ -58,17 +69,21 @@ export const filterAndSortSets = (sets, summaries, { search, category, status, s
     : result;
 };
 
-/** Saved category/status/sort, falling back to defaults for unknown values. */
+const DEFAULT_FILTERS = { category: "All", status: "All", availability: "All", sort: "Name" };
+
+/** Saved filters and sort, falling back to defaults for unknown values. */
 export const loadFilters = (categories) => {
   try {
-    const { category, status, sort } = JSON.parse(localStorage.getItem(FILTERS_KEY)) ?? {};
+    const saved = JSON.parse(localStorage.getItem(FILTERS_KEY)) ?? {};
+    const pick = (options, value, fallback) => (options.includes(value) ? value : fallback);
     return {
-      category: categories.includes(category) ? category : "All",
-      status: statusFilters.includes(status) ? status : "All",
-      sort: sortOptions.includes(sort) ? sort : "Name",
+      category: pick(categories, saved.category, DEFAULT_FILTERS.category),
+      status: pick(statusFilters, saved.status, DEFAULT_FILTERS.status),
+      availability: pick(availabilityFilters, saved.availability, DEFAULT_FILTERS.availability),
+      sort: pick(sortOptions, saved.sort, DEFAULT_FILTERS.sort),
     };
   } catch {
-    return { category: "All", status: "All", sort: "Name" };
+    return { ...DEFAULT_FILTERS };
   }
 };
 

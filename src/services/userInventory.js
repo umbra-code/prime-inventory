@@ -18,20 +18,38 @@ export const getOwnedCounts = (set, counts) =>
   set.components.map((part) => getCount(counts, part.uniqueName));
 
 /**
+ * Owned parts that can be sold for ducats without losing progress: every part
+ * of a mastered set, or the parts above the required amount otherwise.
+ */
+export const getSpareCount = (part, owned, isMastered) =>
+  isMastered ? owned : Math.max(0, owned - part.required);
+
+/**
  * Progress of a set given the owned count of each component (same order as
  * set.components). Status: "incomplete", "ready" (buildable, not mastered) or
  * "extra" (buildable and already mastered, so it can be sold).
+ * `ducats` is the value of a full set; `spareDucats` the value of spare parts.
  */
 export const summarizeSet = (set, owned, isMastered) => {
   let required = 0;
   let have = 0;
+  let ducats = 0;
+  let spareDucats = 0;
   set.components.forEach((part, i) => {
     required += part.required;
     have += Math.min(owned[i], part.required);
+    ducats += part.required * part.ducats;
+    spareDucats += getSpareCount(part, owned[i], isMastered) * part.ducats;
   });
   const missing = required - have;
   const status = missing > 0 ? "incomplete" : isMastered ? "extra" : "ready";
-  return { progress: required > 0 ? (have / required) * 100 : 0, missing, status };
+  return {
+    progress: required > 0 ? (have / required) * 100 : 0,
+    missing,
+    status,
+    ducats,
+    spareDucats,
+  };
 };
 
 const toCount = (value) => {

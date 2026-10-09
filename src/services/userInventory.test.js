@@ -19,7 +19,7 @@ const reduce = (state, ...actions) => actions.reduce(userDataReducer, state);
 describe("summarizeSet", () => {
   it("reports progress by parts and the missing count", () => {
     const owned = getOwnedCounts(akbronco, { "/Parts/AkbroncoPrimeLink": 1 });
-    expect(summarizeSet(akbronco, owned, false)).toEqual({
+    expect(summarizeSet(akbronco, owned, false)).toMatchObject({
       progress: (1 / 3) * 100,
       missing: 2,
       status: "incomplete",
@@ -29,6 +29,21 @@ describe("summarizeSet", () => {
   it("does not count parts above the required amount", () => {
     const owned = getOwnedCounts(akbronco, { "/Parts/AkbroncoPrimeLink": 5 });
     expect(summarizeSet(akbronco, owned, false).missing).toBe(1);
+  });
+
+  it("values a full set in ducats", () => {
+    // Akbronco: Blueprint 1 x 15 + Link 2 x 15
+    expect(summarizeSet(akbronco, [0, 0], false).ducats).toBe(45);
+  });
+
+  it("counts only parts above the requirement as spare while not mastered", () => {
+    expect(summarizeSet(akbronco, [1, 3], false).spareDucats).toBe(15);
+    expect(summarizeSet(akbronco, [1, 2], false).spareDucats).toBe(0);
+  });
+
+  it("counts every owned part as spare once the set is mastered", () => {
+    expect(summarizeSet(akbronco, [1, 3], true).spareDucats).toBe(60);
+    expect(summarizeSet(ash, [0, 1], true).spareDucats).toBe(45);
   });
 
   it("is ready when complete and not mastered, extra when mastered", () => {

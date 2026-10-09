@@ -4,6 +4,7 @@ import { createContext, useEffect, useMemo, useReducer, useRef, useState } from 
 import { toast } from "sonner";
 import { getInitialCatalog, refreshCatalog } from "@/services/catalog";
 import {
+  availabilityFilters,
   filterAndSortSets,
   getCategories,
   loadFilters,
@@ -59,6 +60,7 @@ export function InventoryProvider({ children }) {
   const [initialFilters] = useState(() => loadFilters(getCategories(catalog.sets)));
   const [selectedCategory, setSelectedCategory] = useState(initialFilters.category);
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
+  const [selectedAvailability, setSelectedAvailability] = useState(initialFilters.availability);
   const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
 
   // Read by event handlers without making the actions unstable.
@@ -75,8 +77,13 @@ export function InventoryProvider({ children }) {
   }, [userData]);
 
   useEffect(() => {
-    saveFilters({ category: selectedCategory, status: selectedStatus, sort: selectedSort });
-  }, [selectedCategory, selectedStatus, selectedSort]);
+    saveFilters({
+      category: selectedCategory,
+      status: selectedStatus,
+      availability: selectedAvailability,
+      sort: selectedSort,
+    });
+  }, [selectedCategory, selectedStatus, selectedAvailability, selectedSort]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
@@ -168,11 +175,12 @@ export function InventoryProvider({ children }) {
   }, [catalog, userData]);
 
   const stats = useMemo(() => {
-    const stats = { total: catalog.sets.length, ready: 0, extra: 0, mastered: 0 };
+    const stats = { total: catalog.sets.length, ready: 0, extra: 0, mastered: 0, spareDucats: 0 };
     for (const summary of summaries.values()) {
       if (summary.status === "ready") stats.ready++;
       if (summary.status === "extra") stats.extra++;
       if (summary.isMastered) stats.mastered++;
+      stats.spareDucats += summary.spareDucats;
     }
     return stats;
   }, [catalog, summaries]);
@@ -183,9 +191,18 @@ export function InventoryProvider({ children }) {
         search: searchTerm,
         category: selectedCategory,
         status: selectedStatus,
+        availability: selectedAvailability,
         sort: selectedSort,
       }),
-    [catalog, summaries, searchTerm, selectedCategory, selectedStatus, selectedSort]
+    [
+      catalog,
+      summaries,
+      searchTerm,
+      selectedCategory,
+      selectedStatus,
+      selectedAvailability,
+      selectedSort,
+    ]
   );
 
   const state = useMemo(
@@ -198,8 +215,11 @@ export function InventoryProvider({ children }) {
       setSelectedCategory,
       selectedStatus,
       setSelectedStatus,
+      selectedAvailability,
+      setSelectedAvailability,
       selectedSort,
       setSelectedSort,
+      availabilityFilters,
       sortOptions,
       categories,
       statusFilters,
@@ -213,6 +233,7 @@ export function InventoryProvider({ children }) {
       searchTerm,
       selectedCategory,
       selectedStatus,
+      selectedAvailability,
       selectedSort,
       categories,
       stats,

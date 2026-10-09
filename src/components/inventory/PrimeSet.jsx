@@ -2,12 +2,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InventoryActionsContext } from "@/context/InventoryContext";
+import { imageUrl } from "@/lib/images";
 import { summarizeSet } from "@/services/userInventory";
+import { Lock } from "lucide-react";
 import Image from "next/image";
 import { memo, use } from "react";
+import { Ducats } from "./Ducats";
 import { PrimePart } from "./PrimePart";
-
-const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
 
 const STATUS_STYLES = {
   incomplete: {
@@ -88,7 +89,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
             <div className='p-1.5 sm:p-2 bg-gray-100 rounded dark:bg-gray-800 shrink-0'>
               {primeSet.imageName && (
                 <Image
-                  src={`${IMAGE_BASE_URL}${primeSet.imageName}`}
+                  src={imageUrl(primeSet.imageName)}
                   alt={primeSet.name}
                   width={80}
                   height={80}
@@ -100,16 +101,39 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered })
               <CardTitle className='text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100'>
                 {primeSet.name}
               </CardTitle>
-              <p className='text-sm text-gray-500 dark:text-gray-400'>{primeSet.category}</p>
+              <p className='flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400'>
+                {primeSet.category}
+                {primeSet.vaulted && (
+                  <span className='inline-flex items-center gap-0.5 text-xs' title='Vaulted: its relics no longer drop'>
+                    · <Lock className='size-3' aria-hidden='true' /> Vaulted
+                  </span>
+                )}
+              </p>
               <p className='text-xs font-medium text-gray-600 dark:text-gray-300 mt-0.5'>
                 {progressLabel(summary)}
               </p>
             </div>
           </div>
 
-          <Badge variant='outline' className={`shrink-0 ${styles.badgeClass}`}>
-            {styles.badge}
-          </Badge>
+          <div className='flex flex-col items-end gap-1.5 shrink-0'>
+            <Badge variant='outline' className={styles.badgeClass}>
+              {styles.badge}
+            </Badge>
+            <Ducats
+              value={summary.ducats}
+              prefix='Set'
+              label='ducats for a full set'
+              className='text-xs text-gray-600 dark:text-gray-300'
+            />
+            {summary.spareDucats > 0 && (
+              <Ducats
+                value={summary.spareDucats}
+                prefix='Spare'
+                label='ducats in spare parts'
+                className='text-xs font-medium text-violet-700 dark:text-violet-300'
+              />
+            )}
+          </div>
         </div>
       </CardHeader>
 

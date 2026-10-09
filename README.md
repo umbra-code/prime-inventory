@@ -7,7 +7,8 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Inventory at a glance:** every Prime set with its parts, owned vs. required counts and a progress bar.
 - **Mastery tracking:** mark sets as mastered; sets you can build again show up as extra sets.
 - **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered).
-- **Search and filters:** by name, category and status (Buildable, Incomplete, Mastered, Extra Sets).
+- **Search, filters and sorting:** by name, category, status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
+- **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **Light and dark themes:** follows your system setting by default.
 

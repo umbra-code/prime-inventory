@@ -8,11 +8,11 @@ import {
   saveFilters,
 } from "./filters";
 
-// Akbronco: extra set; Ash: 50% incomplete; Braton: 75% incomplete and mastered.
+// Akbronco: extra set; Ash: 50% incomplete (vaulted); Braton: 75% incomplete and mastered.
 const summaries = new Map([
-  [akbronco.uniqueName, { status: "extra", progress: 100, missing: 0, isMastered: true }],
-  [ash.uniqueName, { status: "incomplete", progress: 50, missing: 1, isMastered: false }],
-  [braton.uniqueName, { status: "incomplete", progress: 75, missing: 1, isMastered: true }],
+  [akbronco.uniqueName, { status: "extra", progress: 100, missing: 0, isMastered: true, spareDucats: 45 }],
+  [ash.uniqueName, { status: "incomplete", progress: 50, missing: 1, isMastered: false, spareDucats: 0 }],
+  [braton.uniqueName, { status: "incomplete", progress: 75, missing: 1, isMastered: true, spareDucats: 60 }],
 ]);
 
 const names = (sets) => sets.map((set) => set.name);
@@ -54,6 +54,15 @@ describe("filterAndSortSets", () => {
     expect(query({ status: "Mastered" })).toEqual(["Akbronco Prime", "Braton Prime"]);
   });
 
+  it("filters by relic availability", () => {
+    expect(query({ availability: "Vaulted" })).toEqual(["Ash Prime"]);
+    expect(query({ availability: "Available" })).toEqual(["Akbronco Prime", "Braton Prime"]);
+  });
+
+  it("sorts by spare ducats, highest first", () => {
+    expect(query({ sort: "Spare Ducats" })).toEqual(["Braton Prime", "Akbronco Prime", "Ash Prime"]);
+  });
+
   it("sorts by progress, highest first", () => {
     expect(query({ sort: "Progress" })).toEqual(["Akbronco Prime", "Braton Prime", "Ash Prime"]);
   });
@@ -86,15 +95,15 @@ describe("saved filters", () => {
 
   it("round-trips valid filters", () => {
     vi.stubGlobal("localStorage", createStorage());
-    const filters = { category: "Primary", status: "Extra Sets", sort: "Progress" };
+    const filters = { category: "Primary", status: "Extra Sets", availability: "Vaulted", sort: "Progress" };
     saveFilters(filters);
     expect(loadFilters(getCategories(catalogSets))).toEqual(filters);
   });
 
   it("falls back to defaults for unknown or missing values", () => {
     vi.stubGlobal("localStorage", createStorage());
-    saveFilters({ category: "Gone", status: "Buildable", sort: "Random" });
-    expect(loadFilters(["All"])).toEqual({ category: "All", status: "All", sort: "Name" });
+    saveFilters({ category: "Gone", status: "Buildable", availability: "Maybe", sort: "Random" });
+    expect(loadFilters(["All"])).toEqual({ category: "All", status: "All", availability: "All", sort: "Name" });
   });
 
   it("survives storage being unavailable", () => {
@@ -107,6 +116,6 @@ describe("saved filters", () => {
       },
     });
     expect(() => saveFilters({ category: "All", status: "All", sort: "Name" })).not.toThrow();
-    expect(loadFilters(["All"])).toEqual({ category: "All", status: "All", sort: "Name" });
+    expect(loadFilters(["All"])).toEqual({ category: "All", status: "All", availability: "All", sort: "Name" });
   });
 });

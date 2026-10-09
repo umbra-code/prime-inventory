@@ -3,9 +3,9 @@ import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { InventoryActionsContext } from "@/context/InventoryContext";
+import { imageUrl } from "@/lib/images";
 import { memo, use, useState } from "react";
-
-const IMAGE_BASE_URL = "https://cdn.warframestat.us/img/";
+import { Ducats } from "./Ducats";
 
 export const PrimePart = memo(function PrimePart({ part, count, setName }) {
   const { updatePart, adjustPart } = use(InventoryActionsContext);
@@ -26,14 +26,21 @@ export const PrimePart = memo(function PrimePart({ part, count, setName }) {
         <div className='p-px bg-gray-100/50 rounded dark:bg-gray-800/50'>
           {part.imageName && (
             <Image
-              src={`${IMAGE_BASE_URL}${part.imageName}`}
+              src={imageUrl(part.imageName)}
               alt={part.name}
               width={32}
               height={32}
             />
           )}
         </div>
-        <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{part.name}</span>
+        <div className='flex flex-col'>
+          <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>{part.name}</span>
+          <Ducats
+            value={part.ducats}
+            label='ducats each'
+            className='text-[11px] text-gray-500 dark:text-gray-400'
+          />
+        </div>
       </div>
 
       <div className='flex items-center space-x-2'>
