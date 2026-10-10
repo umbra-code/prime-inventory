@@ -32,7 +32,8 @@ const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal }) {
 
   return (
     <li
-      className={`relative grid gap-3 border-b border-oro-line py-3 pl-4 pr-3 last:border-b-0 hover:bg-oro-surface-2/50 lg:items-center lg:gap-5 ${ROW_GRID}`}
+      style={{ "--offscreen-size": "78px" }}
+      className={`oro-offscreen relative grid gap-3 border-b border-oro-line py-3 pl-4 pr-3 last:border-b-0 hover:bg-oro-surface-2/50 lg:items-center lg:gap-5 ${ROW_GRID}`}
     >
       {/* Status bar: full color for complete sets, fading in for incomplete ones */}
       <span

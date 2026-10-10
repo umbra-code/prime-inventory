@@ -38,7 +38,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, i
       style={{ "--accent": styles.accent, "--strength": strength }}
     >
       <div className='oro-frame h-full'>
-        <article className='oro-frame-inner flex flex-col'>
+        <article className='oro-frame-inner oro-offscreen flex flex-col'>
           <header className='grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3.5 p-4 pb-3 sm:p-[18px] sm:pb-3.5'>
             <div className='bevel grid size-16 place-items-center bg-oro-surface-2 [--cut:9px] sm:size-[68px]'>
               {primeSet.imageName && (

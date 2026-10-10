@@ -188,6 +188,16 @@
     height: 100%;
   }
 
+  /* Lets the browser skip styling, layout and painting of list items that are
+     off screen: with 160+ sets on the page, that is what made a theme switch
+     or a long list feel slow. --offscreen-size is the height they are assumed
+     to have until they have been rendered once. Keep it off elements that
+     draw outside their box (e.g. .oro-glow): their overflow would be clipped. */
+  .oro-offscreen {
+    content-visibility: auto;
+    contain-intrinsic-size: auto var(--offscreen-size, 430px);
+  }
+
   /* Gilded hairline with a diamond marking --progress (0..100%). */
   .oro-divider {
     position: relative;

@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
             <p className='mt-4 font-semibold'>Prime Inventory needs JavaScript to run. Enable it and reload the page.</p>
           </div>
         </noscript>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
         <ServiceWorkerRegistration />
