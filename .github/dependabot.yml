@@ -7,13 +7,13 @@ updates:
     target-branch: development
     schedule:
       interval: weekly
+    # New Primes arrive through @wfcd/items, which the Update Warframe data
+    # workflow keeps current and releases on its own.
+    ignore:
+      - dependency-name: "@wfcd/items"
     groups:
-      # New Primes arrive through this package; keep it in its own PR.
-      warframe-data:
-        patterns: ["@wfcd/items"]
       minor-and-patch:
         patterns: ["*"]
-        exclude-patterns: ["@wfcd/items"]
         update-types: [minor, patch]
 
   - package-ecosystem: github-actions

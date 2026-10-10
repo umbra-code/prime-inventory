@@ -1,0 +1,101 @@
+name: Update Warframe data
+
+# Keeps the bundled data current without anyone having to do it: updates
+# @wfcd/items and the melee classes, and when something the app shows changed
+# (new Primes, vaulted status, relics, translated names…), checks and releases
+# a patch version the same way `npm run release -- patch` does. When nothing
+# changed it does nothing.
+#
+# It only releases while development has nothing unreleased on it; otherwise it
+# waits for the next run, after your own release.
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: development
+          fetch-depth: 0
+
+      - name: Check that development has nothing unreleased
+        id: sync
+        run: |
+          if [ "$(git rev-parse HEAD)" = "$(git rev-parse origin/master)" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::development has unreleased commits; the data update waits for the next release."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v7
+        if: steps.sync.outputs.ready == 'true'
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Save the current data
+        if: steps.sync.outputs.ready == 'true'
+        run: |
+          npm ci
+          npm run catalog
+          node scripts/data-changes.mjs snapshot "$RUNNER_TEMP/before"
+
+      - name: Update melee classes from the Warframe Wiki
+        id: melee
+        if: steps.sync.outputs.ready == 'true'
+        # A wiki problem must not hold back the rest of the update; the job
+        # still fails at the end so it gets noticed.
+        continue-on-error: true
+        run: npm run melee-classes
+
+      - name: Update @wfcd/items
+        if: steps.sync.outputs.ready == 'true'
+        run: |
+          npm install --save-dev @wfcd/items@latest
+          npm run catalog
+
+      - name: Compare
+        id: compare
+        if: steps.sync.outputs.ready == 'true'
+        run: node scripts/data-changes.mjs compare "$RUNNER_TEMP/before" "$RUNNER_TEMP/notes.md"
+
+      - name: Lint, test and build
+        if: steps.compare.outputs.changed == 'true'
+        run: |
+          npm run lint
+          npm test
+          npm run build
+
+      - name: Release a patch version
+        if: steps.compare.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json src/data/meleeClasses.json
+          git commit -m "chore: update Warframe data"
+          npm version patch
+          version="v$(node -p "require('./package.json').version")"
+          git push origin development --follow-tags
+          git push origin HEAD:master
+          gh release create "$version" --title "$version" --notes-file "$RUNNER_TEMP/notes.md"
+
+      - name: Report a melee classes failure
+        if: steps.melee.outcome == 'failure'
+        run: |
+          echo "::error::Updating the melee classes from the Warframe Wiki failed; new melee Primes show as Other Melee. See the 'Update melee classes' step."
+          exit 1

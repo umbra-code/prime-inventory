@@ -73,23 +73,25 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Build for production |
 | `npm run start` | Serve the production build |
 | `npm run catalog` | Regenerate `src/data/primes.json` (runs automatically before dev, build and test) |
-| `npm run melee-classes` | Update `src/data/meleeClasses.json` from the Warframe Wiki (run when a new Prime melee weapon is released) |
+| `npm run melee-classes` | Update `src/data/meleeClasses.json` from the Warframe Wiki (the data update workflow runs it daily) |
 | `npm run lint` | Run ESLint |
 | `npm test` | Run the unit tests once (Vitest) |
 | `npm run test:watch` | Run the unit tests in watch mode |
 | `npm run release -- <patch|minor|major>` | Release a new version (see [Releasing](#releasing)) |
 
-To pick up new Primes in the bundled catalog, update the package (Dependabot opens a weekly PR for it):
+### Data updates
 
-```bash
-npm install -D @wfcd/items@latest
-```
+Nothing needs to be done by hand when Warframe adds Primes. Users get them the same day through the daily catalog check, and the **Update Warframe data** workflow (`.github/workflows/update-data.yml`) keeps the repository current: every day it updates `@wfcd/items` and the melee classes, and when something the app shows changed (new Primes, vaulted status, relics, translated names…) it runs lint, tests and a build and releases a patch version to `master`, with release notes listing the changes. When nothing changed, it does nothing.
+
+It only releases while `development` has nothing unreleased; otherwise it waits for your next release. If the wiki changes its format, the melee classes step fails and the run is marked as failed (GitHub emails you), but the rest of the update still goes out. It can also be run by hand from the Actions tab.
+
+GitHub disables scheduled workflows in public repositories after 60 days without activity (it emails a warning first); re-enable it from the Actions tab.
 
 ## Tests and CI
 
 Unit tests live next to the code they cover (`*.test.js`) and focus on the logic in `src/services` and `src/lib`: the inventory reducer, storage migrations, filters and sorting, and the catalog refresh (with `fetch` and `localStorage` mocked).
 
-GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production build on every push to `master` or `development` and on pull requests. Work happens on `development`; `master` only receives tested, tagged releases. Dependabot (`.github/dependabot.yml`) keeps dependencies up to date.
+GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production build on every push to `master` or `development` and on pull requests. Work happens on `development`; `master` only receives tested, tagged releases. Dependabot (`.github/dependabot.yml`) keeps the other dependencies up to date.
 
 ## Releasing
 
