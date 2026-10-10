@@ -5,6 +5,7 @@ import { PrimeSet } from "@/components/inventory/PrimeSet";
 import { Button } from "@/components/ui/button";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
+import { useProgressiveCount } from "@/lib/useProgressiveCount";
 import Image from "next/image";
 import { use } from "react";
 
@@ -42,14 +43,31 @@ function NoSets() {
 }
 
 export function InventoryGrid() {
-  const { filteredSets, summaries, layout } = use(InventoryStateContext);
+  const {
+    filteredSets,
+    summaries,
+    layout,
+    searchTerm,
+    selectedCategory,
+    selectedType,
+    selectedStatus,
+    selectedAvailability,
+    selectedSort,
+  } = use(InventoryStateContext);
+
+  // The full list can be 160+ sets: the first ones show at once and the rest
+  // follow in batches. A new search, filter, order or layout starts over;
+  // editing counts does not, so the list never collapses under the user.
+  const listKey = [layout, searchTerm, selectedCategory, selectedType, selectedStatus, selectedAvailability, selectedSort].join("|");
+  const shown = useProgressiveCount(filteredSets.length, listKey);
+  const sets = shown < filteredSets.length ? filteredSets.slice(0, shown) : filteredSets;
 
   if (filteredSets.length === 0) return <NoSets />;
-  if (layout === "table") return <InventoryTable />;
+  if (layout === "table") return <InventoryTable sets={sets} />;
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
-      {filteredSets.map((primeSet) => {
+      {sets.map((primeSet) => {
         const { owned, isMastered, inArsenal } = summaries.get(primeSet.uniqueName);
         return (
           <PrimeSet

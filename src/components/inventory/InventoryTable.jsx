@@ -88,8 +88,9 @@ const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal }) {
   );
 }, arePropsEqual);
 
-export function InventoryTable() {
-  const { filteredSets, summaries } = use(InventoryStateContext);
+/** `sets` is the part of the filtered list to show (see InventoryGrid). */
+export function InventoryTable({ sets }) {
+  const { summaries } = use(InventoryStateContext);
   const { t } = useI18n();
 
   return (
@@ -103,7 +104,7 @@ export function InventoryTable() {
         <span />
       </div>
       <ul>
-        {filteredSets.map((set) => {
+        {sets.map((set) => {
           const { owned, isMastered, inArsenal } = summaries.get(set.uniqueName);
           return <SetRow key={set.uniqueName} set={set} counts={owned} isMastered={isMastered} inArsenal={inArsenal} />;
         })}
