@@ -83,9 +83,10 @@ export function HighlightSet({ set, children }) {
             {setName(set)}
           </span>
           {isMastered && (
-            <span title={t("masteredToggle")} className='shrink-0 text-oro-ink-faint'>
+            // Labelled, not sr-only text: that is absolutely positioned and would
+            // escape the phone strip's clipping, widening the whole page.
+            <span role='img' aria-label={t("masteredToggle")} title={t("masteredToggle")} className='shrink-0 text-oro-ink-faint'>
               <Check aria-hidden='true' className='size-3.5' />
-              <span className='sr-only'>{t("masteredToggle")}</span>
             </span>
           )}
         </span>

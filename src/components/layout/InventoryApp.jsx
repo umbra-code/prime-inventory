@@ -3,6 +3,7 @@
 import { AppTabs } from "@/components/layout/AppTabs";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ReceiveFromDevice } from "@/components/layout/ReceiveFromDevice";
 import { Toaster } from "@/components/ui/sonner";
 import { InventoryProvider } from "@/context/InventoryContext";
 import { I18nProvider } from "@/i18n/I18nContext";
@@ -20,6 +21,7 @@ export default function InventoryApp() {
 
           <Footer />
         </div>
+        <ReceiveFromDevice />
         <Toaster position='bottom-right' richColors closeButton />
       </InventoryProvider>
     </I18nProvider>

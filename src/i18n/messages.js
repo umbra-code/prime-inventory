@@ -164,6 +164,38 @@ const en = {
   importFailed: "Could not import {file}",
   importFailedHint: "It is not a valid Prime Inventory backup.",
   inventoryReset: "Inventory reset",
+
+  // Send to another device
+  sendToDevice: "Send to another device",
+  sendToDeviceShort: "Send",
+  sendIntro:
+    "Creates a link that copies this inventory to another device. Afterwards each device keeps its own inventory: later changes are not synced.",
+  sendPrivacy: "The copy is encrypted in your browser, can only be opened with the link, and is deleted after {minutes} minutes.",
+  createLink: "Create link",
+  creatingLink: "Creating link…",
+  sendReady: "Scan the code or open the link on the other device before {time}.",
+  sendReplaces: "It replaces the inventory on that device; it can be undone there.",
+  transferLink: "Transfer link",
+  transferQr: "QR code with the transfer link",
+  copyLink: "Copy link",
+  linkCopied: "Link copied",
+  close: "Close",
+  retry: "Try again",
+  receiveTitle: "Import this inventory?",
+  receiveDescription:
+    "The link holds an inventory with <b>{parts}</b> and <b>{mastered}</b>. It will replace the inventory in this browser.",
+  receiveParts: { one: "{count} part", other: "{count} parts" },
+  receiveMastered: { one: "{count} mastered set", other: "{count} mastered sets" },
+  receiveImport: "Import",
+  transferImported: "Imported the inventory from the link",
+  "transferError.expired": "This link has expired or was already used",
+  "transferError.expiredHint": "Create a new one on the device that has the inventory.",
+  "transferError.busy": "Too many transfers right now",
+  "transferError.busyHint": "Try again in a few minutes, or use Export and Import.",
+  "transferError.unavailable": "Sending is not available right now",
+  "transferError.unavailableHint": "Check your connection, or use Export and Import.",
+  "transferError.invalid": "The link does not hold a valid inventory",
+  "transferError.invalidHint": "Create a new one on the device that has the inventory.",
 };
 
 const es = {
@@ -352,6 +384,37 @@ const es = {
   importFailed: "No se pudo importar {file}",
   importFailedHint: "No es un respaldo válido de Prime Inventory.",
   inventoryReset: "Inventario reiniciado",
+
+  sendToDevice: "Enviar a otro dispositivo",
+  sendToDeviceShort: "Enviar",
+  sendIntro:
+    "Crea un enlace que copia este inventario a otro dispositivo. Después cada dispositivo sigue con su propio inventario: los cambios posteriores no se sincronizan.",
+  sendPrivacy: "La copia se cifra en tu navegador, solo se puede abrir con el enlace y se borra a los {minutes} minutos.",
+  createLink: "Crear enlace",
+  creatingLink: "Creando enlace…",
+  sendReady: "Escanea el código o abre el enlace en el otro dispositivo antes de las {time}.",
+  sendReplaces: "Reemplaza el inventario de ese dispositivo; allá se puede deshacer.",
+  transferLink: "Enlace de traspaso",
+  transferQr: "Código QR con el enlace de traspaso",
+  copyLink: "Copiar enlace",
+  linkCopied: "Enlace copiado",
+  close: "Cerrar",
+  retry: "Reintentar",
+  receiveTitle: "¿Importar este inventario?",
+  receiveDescription:
+    "El enlace trae un inventario con <b>{parts}</b> y <b>{mastered}</b>. Reemplazará el inventario de este navegador.",
+  receiveParts: { one: "{count} parte", other: "{count} partes" },
+  receiveMastered: { one: "{count} set masterizado", other: "{count} sets masterizados" },
+  receiveImport: "Importar",
+  transferImported: "Inventario importado desde el enlace",
+  "transferError.expired": "Este enlace caducó o ya fue usado",
+  "transferError.expiredHint": "Crea uno nuevo en el dispositivo que tiene el inventario.",
+  "transferError.busy": "Hay demasiados traspasos en este momento",
+  "transferError.busyHint": "Intenta de nuevo en unos minutos, o usa Exportar e Importar.",
+  "transferError.unavailable": "El envío no está disponible en este momento",
+  "transferError.unavailableHint": "Revisa tu conexión, o usa Exportar e Importar.",
+  "transferError.invalid": "El enlace no trae un inventario válido",
+  "transferError.invalidHint": "Crea uno nuevo en el dispositivo que tiene el inventario.",
 };
 
 export const messages = { en, es };

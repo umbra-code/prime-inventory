@@ -16,6 +16,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
 - **Reset** lives in the Preferences menu under Danger zone, behind a confirmation and with undo.
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
+- **Send to another device:** copy your inventory to another device with a short link or a QR code. The copy is encrypted in your browser and the link works for 15 minutes; afterwards each device keeps its own inventory.
 - **English and Spanish:** the interface follows your browser language, and item names can stay in English (as on warframe.market) or use the game's own translations. Both are in the Preferences menu, next to the theme.
 - **Light and dark themes:** follows your system setting by default.
 - **Installable and offline:** install it as an app from the browser (Install app / Add to Home Screen). After the first visit it works without a connection; images you have already seen stay available.
@@ -30,6 +31,18 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Weapon types** come from `@wfcd/items`, except melee classes, which it does not provide: those come from the [Warframe Wiki](https://wiki.warframe.com/w/Module:Weapons/data/melee) into the committed `src/data/meleeClasses.json`. New melee Primes show as "Other Melee" until it is updated.
 - **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
 - **Prime Resurgence** (Varzia's current offer and its end date) comes live from the [warframestat.us](https://docs.warframestat.us/) world state API and is cached until the rotation ends. Offline or when the API is down, the panel is simply hidden.
+
+## Send to another device
+
+Your inventory only lives in your browser; this copies it to another one without accounts. It is a one-time copy, not a sync: afterwards the two inventories are independent, exactly as with Export and Import.
+
+1. **Create link** compresses the inventory and encrypts it in the browser (AES-GCM, with a random key made for that link), then uploads the result.
+2. The server keeps it for 15 minutes in a private [Vercel Blob](https://vercel.com/docs/vercel-blob) store and answers with an id. The link is `…/#t=<id>.<key>`: the key sits after the `#`, which browsers never send to a server, so what is stored cannot be read by the server or by anyone without the link.
+3. Opening the link downloads and decrypts the inventory, asks before replacing the one in that browser (with undo), and then deletes the stored copy. The key is removed from the address bar right away.
+
+Blobs have no expiry of their own, so each stored copy carries its expiry time and saving a new one deletes those that ran out. Uploads are limited to 64 KB, to requests from the site itself, and to 200 copies waiting at once.
+
+The feature needs a Blob store: create a private one in the Vercel project (Storage → Blob), which sets `BLOB_STORE_ID`, and add `BLOB_READ_WRITE_TOKEN` for local development (see `.env.example`). Without one, everything else works and sending reports that it is not available.
 
 ## Translations
 
@@ -52,6 +65,7 @@ Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo 
 - Tailwind CSS 4 with [shadcn/ui](https://ui.shadcn.com/) components, restyled with the Orokin theme (`src/app/globals.css`): every color is an `oro-*` token that switches with light/dark, plus `bevel`, `chip` and card-frame utilities
 - Cinzel (display) and Geist (body) via `next/font`
 - `next-themes` for theming
+- Two small route handlers and Vercel Blob for [Send to another device](#send-to-another-device); everything else is static
 - JavaScript (no TypeScript)
 
 ## Getting started
@@ -117,6 +131,9 @@ src/lib/slimCatalog.mjs     Raw @wfcd/items data -> app catalog (shared by build
 src/services/catalog.js     Catalog selection and daily refresh
 src/services/userInventory.js  User data reducer, storage, migrations, backups
 src/services/filters.js     Search, status filters and sorting
+src/lib/transferCodec.js    Send to another device: compression, encryption and link format
+src/services/transfer*.js   Its browser side (transfer.js) and Blob storage (transferStore.js)
+src/app/api/transfer/       Its route handlers
 src/i18n/                   UI strings, translator and language context
 src/lib/itemNames.mjs       In-game item names per language (used by the catalog script)
 src/context/InventoryContext.jsx  App state (state + stable actions contexts)

@@ -18,6 +18,7 @@ import {
 } from "@/services/filters";
 import { getHighlights } from "@/services/highlights";
 import { groupMissingPartsByRelic } from "@/services/missingParts";
+import { sendTransfer } from "@/services/transfer";
 import {
   emptyUserData,
   getCount,
@@ -181,6 +182,12 @@ export function InventoryProvider({ children }) {
           });
         }
       },
+
+      // "Send to another device": resolves with the link and its expiry time.
+      sendInventory: () => sendTransfer(toExportFile(latest.current.userData)),
+      /** The inventory in data received from a link, or null if it is not one. */
+      readReceivedInventory: (raw) => normalizeUserData(raw, latest.current.catalog.sets),
+      applyReceivedInventory: (userData) => replaceAll(userData, translate("transferImported")),
 
       resetInventory: () => replaceAll(emptyUserData(), translate("inventoryReset")),
 

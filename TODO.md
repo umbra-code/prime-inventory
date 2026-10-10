@@ -47,6 +47,7 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] "Now in Game" panel: newest Primes and Primes back from the vault
 - [x] Prime Resurgence panel: Varzia's current Primes and when the rotation ends (warframestat.us); mastered sets are framed and go last
 - [x] Move Reset out of the header into the Preferences menu (Danger zone)
+- [x] Send to another device: encrypted, short-lived link or QR code (Vercel Blob), no accounts
 
 ## Tooling
 

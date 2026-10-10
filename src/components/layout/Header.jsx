@@ -10,6 +10,7 @@ import { useI18n } from "@/i18n/I18nContext";
 import { AppVersion } from "./AppVersion";
 import { OfflineBadge } from "./OfflineBadge";
 import { PreferencesMenu } from "./PreferencesMenu";
+import { SendToDevice } from "./SendToDevice";
 
 export function Header() {
   const { importInventory, exportInventory } = use(InventoryActionsContext);
@@ -43,6 +44,7 @@ export function Header() {
           {/* Main actions: labels collapse to icons on small screens */}
           <div className='flex shrink-0 items-center gap-1.5 sm:gap-2'>
             <PreferencesMenu />
+            <SendToDevice />
             <Button variant='outline' onClick={importInventory} size='sm' aria-label={t("importInventory")}>
               <Upload />
               <span className='hidden md:inline'>{t("import")}</span>
