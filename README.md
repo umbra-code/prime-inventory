@@ -9,6 +9,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Cards or table:** browse sets as detailed cards, or switch to a compact table (one row per set) to update many counts quickly. The choice is remembered.
 - **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered and in your arsenal).
 - **Now in Game:** a collapsible panel with the newest Primes and the vaulted Primes whose relics drop again, computed from the catalog. Click one to jump to it.
+- **Prime Resurgence:** a second panel with the Primes Varzia sells right now and the exact end of the rotation. In both panels, sets you have already mastered fade and go last.
 - **Search, filters and sorting:** by name, category, weapon type (Rifle, Bow, Nikana, Heavy Blade…), status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
 - **Missing Parts:** a separate tab lists the parts you still need for the sets you have not mastered, grouped by the relics you can open right now (the ones that drop the most of them first), plus the parts that only drop from vaulted relics.
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
@@ -28,6 +29,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
   3. If the check fails (offline, network errors), the app keeps using the cached or bundled catalog.
 - **Weapon types** come from `@wfcd/items`, except melee classes, which it does not provide: those come from the [Warframe Wiki](https://wiki.warframe.com/w/Module:Weapons/data/melee) into the committed `src/data/meleeClasses.json`. New melee Primes show as "Other Melee" until it is updated.
 - **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
+- **Prime Resurgence** (Varzia's current offer and its end date) comes live from the [warframestat.us](https://docs.warframestat.us/) world state API and is cached until the rotation ends. Offline or when the API is down, the panel is simply hidden.
 
 ## Translations
 
