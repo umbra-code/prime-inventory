@@ -45,7 +45,7 @@ Prime Inventory is a client-side app for tracking Warframe Prime parts. User dat
 - [x] In Arsenal flag, separate from Mastered, with its own status filter
 - [x] Weapon type sub-filter (melee classes from the Warframe Wiki)
 - [x] "Now in Game" panel: newest Primes and Primes back from the vault
-- [x] Prime Resurgence panel: Varzia's current Primes and when the rotation ends (warframestat.us); mastered sets fade and go last
+- [x] Prime Resurgence panel: Varzia's current Primes and when the rotation ends (warframestat.us); mastered sets are framed and go last
 - [x] Move Reset out of the header into the Preferences menu (Danger zone)
 
 ## Tooling
