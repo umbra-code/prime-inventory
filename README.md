@@ -14,7 +14,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Missing Parts:** a separate tab lists the parts you still need for the sets you have not mastered, grouped by the relics you can open right now (the ones that drop the most of them first), plus the parts that only drop from vaulted relics.
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
-- **Platinum prices:** the recent average price of every set and part on warframe.market, next to its ducat value, so you can tell what is worth selling for platinum and what for ducats. Each price links to the item's page there.
+- **Platinum prices:** the recent average price of every set and part on warframe.market, next to its ducat value, so you can tell what is worth selling for platinum and what for ducats. Each price links to the item's page there, and the summary shows what your spare parts add up to.
 - **Reset** lives in the Preferences menu under Danger zone, behind a confirmation and with undo.
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **Send to another device:** copy your inventory to another device with a short link or a QR code. The copy is encrypted in your browser and the link works for 15 minutes; afterwards each device keeps its own inventory.

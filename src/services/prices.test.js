@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createStorage } from "@/test/fixtures";
-import { findPrice, getCachedPrices, marketUrl, parsePrices, refreshPrices } from "./prices";
+import { findPrice, getCachedPrices, getSparePlatinum, marketUrl, parsePrices, refreshPrices } from "./prices";
 
 const CACHE_KEY = "primePrices";
 const NOW = Date.parse("2026-10-10T12:00:00Z");
@@ -120,6 +120,39 @@ describe("findPrice", () => {
     expect(findPrice(null, ivara)).toBeNull();
     expect(findPrice(prices, { name: "Newest Prime" })).toBeNull();
     expect(findPrice(prices, ivara, { name: "Chassis" })).toBeNull();
+  });
+});
+
+describe("getSparePlatinum", () => {
+  const braton = {
+    uniqueName: "/Braton",
+    name: "Braton Prime",
+    components: [
+      { name: "Barrel", required: 1 },
+      { name: "Stock", required: 2 },
+      { name: "Unpriced", required: 1 },
+    ],
+  };
+  const paris = { uniqueName: "/Paris", name: "Paris Prime", components: [{ name: "String", required: 1 }] };
+  const prices = { "Braton Prime Barrel": [4, 1], "Braton Prime Stock": [10.5, 1], "Paris Prime String": [20, 1] };
+
+  it("adds up the parts above what a set needs", () => {
+    const summaries = new Map([
+      ["/Braton", { owned: [3, 3, 5], isMastered: false }],
+      ["/Paris", { owned: [1], isMastered: false }],
+    ]);
+    // 2 spare barrels and 1 spare stock; the unpriced part counts as nothing.
+    expect(getSparePlatinum(prices, [braton, paris], summaries)).toBe(2 * 4 + 10.5);
+  });
+
+  it("counts every part of a mastered set as spare", () => {
+    const summaries = new Map([["/Paris", { owned: [2], isMastered: true }]]);
+    expect(getSparePlatinum(prices, [braton, paris], summaries)).toBe(40);
+  });
+
+  it("is null without prices and zero without spares", () => {
+    expect(getSparePlatinum(null, [paris], new Map())).toBeNull();
+    expect(getSparePlatinum(prices, [paris], new Map([["/Paris", { owned: [1], isMastered: false }]]))).toBe(0);
   });
 });
 

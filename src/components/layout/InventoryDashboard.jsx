@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/select";
 import { Ducats } from "@/components/inventory/Ducats";
 import { InventoryStateContext } from "@/context/InventoryContext";
+import { PricesContext } from "@/context/PricesContext";
 import { useI18n } from "@/i18n/I18nContext";
+import { getSparePlatinum } from "@/services/prices";
 import { ArrowUpDown, LayoutGrid, Rows3, Search, X } from "lucide-react";
-import { use } from "react";
+import { use, useMemo } from "react";
 
 // Beveled field; the border is an inset shadow so the bevel does not cut it.
 const FIELD =
@@ -59,20 +61,39 @@ export function InventoryDashboard() {
     availabilityFilters,
     sortOptions,
     stats,
+    catalog,
+    summaries,
     filteredSets,
     layout,
     setLayout,
   } = use(InventoryStateContext);
-  const { t } = useI18n();
+  const prices = use(PricesContext);
+  const { t, formatNumber } = useI18n();
   // Option values are internal keys; "All" gets a label per filter.
   const labelFor = (prefix, allKey) => (option) =>
     option === "All" ? t(allKey) : t(`${prefix}.${option}`);
 
+  // Prices arrive on their own and may be missing; the tile follows them.
+  const sparePlatinum = useMemo(
+    () => getSparePlatinum(prices, catalog.sets, summaries),
+    [prices, catalog, summaries]
+  );
+  const platinumAmount = sparePlatinum === null ? null : formatNumber(Math.round(sparePlatinum));
+
   const statTiles = [
-    { label: t("stat.total"), value: stats.total, className: "text-oro-ink" },
+    {
+      label: t("stat.mastered"),
+      title: t("masteredOfTotal", { mastered: stats.mastered, total: stats.total }),
+      value: (
+        <>
+          <span className='text-oro-gold'>{stats.mastered}</span>
+          <span className='text-[0.6em] text-oro-ink-muted'>/{stats.total}</span>
+        </>
+      ),
+      className: "text-oro-ink",
+    },
     { label: t("stat.ready"), value: stats.ready, className: "text-oro-ready" },
     { label: t("stat.extra"), value: stats.extra, className: "text-oro-extra" },
-    { label: t("stat.mastered"), value: stats.mastered, className: "text-oro-gold" },
     {
       label: t("stat.spareDucats"),
       value: (
@@ -82,18 +103,30 @@ export function InventoryDashboard() {
           className='gap-2 text-[length:inherit] text-oro-ink [&_img]:size-6'
         />
       ),
-      className: "text-oro-ink col-span-2 sm:col-span-1",
+      className: "text-oro-ink",
     },
-  ];
+    platinumAmount !== null && {
+      label: t("stat.sparePlatinum"),
+      title: t("sparePlatinumLabel", { amount: platinumAmount }),
+      value: (
+        <>
+          {platinumAmount}
+          <span className='ml-0.5 text-[0.6em] text-oro-ink-muted'>{t("platinumUnit")}</span>
+        </>
+      ),
+      className: "text-oro-ink",
+    },
+  ].filter(Boolean);
 
   return (
     <div className='mb-8 grid gap-6'>
-      {/* Stats: Cinzel figures between thin dividers */}
-      <div className='grid grid-cols-2 gap-y-4 sm:grid-cols-5'>
-        {statTiles.map(({ label, value, className }) => (
+      {/* Stats: Cinzel figures between thin dividers; on phones an odd last tile spans the row */}
+      <div className={`grid grid-cols-2 gap-y-4 ${statTiles.length === 5 ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
+        {statTiles.map(({ label, title, value, className }) => (
           <div
             key={label}
-            className={`px-2 text-center sm:border-l sm:border-oro-line sm:first:border-l-0 ${className}`}
+            title={title}
+            className={`px-2 text-center last:odd:col-span-2 sm:border-l sm:border-oro-line sm:first:border-l-0 sm:last:odd:col-span-1 ${className}`}
           >
             <div className='font-display text-2xl font-semibold tabular-nums sm:text-[34px] sm:leading-tight'>{value}</div>
             <div className='text-[11px] uppercase tracking-[0.12em] text-oro-ink-muted'>{label}</div>

@@ -5,6 +5,8 @@
 // Prices are an extra: they are cached in the browser, refreshed every few
 // hours, and simply not shown when they cannot be loaded.
 
+import { getSpareCount } from "@/services/userInventory";
+
 const SOURCE_URL = "https://api.warframestat.us/wfinfo/prices/";
 const CACHE_KEY = "primePrices";
 const REFRESH_INTERVAL_MS = 6 * 60 * 60 * 1000;
@@ -78,6 +80,24 @@ export const findPrice = (prices, set, part) => {
   if (!name) return null;
   const [average, sold] = prices[name];
   return { name, average, sold };
+};
+
+/**
+ * What the user's spare parts would sell for, part by part, or null without
+ * prices. `summaries` is the map kept by the inventory context.
+ */
+export const getSparePlatinum = (prices, sets, summaries) => {
+  if (!prices) return null;
+  let total = 0;
+  for (const set of sets) {
+    const summary = summaries.get(set.uniqueName);
+    if (!summary) continue;
+    set.components.forEach((part, i) => {
+      const spare = getSpareCount(part, summary.owned[i], summary.isMastered);
+      if (spare > 0) total += spare * (findPrice(prices, set, part)?.average ?? 0);
+    });
+  }
+  return total;
 };
 
 /** The item's page on warframe.market: "Silva & Aegis Prime Set" → …/items/silva_and_aegis_prime_set */
