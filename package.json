@@ -1,6 +1,6 @@
 {
   "name": "prime-inventory",
-  "version": "2.11.1",
+  "version": "2.11.2",
   "private": true,
   "scripts": {
     "catalog": "node scripts/build-catalog.mjs",
