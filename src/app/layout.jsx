@@ -21,17 +21,30 @@ const cinzel = Cinzel({
   weight: ["500", "600", "700"],
 });
 
+const DESCRIPTION = "Track your Warframe Prime parts, mastery, ducats and the relics you still need.";
+
+// Link previews (Discord, WhatsApp, X…) use opengraph-image.png next to this
+// file; metadataBase makes its URL absolute.
 export const metadata = {
+  metadataBase: new URL("https://prime-inventory-lovat.vercel.app"),
   title: "Prime Inventory",
-  description:
-    "Track your Warframe Prime parts, mastery, ducats and the relics you still need.",
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Prime Inventory",
+    title: "Prime Inventory",
+    description: DESCRIPTION,
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
   appleWebApp: { capable: true, title: "Prime Inventory", statusBarStyle: "black-translucent" },
 };
 
+// The Orokin backgrounds (--oro-bg), so the browser bar matches the page.
 export const viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#030712" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0b09" },
   ],
 };
 
