@@ -3,6 +3,7 @@
 import { HighlightPanel, HighlightSet, SET_LIST } from "@/components/layout/HighlightPanel";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
+import { masteredLast } from "@/services/highlights";
 import { loadPrimeResurgence, matchOfferSets } from "@/services/primeResurgence";
 import { use, useEffect, useMemo, useState } from "react";
 
@@ -18,7 +19,7 @@ const formatTimeLeft = (expiry, locale) => {
 
 /** The Primes Varzia sells right now, with the exact end of the rotation. */
 export function PrimeResurgence() {
-  const { catalog } = use(InventoryStateContext);
+  const { catalog, summaries } = use(InventoryStateContext);
   const { t, locale } = useI18n();
   const [offer, setOffer] = useState(null);
 
@@ -32,7 +33,8 @@ export function PrimeResurgence() {
     };
   }, []);
 
-  const sets = useMemo(() => (offer ? matchOfferSets(offer, catalog.sets) : []), [offer, catalog]);
+  const offered = useMemo(() => (offer ? matchOfferSets(offer, catalog.sets) : []), [offer, catalog]);
+  const sets = useMemo(() => masteredLast(offered, summaries), [offered, summaries]);
   if (!offer || sets.length === 0) return null;
 
   const endDate = new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(new Date(offer.expiry));

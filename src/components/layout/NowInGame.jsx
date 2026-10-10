@@ -3,6 +3,7 @@
 import { HighlightPanel, HighlightSet, SET_LIST } from "@/components/layout/HighlightPanel";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
+import { masteredLast } from "@/services/highlights";
 import { use } from "react";
 
 // Release dates are calendar days ("2026-09-23"); read them as local dates.
@@ -13,10 +14,13 @@ const parseDay = (day) => {
 
 /** Newest Primes and Primes back from the vault, computed from the catalog. */
 export function NowInGame() {
-  const { highlights } = use(InventoryStateContext);
+  const { highlights, summaries } = use(InventoryStateContext);
   const { t, locale } = useI18n();
-  const { newest, returned } = highlights;
-  if (newest.length === 0 && returned.length === 0) return null;
+  if (highlights.newest.length === 0 && highlights.returned.length === 0) return null;
+
+  // What the user still has to get comes first.
+  const newest = masteredLast(highlights.newest, summaries);
+  const returned = masteredLast(highlights.returned, summaries);
 
   const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: "medium" });
 

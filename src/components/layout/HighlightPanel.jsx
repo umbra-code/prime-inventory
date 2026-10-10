@@ -4,7 +4,8 @@ import { InventoryActionsContext, InventoryStateContext } from "@/context/Invent
 import { useI18n } from "@/i18n/I18nContext";
 import { imageUrl } from "@/lib/images";
 import { STATUS } from "@/lib/setStatus";
-import { ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Check, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { use, useState } from "react";
 
@@ -47,23 +48,35 @@ export function HighlightPanel({ storageKey, title, children }) {
   );
 }
 
-/** One set in a panel: image, name, the user's progress; opens the set. */
+/**
+ * One set in a panel: image, name, the user's progress; opens the set.
+ * Mastered sets fade out so the ones still to get stand out.
+ */
 export function HighlightSet({ set, children }) {
   const { showSetInInventory } = use(InventoryActionsContext);
   const { summaries } = use(InventoryStateContext);
   const { t, setName } = useI18n();
   const summary = summaries.get(set.uniqueName);
   const status = summary?.status ?? "incomplete";
+  const isMastered = summary?.isMastered ?? false;
   const accent = STATUS[status].accent;
+  // An extra set is mastered too, but its parts are still worth selling.
   const progress =
-    status === "incomplete" ? t("highlightIncomplete", { percent: Math.floor(summary?.progress ?? 0) }) : t(STATUS[status].badge);
+    status !== "incomplete"
+      ? t(STATUS[status].badge)
+      : isMastered
+        ? t("masteredToggle")
+        : t("highlightIncomplete", { percent: Math.floor(summary?.progress ?? 0) });
 
   return (
     <button
       type='button'
       onClick={() => showSetInInventory(set)}
       title={t("showInInventory", { name: setName(set) })}
-      className='group flex min-w-[240px] shrink-0 snap-start cursor-pointer items-center gap-3 p-1.5 text-left hover:bg-oro-surface-2 sm:min-w-0 sm:shrink'
+      className={cn(
+        "group flex min-w-[240px] shrink-0 snap-start cursor-pointer items-center gap-3 p-1.5 text-left hover:bg-oro-surface-2 sm:min-w-0 sm:shrink",
+        isMastered && "opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+      )}
     >
       <span className='bevel grid size-11 shrink-0 place-items-center bg-oro-surface-2 [--cut:7px]'>
         {set.imageName && <Image src={imageUrl(set.imageName)} alt='' width={40} height={40} className='size-10 object-contain' />}
@@ -73,8 +86,14 @@ export function HighlightSet({ set, children }) {
           {setName(set)}
         </span>
         <span className='flex items-center gap-1.5 text-xs text-oro-ink-muted'>
-          <span aria-hidden='true' className='oro-diamond !size-[7px]' style={{ background: accent }} />
-          <span style={status === "incomplete" ? undefined : { color: accent }}>{progress}</span>
+          {isMastered && status === "incomplete" ? (
+            <Check aria-hidden='true' className='size-3.5 shrink-0' />
+          ) : (
+            <span aria-hidden='true' className='oro-diamond !size-[7px] shrink-0' style={{ background: accent }} />
+          )}
+          <span className='shrink-0 whitespace-nowrap' style={status === "incomplete" ? undefined : { color: accent }}>
+            {progress}
+          </span>
           {children}
         </span>
       </span>

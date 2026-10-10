@@ -13,3 +13,7 @@ export const getHighlights = (sets, { newestCount = NEWEST_COUNT } = {}) => ({
     .slice(0, newestCount),
   returned: sets.filter((set) => set.returned).toSorted((a, b) => a.name.localeCompare(b.name, "en")),
 });
+
+/** Sets the user has not mastered first, keeping each group's order. */
+export const masteredLast = (sets, summaries) =>
+  sets.toSorted((a, b) => Number(!!summaries.get(a.uniqueName)?.isMastered) - Number(!!summaries.get(b.uniqueName)?.isMastered));

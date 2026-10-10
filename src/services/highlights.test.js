@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getHighlights } from "./highlights";
+import { getHighlights, masteredLast } from "./highlights";
 
 const set = (name, releaseDate, extra = {}) => ({ name, uniqueName: `/${name}`, releaseDate, ...extra });
 
@@ -26,5 +26,17 @@ describe("getHighlights", () => {
   it("does not reorder the catalog", () => {
     getHighlights(sets);
     expect(sets[0].name).toBe("Braton Prime");
+  });
+});
+
+describe("masteredLast", () => {
+  it("moves mastered sets to the end and keeps the order of each group", () => {
+    const sets = ["A", "B", "C", "D"].map((name) => set(name));
+    const summaries = new Map([
+      ["/A", { isMastered: true }],
+      ["/C", { isMastered: true }],
+      ["/D", { isMastered: false }],
+    ]);
+    expect(masteredLast(sets, summaries).map((s) => s.name)).toEqual(["B", "D", "A", "C"]);
   });
 });
