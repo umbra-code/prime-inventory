@@ -1,21 +1,30 @@
 // Releases a new version: development gets the version commit and tag, CI runs
 // on it, and master is fast-forwarded to that exact commit once CI passes.
+// Finally it prints a link to GitHub's new release page, prefilled from the commits.
 //
-//   npm run release -- patch|minor|major [--dry-run]
+//   npm run release -- patch|minor|major ["Title"] [--dry-run]
+//
+// The optional title goes into the version commit, the tag and the release
+// ("2.9.0 · Prime Resurgence"); it is asked for when not given.
 //
 // Set GITHUB_TOKEN to raise the GitHub API rate limit while waiting for CI.
 
 import { execFileSync, execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { createInterface } from "node:readline/promises";
+import { draftReleaseNotes, newReleaseUrl, versionMessage } from "../src/lib/releaseNotes.mjs";
 
 const DEVELOP = "development";
 const MAIN = "master";
 const CI_POLL_MS = 20_000;
 const CI_TIMEOUT_MS = 20 * 60_000;
 
-const [bump, ...flags] = process.argv.slice(2);
-const dryRun = flags.includes("--dry-run");
+const [bump, ...rest] = process.argv.slice(2);
+const dryRun = rest.includes("--dry-run");
+let title = rest
+  .filter((arg) => !arg.startsWith("--"))
+  .join(" ")
+  .trim();
 
 const fail = (message) => {
   console.error(`\n✗ ${message}`);
@@ -23,7 +32,7 @@ const fail = (message) => {
 };
 
 if (!["patch", "minor", "major"].includes(bump)) {
-  fail("Usage: npm run release -- patch|minor|major [--dry-run]");
+  fail('Usage: npm run release -- patch|minor|major ["Title"] [--dry-run]');
 }
 
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
@@ -33,6 +42,12 @@ const step = (title) => console.log(`\n→ ${title}`);
 const run = (command) => {
   console.log(`  $ ${command}`);
   if (!dryRun) execSync(command, { stdio: "inherit" });
+};
+
+/** Runs git without a shell, so messages need no quoting; only printed in a dry run. */
+const runGit = (...args) => {
+  console.log(`  $ git ${args.map((arg) => (/\s/.test(arg) ? JSON.stringify(arg) : arg)).join(" ")}`);
+  if (!dryRun) execFileSync("git", args, { stdio: "inherit" });
 };
 
 /** Runs a read-only check, also in a dry run. */
@@ -92,15 +107,23 @@ check("npm test");
 
 // 3. Confirm
 const rl = createInterface({ input: process.stdin, output: process.stdout });
+if (!title) title = (await rl.question("\nRelease title (optional, e.g. Prime Resurgence): ")).trim();
+const message = versionMessage(version, title);
 const answer = await rl.question(
-  `\nRelease v${version} (from v${current}) to ${MAIN}${dryRun ? " [dry run]" : ""}? [y/N] `
+  `\nRelease "v${message}" (from v${current}) to ${MAIN}${dryRun ? " [dry run]" : ""}? [y/N] `
 );
 rl.close();
 if (answer.trim().toLowerCase() !== "y") fail("Cancelled.");
 
-// 4. Version commit and tag on development
+// 4. Version commit and tag on development, with the title in both
+const previousTag = git("describe", "--tags", "--abbrev=0");
+const commits = git("log", `${previousTag}..HEAD`, "--format=%s").split("\n").filter(Boolean);
+
 step(`Creating v${version}`);
-run(`npm version ${bump}`);
+run(`npm version ${bump} --no-git-tag-version`);
+runGit("add", "package.json", "package-lock.json");
+runGit("commit", "-m", message);
+runGit("tag", "-a", `v${version}`, "-m", message);
 run("git push --follow-tags");
 
 // 5. Wait for CI on that commit
@@ -126,5 +149,10 @@ try {
 } finally {
   run(`git switch ${DEVELOP}`);
 }
+
+// 7. GitHub release: prefilled here, reviewed and published by hand
+step("GitHub release");
+const releaseUrl = newReleaseUrl(repo, { tag: `v${version}`, title: `v${message}`, body: draftReleaseNotes(commits) });
+console.log(`  Open this link (Ctrl+click), review the notes and publish:\n  ${releaseUrl}`);
 
 console.log(`\n✓ Released v${version}${dryRun ? " (dry run, nothing changed)" : ""}`);

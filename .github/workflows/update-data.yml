@@ -88,11 +88,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package.json package-lock.json src/data/meleeClasses.json
           git commit -m "chore: update Warframe data"
-          npm version patch
+          npm version patch -m "%s · Warframe data update"
           version="v$(node -p "require('./package.json').version")"
           git push origin development --follow-tags
           git push origin HEAD:master
-          gh release create "$version" --title "$version" --notes-file "$RUNNER_TEMP/notes.md"
+          gh release create "$version" --title "$version · Warframe data update" --notes-file "$RUNNER_TEMP/notes.md"
 
       - name: Report a melee classes failure
         if: steps.melee.outcome == 'failure'

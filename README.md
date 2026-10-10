@@ -98,11 +98,13 @@ GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests and a production bu
 Work happens on `development`; `master` only receives tested, tagged releases. From a clean `development`:
 
 ```bash
-npm run release -- minor            # or patch / major
-npm run release -- minor --dry-run  # show the steps without changing anything
+npm run release -- minor "Prime Resurgence"  # or patch / major; the title is optional
+npm run release -- minor --dry-run           # show the steps without changing anything
 ```
 
-The script (`scripts/release.mjs`) pulls, runs lint and tests, asks for confirmation, runs `npm version` (version commit + tag), pushes `development` with the tag, waits for CI on that commit, and only if CI passes fast-forwards `master` to it and pushes. It always switches back to `development`. Set `GITHUB_TOKEN` to raise the GitHub API rate limit while it waits for CI.
+The script (`scripts/release.mjs`) pulls, runs lint and tests, asks for a title if none was given and for confirmation, creates the version commit and tag (both named like `2.9.0 · Prime Resurgence`), pushes `development` with the tag, waits for CI on that commit, and only if CI passes fast-forwards `master` to it and pushes. It always switches back to `development`. Set `GITHUB_TOKEN` to raise the GitHub API rate limit while it waits for CI.
+
+At the end it prints a link to GitHub's new release page with the tag, the title and a draft of the notes (the `feat`, `fix` and `perf` commits since the last release) already filled in: rewrite the notes for users if needed and publish. The data update workflow creates its releases on its own.
 
 The app shows the build's version in the header, the footer and the Preferences menu, computed at build time from `git describe` (`src/lib/buildVersion.mjs`): `v2.3.0` for a release, `v2.3.0-4-gabc1234` for a build 4 commits later, with `-dirty` if it had uncommitted changes. It links to the release or commit on GitHub, so a screenshot tells you exactly which code it shows.
 
