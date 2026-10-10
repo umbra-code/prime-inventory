@@ -69,7 +69,15 @@ const en = {
   columnSet: "Set",
   columnParts: "Parts",
   noSetsTitle: "No Prime sets found",
-  noSetsHint: "Try adjusting your search filters.",
+  noSetsHint: "Try a different search.",
+  noSetsFilteredHint: "No set matches the active filters.",
+  noSetsSearchFilteredHint: {
+    one: "<b>{count} set</b> matches “{search}”, but the active filters hide it.",
+    other: "<b>{count} sets</b> match “{search}”, but the active filters hide them.",
+  },
+  activeFilters: { one: "{count} filter", other: "{count} filters" },
+  clearFilters: "Clear",
+  clearFiltersLong: "Clear filters",
 
   // Filter and sort options (values are the internal keys)
   "category.Primary": "Primary",
@@ -299,7 +307,15 @@ const es = {
   columnSet: "Set",
   columnParts: "Partes",
   noSetsTitle: "No se encontraron sets Prime",
-  noSetsHint: "Prueba ajustando la búsqueda o los filtros.",
+  noSetsHint: "Prueba con otra búsqueda.",
+  noSetsFilteredHint: "Ningún set coincide con los filtros activos.",
+  noSetsSearchFilteredHint: {
+    one: "<b>{count} set</b> coincide con «{search}», pero los filtros activos lo ocultan.",
+    other: "<b>{count} sets</b> coinciden con «{search}», pero los filtros activos los ocultan.",
+  },
+  activeFilters: { one: "{count} filtro", other: "{count} filtros" },
+  clearFilters: "Quitar",
+  clearFiltersLong: "Quitar filtros",
 
   "category.Primary": "Principal",
   "category.Secondary": "Secundaria",

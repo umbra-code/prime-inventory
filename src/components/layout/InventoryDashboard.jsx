@@ -13,19 +13,23 @@ import { InventoryStateContext } from "@/context/InventoryContext";
 import { PricesContext } from "@/context/PricesContext";
 import { useI18n } from "@/i18n/I18nContext";
 import { getSparePlatinum } from "@/services/prices";
-import { ArrowUpDown, LayoutGrid, Rows3, Search, X } from "lucide-react";
+import { ArrowUpDown, LayoutGrid, Rows3, Search, SlidersHorizontal, X } from "lucide-react";
 import { use, useMemo } from "react";
 
 // Beveled field; the border is an inset shadow so the bevel does not cut it.
 const FIELD =
   "bevel [--cut:6px] h-[38px] rounded-none border-0 bg-oro-surface dark:bg-oro-surface dark:hover:bg-oro-surface text-oro-ink shadow-[inset_0_0_0_1px_var(--oro-line)] hover:shadow-[inset_0_0_0_1px_var(--oro-line-strong)] focus-visible:ring-0 focus-visible:shadow-[inset_0_0_0_1px_var(--oro-gold)]";
 
-function FilterSelect({ value, onValueChange, options, optionLabel, label, icon, className = "" }) {
+// A filter that is narrowing the list is gilded, so it cannot go unnoticed.
+const ACTIVE_FIELD =
+  "!text-oro-gold font-medium !shadow-[inset_0_0_0_1px_var(--oro-gold)] !bg-oro-gold/10 [&>svg]:!text-oro-gold [&>svg]:!opacity-100";
+
+function FilterSelect({ value, onValueChange, options, optionLabel, label, icon, active = false, className = "" }) {
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         aria-label={label}
-        className={`${FIELD} w-full justify-start lg:w-44 data-[size=default]:h-[38px] [&>svg:last-child]:ml-auto ${className}`}
+        className={`${FIELD} w-full justify-start lg:w-44 data-[size=default]:h-[38px] [&>svg:last-child]:ml-auto ${active ? ACTIVE_FIELD : ""} ${className}`}
       >
         {icon}
         <SelectValue />
@@ -38,6 +42,23 @@ function FilterSelect({ value, onValueChange, options, optionLabel, label, icon,
         ))}
       </SelectContent>
     </Select>
+  );
+}
+
+/** "2 filters · Clear": says that the list is narrowed and undoes it in one click. */
+export function ClearFilters({ count, onClear }) {
+  const { t } = useI18n();
+  return (
+    <button
+      type='button'
+      onClick={onClear}
+      className='chip inline-flex cursor-pointer items-center gap-1.5 bg-oro-gold/15 px-2.5 py-1 text-xs font-medium text-oro-gold hover:bg-oro-gold/25'
+    >
+      <SlidersHorizontal className='size-3.5' aria-hidden='true' />
+      {t("activeFilters", { count })}
+      <span aria-hidden='true'>·</span>
+      {t("clearFilters")}
+    </button>
   );
 }
 
@@ -64,6 +85,8 @@ export function InventoryDashboard() {
     catalog,
     summaries,
     filteredSets,
+    activeFilterCount,
+    clearFilters,
     layout,
     setLayout,
   } = use(InventoryStateContext);
@@ -163,6 +186,7 @@ export function InventoryDashboard() {
           <FilterSelect
             label={t("filterCategory")}
             value={selectedCategory}
+            active={selectedCategory !== "All"}
             onValueChange={setSelectedCategory}
             options={categories}
             optionLabel={labelFor("category", "allCategories")}
@@ -171,6 +195,7 @@ export function InventoryDashboard() {
             <FilterSelect
               label={t("filterType")}
               value={selectedType}
+              active={selectedType !== "All"}
               onValueChange={setSelectedType}
               options={types}
               optionLabel={(option) => (option === "All" ? t("allTypes") : t(`type.${option}`, {}, option))}
@@ -179,6 +204,7 @@ export function InventoryDashboard() {
           <FilterSelect
             label={t("filterStatus")}
             value={selectedStatus}
+            active={selectedStatus !== "All"}
             onValueChange={setSelectedStatus}
             options={statusFilters}
             optionLabel={labelFor("status", "allStatuses")}
@@ -186,6 +212,7 @@ export function InventoryDashboard() {
           <FilterSelect
             label={t("filterAvailability")}
             value={selectedAvailability}
+            active={selectedAvailability !== "All"}
             onValueChange={setSelectedAvailability}
             options={availabilityFilters}
             optionLabel={labelFor("availability", "anyAvailability")}
@@ -202,9 +229,10 @@ export function InventoryDashboard() {
       </div>
 
       <div className='flex items-center justify-between gap-3'>
-        <span className='text-sm text-oro-ink-muted'>
-          {t("showing", { shown: filteredSets.length, total: stats.total })}
-        </span>
+        <div className='flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-oro-ink-muted'>
+          <span>{t("showing", { shown: filteredSets.length, total: stats.total })}</span>
+          {activeFilterCount > 0 && <ClearFilters count={activeFilterCount} onClear={clearFilters} />}
+        </div>
         <div role='group' aria-label={t("layoutLabel")} className='flex gap-1'>
           {[
             ["cards", LayoutGrid],

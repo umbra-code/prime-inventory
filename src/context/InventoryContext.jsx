@@ -77,6 +77,13 @@ export function InventoryProvider({ children }) {
   const [selectedStatus, setSelectedStatus] = useState(initialFilters.status);
   const [selectedAvailability, setSelectedAvailability] = useState(initialFilters.availability);
   const [selectedSort, setSelectedSort] = useState(initialFilters.sort);
+  // Search and sorting stay: only what narrows the list is cleared.
+  const clearFilters = useCallback(() => {
+    setCategoryState("All");
+    setSelectedType("All");
+    setSelectedStatus("All");
+    setSelectedAvailability("All");
+  }, []);
   const [layout, setLayout] = useState(initialFilters.layout);
 
   // Read by event handlers without making the actions unstable.
@@ -192,12 +199,14 @@ export function InventoryProvider({ children }) {
       resetInventory: () => replaceAll(emptyUserData(), translate("inventoryReset")),
 
       showSetInInventory: (set) => {
+        // A filter left on would hide the set that was asked for.
+        clearFilters();
         setSearchTerm(set.name);
         setView("inventory");
         window.scrollTo({ top: 0 });
       },
     };
-  }, []);
+  }, [clearFilters]);
 
   const categories = useMemo(() => getCategories(catalog.sets), [catalog]);
   const highlights = useMemo(() => getHighlights(catalog.sets), [catalog]);
@@ -257,6 +266,27 @@ export function InventoryProvider({ children }) {
     ]
   );
 
+  const activeFilterCount = [selectedCategory, effectiveType, selectedStatus, selectedAvailability].filter(
+    (value) => value !== "All"
+  ).length;
+  // How many sets the search would find without the filters, to explain a
+  // short or empty list; null when that is not the question.
+  const searchMatchesWithoutFilters = useMemo(
+    () =>
+      activeFilterCount > 0 && searchTerm.trim()
+        ? filterAndSortSets(catalog.sets, summaries, {
+            search: searchTerm,
+            category: "All",
+            type: "All",
+            status: "All",
+            availability: "All",
+            sort: selectedSort,
+            nameOf: setName,
+          }).length
+        : null,
+    [activeFilterCount, searchTerm, catalog, summaries, selectedSort, setName]
+  );
+
   const state = useMemo(
     () => ({
       catalog,
@@ -281,6 +311,9 @@ export function InventoryProvider({ children }) {
       stats,
       summaries,
       filteredSets,
+      activeFilterCount,
+      searchMatchesWithoutFilters,
+      clearFilters,
       missingParts,
       highlights,
       view,
@@ -303,6 +336,9 @@ export function InventoryProvider({ children }) {
       stats,
       summaries,
       filteredSets,
+      activeFilterCount,
+      searchMatchesWithoutFilters,
+      clearFilters,
       missingParts,
       highlights,
       view,
