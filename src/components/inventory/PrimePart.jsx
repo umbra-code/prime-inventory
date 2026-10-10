@@ -4,6 +4,7 @@ import Image from "next/image";
 import { memo } from "react";
 import { CountStepper, PartStatus } from "./CountStepper";
 import { Ducats } from "./Ducats";
+import { MarketPrice } from "./MarketPrice";
 import { RelicsPopover } from "./RelicsPopover";
 
 export const PrimePart = memo(function PrimePart({ part, count, set }) {
@@ -24,6 +25,7 @@ export const PrimePart = memo(function PrimePart({ part, count, set }) {
         <span className='flex items-center gap-2.5'>
           <Ducats value={part.ducats} label={t("partDucatsLabel")} className='text-[11px] text-oro-ink-muted' />
           <RelicsPopover relics={part.relics} label={label} />
+          <MarketPrice set={set} part={part} className='text-[11px] text-oro-ink-muted' />
         </span>
       </span>
 

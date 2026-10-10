@@ -14,6 +14,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Missing Parts:** a separate tab lists the parts you still need for the sets you have not mastered, grouped by the relics you can open right now (the ones that drop the most of them first), plus the parts that only drop from vaulted relics.
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
+- **Platinum prices:** the recent average price of every set and part on warframe.market, next to its ducat value, so you can tell what is worth selling for platinum and what for ducats. Each price links to the item's page there.
 - **Reset** lives in the Preferences menu under Danger zone, behind a confirmation and with undo.
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **Send to another device:** copy your inventory to another device with a short link or a QR code. The copy is encrypted in your browser and the link works for 15 minutes; afterwards each device keeps its own inventory.
@@ -31,6 +32,8 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Weapon types** come from `@wfcd/items`, except melee classes, which it does not provide: those come from the [Warframe Wiki](https://wiki.warframe.com/w/Module:Weapons/data/melee) into the committed `src/data/meleeClasses.json`. New melee Primes show as "Other Melee" until it is updated.
 - **Vaulted status** combines two `@wfcd/items` sources that each have known errors: a set counts as vaulted only if it is marked vaulted *and* none of its relics currently drop. Relic rarity is derived from the Intact drop chance, because the rarity labels in the data are unreliable.
 - **Prime Resurgence** (Varzia's current offer and its end date) comes live from the [warframestat.us](https://docs.warframestat.us/) world state API and is cached until the rotation ends. Offline or when the API is down, the panel is simply hidden.
+
+- **Platinum prices** are the averages [WFInfo](https://wfinfo.warframestat.us) computes from [warframe.market](https://warframe.market) orders, served by the warframestat.us API as one small file (`/wfinfo/prices/`). The app downloads it at most every 6 hours, keeps it in the browser, and never calls warframe.market itself; the links to it are plain links. Prices are an extra: when they cannot be loaded, they are simply not shown. The footer credits both sources.
 
 ## Send to another device
 
@@ -131,6 +134,7 @@ src/lib/slimCatalog.mjs     Raw @wfcd/items data -> app catalog (shared by build
 src/services/catalog.js     Catalog selection and daily refresh
 src/services/userInventory.js  User data reducer, storage, migrations, backups
 src/services/filters.js     Search, status filters and sorting
+src/services/prices.js      Platinum prices: download, cache, matching to sets and parts
 src/lib/transferCodec.js    Send to another device: compression, encryption and link format
 src/services/transfer*.js   Its browser side (transfer.js) and Blob storage (transferStore.js)
 src/app/api/transfer/       Its route handlers

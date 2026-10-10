@@ -8,6 +8,7 @@ import { Lock } from "lucide-react";
 import Image from "next/image";
 import { memo, use } from "react";
 import { Ducats } from "./Ducats";
+import { MarketPrice } from "./MarketPrice";
 import { PrimePart } from "./PrimePart";
 import { SetToggles } from "./SetToggles";
 
@@ -81,6 +82,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, i
                 label={t("setDucatsLabel")}
                 className='text-xs text-oro-ink-muted'
               />
+              <MarketPrice set={primeSet} className='text-xs text-oro-ink-muted' />
               {summary.spareDucats > 0 && (
                 <Ducats
                   value={summary.spareDucats}

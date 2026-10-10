@@ -7,6 +7,7 @@ import { summarizeSet } from "@/services/userInventory";
 import Image from "next/image";
 import { memo, use } from "react";
 import { CountStepper, PartStatus } from "./CountStepper";
+import { MarketPrice } from "./MarketPrice";
 import { SetToggles } from "./SetToggles";
 
 // Compact layout: one row per set, parts as small steppers, for quick updates
@@ -55,6 +56,7 @@ const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal }) {
             <span className={status === "incomplete" ? "text-oro-ink-muted" : "font-medium"} style={isComplete ? { color: styles.accent } : undefined}>
               {progressLabel(t, summary)}
             </span>
+            <MarketPrice set={set} className='ml-1 shrink-0 text-oro-ink-muted' />
           </div>
         </div>
       </div>
