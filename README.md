@@ -119,7 +119,7 @@ npm run release -- minor "Prime Resurgence"  # or patch / major; the title is op
 npm run release -- minor --dry-run           # show the steps without changing anything
 ```
 
-The script (`scripts/release.mjs`) pulls, runs lint and tests, asks for a title if none was given and for confirmation, creates the version commit and tag (both named like `2.9.0 · Prime Resurgence`), pushes `development` with the tag, waits for CI on that commit, and only if CI passes fast-forwards `master` to it and pushes. It always switches back to `development`. Set `GITHUB_TOKEN` to raise the GitHub API rate limit while it waits for CI.
+The script (`scripts/release.mjs`) pulls, runs lint and tests, asks for a title if none was given and for confirmation, creates the version commit and tag (both named like `2.9.0 · Prime Resurgence`), pushes `development` with the tag, waits for CI on that commit, and only if CI passes fast-forwards `master` to it and pushes. If CI fails for a reason unrelated to the code (a download error, an outage), re-run the job on GitHub and press Enter in the script to check again; do not run the release a second time, since the version already exists. If you stop there, the script prints the commands that finish the release by hand. It always switches back to `development`. Set `GITHUB_TOKEN` to raise the GitHub API rate limit while it waits for CI.
 
 At the end it prints a link to GitHub's new release page with the tag, the title and a draft of the notes (the `feat`, `fix` and `perf` commits since the last release) already filled in: rewrite the notes for users if needed and publish. The data update workflow creates its releases on its own.
 

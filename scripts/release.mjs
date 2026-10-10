@@ -72,7 +72,11 @@ const githubRepo = () => {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/** Waits for the CI run of the pushed commit; resolves to the run, or fails. */
+/**
+ * Waits for the CI run of the pushed commit; resolves to the finished run, or
+ * to null when it does not finish in time. A re-run on GitHub reuses the same
+ * run, so calling this again after one picks up the new attempt.
+ */
 const waitForCi = async (repo, sha) => {
   const headers = { Accept: "application/vnd.github+json" };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
@@ -80,15 +84,36 @@ const waitForCi = async (repo, sha) => {
   const deadline = Date.now() + CI_TIMEOUT_MS;
 
   while (Date.now() < deadline) {
-    const response = await fetch(url, { headers });
-    if (!response.ok) fail(`GitHub API returned ${response.status} while checking CI.`);
-    const [ciRun] = (await response.json()).workflow_runs ?? [];
-    if (ciRun?.status === "completed") return ciRun;
-    process.stdout.write(`  ${ciRun ? ciRun.status : "waiting for the run to start"}…\r`);
+    let status = "GitHub did not answer, trying again";
+    try {
+      const response = await fetch(url, { headers });
+      if (response.ok) {
+        const [ciRun] = (await response.json()).workflow_runs ?? [];
+        if (ciRun?.status === "completed") return ciRun;
+        status = ciRun ? ciRun.status : "waiting for the run to start";
+      } else {
+        status = `GitHub API returned ${response.status}, trying again`;
+      }
+    } catch {
+      // A network hiccup while polling is not a failed release.
+    }
+    process.stdout.write(`  ${status}…          \r`);
     await sleep(CI_POLL_MS);
   }
-  fail("Timed out waiting for CI. Check GitHub Actions, then fast-forward master by hand.");
+  return null;
 };
+
+/** What is left to do by hand once the version is tagged but master was not updated. */
+const finishByHand = (version) =>
+  [
+    `v${version} is already committed, tagged and pushed to ${DEVELOP}; ${MAIN} was not touched.`,
+    "  Do NOT run the release again: that would create another version.",
+    "",
+    "  If CI failed because of the code: fix it and release a patch.",
+    `  If it was a one-off and CI passes after a re-run, finish this release with:`,
+    `    git switch ${MAIN} && git pull --ff-only && git merge --ff-only ${DEVELOP} && git push && git switch ${DEVELOP}`,
+    "  and then publish its GitHub release.",
+  ].join("\n");
 
 // 1. Preconditions
 step("Checking the repository");
@@ -132,11 +157,25 @@ if (dryRun) {
   console.log("  (dry run: skipped)");
 } else {
   const sha = git("rev-parse", "HEAD");
-  const ciRun = await waitForCi(repo, sha);
-  if (ciRun.conclusion !== "success") {
-    fail(`CI ${ciRun.conclusion}: ${ciRun.html_url}\n  ${MAIN} was not touched. Fix it and release a patch.`);
+  // CI can fail for reasons that have nothing to do with the code (a download
+  // error while installing, an outage): those are re-run on GitHub and checked
+  // again here, instead of leaving a tagged version that never reached master.
+  for (;;) {
+    const ciRun = await waitForCi(repo, sha);
+    if (ciRun?.conclusion === "success") {
+      console.log(`  ✓ CI passed: ${ciRun.html_url}`);
+      break;
+    }
+    console.log(ciRun ? `\n  ✗ CI ${ciRun.conclusion}: ${ciRun.html_url}` : "\n  ✗ CI did not finish in time. Check GitHub Actions.");
+    const retry = createInterface({ input: process.stdin, output: process.stdout });
+    const reply = await retry.question(
+      "  If it was a one-off, re-run the failed job on GitHub, then press Enter to check again.\n  Type q to stop here: "
+    );
+    retry.close();
+    if (reply.trim().toLowerCase() === "q") fail(finishByHand(version));
+    // GitHub takes a moment to show a re-run as running again.
+    await sleep(CI_POLL_MS);
   }
-  console.log(`  ✓ CI passed: ${ciRun.html_url}`);
 }
 
 // 6. Fast-forward master to the released commit, then come back

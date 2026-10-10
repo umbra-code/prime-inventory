@@ -49,7 +49,7 @@ jobs:
       - name: Save the current data
         if: steps.sync.outputs.ready == 'true'
         run: |
-          npm ci
+          npm ci || npm ci
           npm run catalog
           node scripts/data-changes.mjs snapshot "$RUNNER_TEMP/before"
 

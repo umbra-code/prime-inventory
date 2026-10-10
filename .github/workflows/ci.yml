@@ -16,7 +16,8 @@ jobs:
           node-version: 24
           cache: npm
 
-      - run: npm ci
+      # Retried once: downloads from the registry fail now and then.
+      - run: npm ci || npm ci
       - run: npm run lint
       - run: npm test
       - run: npm run build
