@@ -10,6 +10,7 @@ const InventoryApp = dynamic(() => import("@/components/layout/InventoryApp"), {
   ssr: false,
   loading: () => (
     <div
+      id='app-loading'
       role='status'
       aria-label='Loading'
       className='flex min-h-screen items-center justify-center bg-oro-bg text-oro-gold'
