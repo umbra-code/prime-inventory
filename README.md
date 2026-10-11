@@ -17,6 +17,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).
 - **Platinum prices:** the recent average price of every set and part on warframe.market, next to its ducat value, so you can tell what is worth selling for platinum and what for ducats. Each price links to the item's page there, and the summary shows what your spare parts add up to.
 - **Reset** lives in the Preferences menu under Danger zone, behind a confirmation and with undo.
+- **History and undo:** the History button lists your recent changes (edits, Build, Sell, imports, resets) and undoes them one step at a time or back to any point, also with Ctrl+Z / Ctrl+Y. It survives reloads, so a mistake noticed later can still be fixed.
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
 - **Send to another device:** copy your inventory to another device with a short link or a QR code. The copy is encrypted in your browser and the link works for 15 minutes; afterwards each device keeps its own inventory.
 - **English and Spanish:** the interface follows your browser language, and item names can stay in English (as on warframe.market) or use the game's own translations. Both are in the Preferences menu, next to the theme.
@@ -35,6 +36,15 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Prime Resurgence** (Varzia's current offer and its end date) comes live from the [warframestat.us](https://docs.warframestat.us/) world state API and is cached until the rotation ends. Offline or when the API is down, the panel is simply hidden.
 
 - **Platinum prices** are the averages [WFInfo](https://wfinfo.warframestat.us) computes from [warframe.market](https://warframe.market) orders, served by the warframestat.us API as one small file (`/wfinfo/prices/`). The app downloads it at most every 6 hours, keeps it in the browser, and never calls warframe.market itself; the links to it are plain links. Prices are an extra: when they cannot be loaded, they are simply not shown. The footer credits both sources.
+
+## Change history
+
+Every change to the inventory is recorded so it can be undone later, not only from the "Undo" in its toast. The inventory and its history are one reducer state (`src/services/history.js`): an action produces the new inventory and, in the same step, its history entry, so there is nothing pending that closing the page could lose.
+
+- **Entries hold only what changed**, with the value before and after (`{ counts: { part: [from, to] }, mastered, arsenal }`), not a copy of the inventory: about 100 bytes each, and the last 50 are kept in `localStorage`.
+- **Quick edits are grouped:** changes to the same set less than 5 seconds apart join one entry (ten clicks on "+" read "Barrel 0 → 10"), and edits that end where they started leave none. Build, Sell, Import, Reset and receiving from another device always get their own entry.
+- **Undo is a position in the list:** undo moves it back, redo forward, and the History menu jumps straight to any entry. Undone entries stay, dimmed, until a new change is made.
+- The history belongs to the device: it is not part of backups or of "Send to another device". Other open tabs share it.
 
 ## Send to another device
 
@@ -135,6 +145,7 @@ src/lib/slimCatalog.mjs     Raw @wfcd/items data -> app catalog (shared by build
 src/services/catalog.js     Catalog selection and daily refresh
 src/services/userInventory.js  User data reducer, storage, migrations, backups
 src/services/filters.js     Search, status filters and sorting
+src/services/history.js     Change history: recording, grouping, undo/redo, storage
 src/services/prices.js      Platinum prices: download, cache, matching to sets and parts
 src/lib/transferCodec.js    Send to another device: compression, encryption and link format
 src/services/transfer*.js   Its browser side (transfer.js) and Blob storage (transferStore.js)

@@ -17,6 +17,7 @@ import {
   statusFilters,
 } from "@/services/filters";
 import { getHighlights } from "@/services/highlights";
+import { HISTORY_KEY, initialInventoryState, inventoryReducer, parseStoredHistory, saveHistory } from "@/services/history";
 import { groupMissingPartsByRelic } from "@/services/missingParts";
 import { sendTransfer } from "@/services/transfer";
 import {
@@ -31,7 +32,6 @@ import {
   STORAGE_KEY,
   summarizeSet,
   toExportFile,
-  userDataReducer,
 } from "@/services/userInventory";
 
 // State changes on every edit; actions are stable so memoized cards that only
@@ -60,9 +60,15 @@ const downloadJson = (data, fileName) => {
   URL.revokeObjectURL(url);
 };
 
+// Ids for history entries; only unique within one browser.
+const newId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
 export function InventoryProvider({ children }) {
   const [catalog, setCatalog] = useState(getInitialCatalog);
-  const [userData, dispatch] = useReducer(userDataReducer, catalog.sets, loadUserData);
+  // The inventory and the history of its changes move together (see services/history.js).
+  const [{ userData, history }, dispatch] = useReducer(inventoryReducer, catalog.sets, (sets) =>
+    initialInventoryState(loadUserData(sets))
+  );
   const { t, setName } = useI18n();
   const [searchTerm, setSearchTerm] = useState("");
   const [view, setView] = useState(loadView);
@@ -87,11 +93,23 @@ export function InventoryProvider({ children }) {
   const [layout, setLayout] = useState(initialFilters.layout);
   const [wide, setWide] = useState(initialFilters.wide);
 
+  // Sets and parts by uniqueName, to name what a history entry changed and to
+  // know which set an edited part belongs to.
+  const catalogIndex = useMemo(() => {
+    const sets = new Map();
+    const parts = new Map();
+    for (const set of catalog.sets) {
+      sets.set(set.uniqueName, set);
+      for (const part of set.components) if (!parts.has(part.uniqueName)) parts.set(part.uniqueName, { part, set });
+    }
+    return { sets, parts };
+  }, [catalog]);
+
   // Read by event handlers without making the actions unstable.
-  const latest = useRef({ userData, catalog, t, setName });
+  const latest = useRef({ userData, catalog, catalogIndex, t, setName });
   useEffect(() => {
-    latest.current = { userData, catalog, t, setName };
-  }, [userData, catalog, t, setName]);
+    latest.current = { userData, catalog, catalogIndex, t, setName };
+  }, [userData, catalog, catalogIndex, t, setName]);
 
   // Data received from another tab is already stored; writing it back could
   // overwrite a newer value that tab saved in the meantime.
@@ -99,6 +117,11 @@ export function InventoryProvider({ children }) {
   useEffect(() => {
     if (userData !== receivedFromStorage.current) saveUserData(userData);
   }, [userData]);
+
+  const historyFromStorage = useRef(null);
+  useEffect(() => {
+    if (history !== historyFromStorage.current) saveHistory(history);
+  }, [history]);
 
   useEffect(() => {
     saveView(view);
@@ -119,10 +142,17 @@ export function InventoryProvider({ children }) {
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
     const onStorage = (event) => {
-      if (event.key !== STORAGE_KEY && event.key !== null) return;
-      const userData = parseStoredUserData(event.newValue, latest.current.catalog.sets);
-      receivedFromStorage.current = userData;
-      dispatch({ type: "replace", userData });
+      if (event.key === HISTORY_KEY || event.key === null) {
+        const history = parseStoredHistory(event.key === null ? null : event.newValue);
+        historyFromStorage.current = history;
+        dispatch({ type: "syncHistory", history });
+      }
+      if (event.key === STORAGE_KEY || event.key === null) {
+        const userData = parseStoredUserData(event.key === null ? null : event.newValue, latest.current.catalog.sets);
+        receivedFromStorage.current = userData;
+        // No cause: the tab that made the change already recorded it.
+        dispatch({ type: "replace", userData });
+      }
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
@@ -143,6 +173,9 @@ export function InventoryProvider({ children }) {
     const nameOf = (set) => latest.current.setName(set);
     const undoable = (message, undo) =>
       toast.success(message, { action: { label: translate("undo"), onClick: undo } });
+    // Recorded actions carry an id and the time, which the reducer cannot make up itself.
+    const record = (action) => dispatch({ id: newId(), ...action, at: Date.now() });
+    const setOf = (partUniqueName) => latest.current.catalogIndex.parts.get(partUniqueName)?.set.uniqueName;
 
     // Build and Sell only touch one set, so undo restores just that set
     // instead of discarding edits made after the toast appeared.
@@ -154,21 +187,31 @@ export function InventoryProvider({ children }) {
         isMastered: Boolean(mastered[set.uniqueName]),
         inArsenal: Boolean(arsenal[set.uniqueName]),
       };
-      dispatch({ type, set });
-      undoable(message, () => dispatch({ type: "restoreSet", set, ...previous }));
+      const id = newId();
+      record({ type, set, id });
+      undoable(message, () => record({ type: "undoEntry", entryId: id, fallback: { type: "restoreSet", set, ...previous } }));
     };
 
-    const replaceAll = (userData, message) => {
+    const replaceAll = (userData, message, cause) => {
       const previous = latest.current.userData;
-      dispatch({ type: "replace", userData });
-      undoable(message, () => dispatch({ type: "replace", userData: previous }));
+      const id = newId();
+      record({ type: "replace", userData, cause, id });
+      undoable(message, () =>
+        record({ type: "undoEntry", entryId: id, fallback: { type: "replace", userData: previous, cause: "revert" } })
+      );
     };
 
     return {
-      updatePart: (uniqueName, count) => dispatch({ type: "setCount", uniqueName, count }),
-      adjustPart: (uniqueName, delta) => dispatch({ type: "adjustCount", uniqueName, delta }),
-      toggleMastery: (set) => dispatch({ type: "toggleMastery", set }),
-      toggleArsenal: (set) => dispatch({ type: "toggleArsenal", set }),
+      updatePart: (uniqueName, count) => record({ type: "setCount", uniqueName, count, group: setOf(uniqueName) }),
+      adjustPart: (uniqueName, delta) => record({ type: "adjustCount", uniqueName, delta, group: setOf(uniqueName) }),
+      toggleMastery: (set) => record({ type: "toggleMastery", set }),
+      toggleArsenal: (set) => record({ type: "toggleArsenal", set }),
+
+      // Change history: one step back or forward, or straight to a point.
+      undo: () => dispatch({ type: "undo" }),
+      redo: () => dispatch({ type: "redo" }),
+      goToHistory: (position) => dispatch({ type: "goTo", position }),
+      clearHistory: () => dispatch({ type: "clearHistory" }),
       build: (set) => consumeSet("build", set, translate("built", { name: nameOf(set) })),
       sell: (set) => consumeSet("sell", set, translate("sold", { name: nameOf(set) })),
 
@@ -183,7 +226,7 @@ export function InventoryProvider({ children }) {
           const raw = JSON.parse(await file.text());
           const imported = normalizeUserData(raw, latest.current.catalog.sets);
           if (!imported) throw new Error("Unrecognized inventory format");
-          replaceAll(imported, translate("imported", { file: file.name }));
+          replaceAll(imported, translate("imported", { file: file.name }), "import");
         } catch (error) {
           console.error("Failed to import inventory:", error);
           toast.error(translate("importFailed", { file: file.name }), {
@@ -196,9 +239,9 @@ export function InventoryProvider({ children }) {
       sendInventory: () => sendTransfer(toExportFile(latest.current.userData)),
       /** The inventory in data received from a link, or null if it is not one. */
       readReceivedInventory: (raw) => normalizeUserData(raw, latest.current.catalog.sets),
-      applyReceivedInventory: (userData) => replaceAll(userData, translate("transferImported")),
+      applyReceivedInventory: (userData) => replaceAll(userData, translate("transferImported"), "receive"),
 
-      resetInventory: () => replaceAll(emptyUserData(), translate("inventoryReset")),
+      resetInventory: () => replaceAll(emptyUserData(), translate("inventoryReset"), "reset"),
 
       showSetInInventory: (set) => {
         // A filter left on would hide the set that was asked for.
@@ -292,7 +335,9 @@ export function InventoryProvider({ children }) {
   const state = useMemo(
     () => ({
       catalog,
+      catalogIndex,
       userData,
+      history,
       searchTerm,
       setSearchTerm,
       selectedCategory,
@@ -327,7 +372,9 @@ export function InventoryProvider({ children }) {
     }),
     [
       catalog,
+      catalogIndex,
       userData,
+      history,
       searchTerm,
       selectedCategory,
       setSelectedCategory,

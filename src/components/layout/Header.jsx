@@ -11,6 +11,7 @@ import { AppVersion } from "./AppVersion";
 import { OfflineBadge } from "./OfflineBadge";
 import { PreferencesMenu } from "./PreferencesMenu";
 import { ExportMenu } from "./ExportMenu";
+import { HistoryMenu } from "./HistoryMenu";
 
 export function Header() {
   const { importInventory } = use(InventoryActionsContext);
@@ -44,6 +45,7 @@ export function Header() {
           {/* Main actions: labels collapse to icons on small screens */}
           <div className='flex shrink-0 items-center gap-1.5 sm:gap-2'>
             <PreferencesMenu />
+            <HistoryMenu />
             <Button variant='outline' onClick={importInventory} size='sm' aria-label={t("importInventory")}>
               <Upload />
               <span className='hidden md:inline'>{t("import")}</span>
