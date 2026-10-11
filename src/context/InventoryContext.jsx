@@ -85,6 +85,7 @@ export function InventoryProvider({ children }) {
     setSelectedAvailability("All");
   }, []);
   const [layout, setLayout] = useState(initialFilters.layout);
+  const [wide, setWide] = useState(initialFilters.wide);
 
   // Read by event handlers without making the actions unstable.
   const latest = useRef({ userData, catalog, t, setName });
@@ -111,8 +112,9 @@ export function InventoryProvider({ children }) {
       availability: selectedAvailability,
       sort: selectedSort,
       layout,
+      wide,
     });
-  }, [selectedCategory, selectedType, selectedStatus, selectedAvailability, selectedSort, layout]);
+  }, [selectedCategory, selectedType, selectedStatus, selectedAvailability, selectedSort, layout, wide]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
@@ -320,6 +322,8 @@ export function InventoryProvider({ children }) {
       setView,
       layout,
       setLayout,
+      wide,
+      setWide,
     }),
     [
       catalog,
@@ -343,6 +347,7 @@ export function InventoryProvider({ children }) {
       highlights,
       view,
       layout,
+      wide,
     ]
   );
 

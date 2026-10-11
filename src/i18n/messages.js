@@ -42,6 +42,9 @@ const en = {
   "tab.missing": "Missing Parts",
 
   // Dashboard
+  widthLabel: "Page width",
+  "width.centered": "Centered",
+  "width.full": "Full width",
   "stat.ready": "Ready to Build",
   "stat.extra": "Extra Sets",
   "stat.mastered": "Mastered",
@@ -247,6 +250,9 @@ const es = {
   "tab.inventory": "Inventario",
   "tab.missing": "Partes faltantes",
 
+  widthLabel: "Ancho de página",
+  "width.centered": "Centrado",
+  "width.full": "Ancho completo",
   "stat.ready": "Listos para construir",
   "stat.extra": "Sets extra",
   "stat.mastered": "Masterizados",

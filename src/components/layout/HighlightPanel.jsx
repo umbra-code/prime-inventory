@@ -11,7 +11,7 @@ import { use, useState } from "react";
 
 // On phones each list of sets is a horizontal strip, so the panels stay short.
 export const SET_LIST =
-  "-mx-1 flex snap-x gap-1 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0";
+  "-mx-1 flex snap-x gap-1 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:group-data-[wide=true]/app:grid-cols-[repeat(auto-fill,minmax(250px,1fr))]";
 
 const loadOpen = (storageKey) => {
   try {

@@ -66,7 +66,7 @@ export function InventoryGrid() {
   if (layout === "table") return <InventoryTable sets={sets} />;
 
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'>
+    <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3 group-data-[wide=true]/app:grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))]'>
       {sets.map((primeSet) => {
         const { owned, isMastered, inArsenal } = summaries.get(primeSet.uniqueName);
         return (

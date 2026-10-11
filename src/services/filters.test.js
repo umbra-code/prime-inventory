@@ -126,15 +126,15 @@ describe("saved filters", () => {
 
   it("round-trips valid filters", () => {
     vi.stubGlobal("localStorage", createStorage());
-    const filters = { category: "Primary", type: "Bow", status: "Extra Sets", availability: "Vaulted", sort: "Progress", layout: "table" };
+    const filters = { category: "Primary", type: "Bow", status: "Extra Sets", availability: "Vaulted", sort: "Progress", layout: "table", wide: true };
     saveFilters(filters);
     expect(loadFilters(getCategories(catalogSets))).toEqual(filters);
   });
 
   it("falls back to defaults for unknown or missing values", () => {
     vi.stubGlobal("localStorage", createStorage());
-    saveFilters({ category: "Gone", status: "Buildable", availability: "Maybe", sort: "Random", layout: "grid" });
-    expect(loadFilters(["All"])).toEqual({ category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards" });
+    saveFilters({ category: "Gone", status: "Buildable", availability: "Maybe", sort: "Random", layout: "grid", wide: "yes" });
+    expect(loadFilters(["All"])).toEqual({ category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards", wide: false });
   });
 
   it("survives storage being unavailable", () => {
@@ -147,6 +147,6 @@ describe("saved filters", () => {
       },
     });
     expect(() => saveFilters({ category: "All", status: "All", sort: "Name" })).not.toThrow();
-    expect(loadFilters(["All"])).toEqual({ category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards" });
+    expect(loadFilters(["All"])).toEqual({ category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards", wide: false });
   });
 });

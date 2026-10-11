@@ -162,7 +162,7 @@ export function MissingPartsView() {
       </div>
 
       {relics.length > 0 && (
-        <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 group-data-[wide=true]/app:grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))]'>
           {relics.map((relic) => (
             <RelicCard key={relic.name} relic={relic} />
           ))}

@@ -7,6 +7,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Inventory at a glance:** every Prime set with its parts, owned vs. required counts and a progress bar.
 - **Mastery and arsenal tracking:** mark sets as mastered, and separately whether you still keep them built (In Arsenal). Sets you can build again show up as extra sets.
 - **Cards or table:** browse sets as detailed cards, or switch to a compact table (one row per set) to update many counts quickly. The choice is remembered.
+- **Full width:** on a wide screen, switch the page from a centered column to the full width of the window (Preferences → Page width) to fit more cards per row.
 - **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered and in your arsenal).
 - **Now in Game:** a collapsible panel with the newest Primes and the vaulted Primes whose relics drop again, computed from the catalog. Click one to jump to it.
 - **Prime Resurgence:** a second panel with the Primes Varzia sells right now and the exact end of the rotation. In both panels, sets you have already mastered get a thin frame and a check, keep their progress, and go last.

@@ -21,7 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { InventoryActionsContext } from "@/context/InventoryContext";
+import { InventoryActionsContext, InventoryStateContext } from "@/context/InventoryContext";
 import { useI18n } from "@/i18n/I18nContext";
 import { AppVersion } from "./AppVersion";
 import { Monitor, Moon, RotateCcw, Settings2, Sun } from "lucide-react";
@@ -35,7 +35,7 @@ const THEMES = [
 ];
 
 /**
- * Theme, interface language and item name language in one menu, plus the
+ * Theme, page width, interface language and item name language in one menu, plus the
  * inventory reset, kept here rather than in the header because it wipes
  * everything.
  */
@@ -43,6 +43,7 @@ export function PreferencesMenu() {
   const { theme = "system", setTheme } = useTheme();
   const { t, locale, setLocale, itemNames, setItemNames, languages } = useI18n();
   const { resetInventory } = use(InventoryActionsContext);
+  const { wide, setWide } = use(InventoryStateContext);
   const [confirmingReset, setConfirmingReset] = useState(false);
 
   return (
@@ -62,6 +63,13 @@ export function PreferencesMenu() {
                 {t(`theme.${value}`)}
               </DropdownMenuRadioItem>
             ))}
+          </DropdownMenuRadioGroup>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>{t("widthLabel")}</DropdownMenuLabel>
+          <DropdownMenuRadioGroup value={wide ? "full" : "centered"} onValueChange={(value) => setWide(value === "full")}>
+            <DropdownMenuRadioItem value='centered'>{t("width.centered")}</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value='full'>{t("width.full")}</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
 
           <DropdownMenuSeparator />

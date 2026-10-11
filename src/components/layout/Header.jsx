@@ -23,7 +23,7 @@ export function Header() {
         aria-hidden='true'
         className='oro-diamond absolute -bottom-[5px] left-1/2 -translate-x-1/2 bg-oro-gold'
       />
-      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+      <div className='mx-auto max-w-7xl group-data-[wide=true]/app:max-w-none px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between gap-3'>
           {/* Logo and title */}
           <div className='flex min-w-0 items-center gap-3'>
