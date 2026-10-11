@@ -3,17 +3,17 @@
 import { Button } from "@/components/ui/button";
 import { InventoryActionsContext } from "@/context/InventoryContext";
 import { GithubIcon } from "@/components/icons/GithubIcon";
-import { Download, Upload } from "lucide-react";
+import { Upload } from "lucide-react";
 import Image from "next/image";
 import { use } from "react";
 import { useI18n } from "@/i18n/I18nContext";
 import { AppVersion } from "./AppVersion";
 import { OfflineBadge } from "./OfflineBadge";
 import { PreferencesMenu } from "./PreferencesMenu";
-import { SendToDevice } from "./SendToDevice";
+import { ExportMenu } from "./ExportMenu";
 
 export function Header() {
-  const { importInventory, exportInventory } = use(InventoryActionsContext);
+  const { importInventory } = use(InventoryActionsContext);
   const { t } = useI18n();
 
   return (
@@ -44,15 +44,11 @@ export function Header() {
           {/* Main actions: labels collapse to icons on small screens */}
           <div className='flex shrink-0 items-center gap-1.5 sm:gap-2'>
             <PreferencesMenu />
-            <SendToDevice />
             <Button variant='outline' onClick={importInventory} size='sm' aria-label={t("importInventory")}>
               <Upload />
               <span className='hidden md:inline'>{t("import")}</span>
             </Button>
-            <Button onClick={exportInventory} size='sm' aria-label={t("exportInventory")}>
-              <Download />
-              <span className='hidden md:inline'>{t("export")}</span>
-            </Button>
+            <ExportMenu />
             <Button asChild variant='outline' size='icon' className='hidden size-8 sm:inline-flex'>
               <a
                 href='https://github.com/umbra-code/prime-inventory'

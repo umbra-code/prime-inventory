@@ -13,6 +13,7 @@ const en = {
   importInventory: "Import inventory",
   export: "Export",
   exportInventory: "Export inventory",
+  exportFile: "Download a backup file",
   reset: "Reset",
   resetInventory: "Reset inventory",
   resetInventoryMenu: "Reset inventory…",
@@ -183,7 +184,6 @@ const en = {
 
   // Send to another device
   sendToDevice: "Send to another device",
-  sendToDeviceShort: "Send",
   sendIntro:
     "Creates a link that copies this inventory to another device. Afterwards each device keeps its own inventory: later changes are not synced.",
   sendPrivacy: "The copy is encrypted in your browser, can only be opened with the link, and is deleted after {minutes} minutes.",
@@ -223,6 +223,7 @@ const es = {
   importInventory: "Importar inventario",
   export: "Exportar",
   exportInventory: "Exportar inventario",
+  exportFile: "Descargar un archivo de respaldo",
   reset: "Reiniciar",
   resetInventory: "Reiniciar inventario",
   resetInventoryMenu: "Reiniciar inventario…",
@@ -418,7 +419,6 @@ const es = {
   inventoryReset: "Inventario reiniciado",
 
   sendToDevice: "Enviar a otro dispositivo",
-  sendToDeviceShort: "Enviar",
   sendIntro:
     "Crea un enlace que copia este inventario a otro dispositivo. Después cada dispositivo sigue con su propio inventario: los cambios posteriores no se sincronizan.",
   sendPrivacy: "La copia se cifra en tu navegador, solo se puede abrir con el enlace y se borra a los {minutes} minutos.",
