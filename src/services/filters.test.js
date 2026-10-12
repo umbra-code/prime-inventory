@@ -38,6 +38,8 @@ describe("matchesStatus", () => {
     ["Almost Complete", { status: "ready", progress: 100 }, false],
     ["Incomplete", { status: "incomplete", progress: 0 }, true],
     ["Mastered", { status: "incomplete", isMastered: true }, true],
+    ["Not Mastered", { status: "incomplete", isMastered: true }, false],
+    ["Not Mastered", { status: "ready", isMastered: false }, true],
     ["All", { status: "incomplete" }, true],
   ])("%s matches %j: %s", (filter, summary, expected) => {
     expect(matchesStatus(filter, summary)).toBe(expected);
@@ -60,6 +62,8 @@ describe("filterAndSortSets", () => {
     expect(query({ category: "Primary" })).toEqual(["Braton Prime"]);
     expect(query({ status: "Almost Complete" })).toEqual(["Braton Prime"]);
     expect(query({ status: "Mastered" })).toEqual(["Akbronco Prime", "Braton Prime"]);
+    expect(query({ status: "Not Mastered" })).not.toContain("Akbronco Prime");
+    expect(query({ status: "Not Mastered" })).toContain("Ash Prime");
   });
 
   it("filters by weapon type", () => {

@@ -11,7 +11,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Build and Sell:** consume a full set of parts in one click (Build also marks the set as mastered and in your arsenal).
 - **Now in Game:** a collapsible panel with the newest Primes and the vaulted Primes whose relics drop again, computed from the catalog. Click one to jump to it.
 - **Prime Resurgence:** a second panel with the Primes Varzia sells right now and the exact end of the rotation. In both panels, sets you have already mastered get a thin frame and a check, keep their progress, and go last.
-- **Search, filters and sorting:** by name, category, weapon type (Rifle, Bow, Nikana, Heavy Blade…), status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
+- **Search, filters and sorting:** by name, category, weapon type (Rifle, Bow, Nikana, Heavy Blade…), status (Ready to Build, Extra Sets, Almost Complete, Incomplete, Mastered, Not Mastered, In Arsenal) and relic availability (vaulted or not); sort by name, progress, ready first or spare ducats.
 - **Missing Parts:** a separate tab lists the parts you still need for the sets you have not mastered, grouped by the relics you can open right now (the ones that drop the most of them first), plus the parts that only drop from vaulted relics.
 - **Relics:** every part lists the relics it drops from, with its rarity, and highlights the relics that can be farmed right now.
 - **Ducats:** the ducat value of every part and set, plus how many ducats your spare parts are worth (every part of a mastered set, or the parts above what a set needs).

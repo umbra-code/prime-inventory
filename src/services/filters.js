@@ -11,6 +11,7 @@ export const statusFilters = [
   "Almost Complete",
   "Incomplete",
   "Mastered",
+  "Not Mastered",
   "In Arsenal",
 ];
 
@@ -26,6 +27,9 @@ export const matchesStatus = (filter, { status, progress, isMastered, inArsenal 
       return status === "incomplete";
     case "Mastered":
       return isMastered;
+    // What is still left to level for mastery rank, whatever its parts.
+    case "Not Mastered":
+      return !isMastered;
     case "In Arsenal":
       return inArsenal;
     default:
