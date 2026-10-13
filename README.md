@@ -2,6 +2,8 @@
 
 A Warframe Prime parts tracker. Count the parts you own, see which sets are ready to build, and keep track of what you have mastered. Your inventory never leaves your browser.
 
+**Use it at [prime-inventory-lovat.vercel.app](https://prime-inventory-lovat.vercel.app).** There is nothing to install and no account to create; the rest of this page is for people who want to see how it works, run their own copy or contribute.
+
 ## Features
 
 - **Inventory at a glance:** every Prime set with its parts, owned vs. required counts and a progress bar.
@@ -82,16 +84,52 @@ Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo 
 - Two small route handlers and Vercel Blob for [Send to another device](#send-to-another-device); everything else is static
 - JavaScript (no TypeScript)
 
-## Getting started
+## Running it on your computer
+
+You only need this to change the code or to keep a private copy; to use the app, open the link at the top.
+
+**What you need**
+
+- [Node.js](https://nodejs.org/) 20.9 or newer (the LTS version from the website is fine). It includes `npm`. To check, open a terminal and run `node --version`.
+- The code: either install [Git](https://git-scm.com/) and clone the repository as shown below, or use the green **Code** button on GitHub → **Download ZIP** and unzip it.
+
+**Steps**, in a terminal (on Windows: PowerShell or the terminal of your editor):
 
 ```bash
-git clone https://github.com/umbra-code/prime-inventory.git
-cd prime-inventory
-npm install
-npm run dev
+git clone https://github.com/umbra-code/prime-inventory.git   # skip if you downloaded the ZIP
+cd prime-inventory        # the folder with package.json
+npm install               # downloads the dependencies; takes a minute the first time
+npm run dev               # starts the app
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
+Then open [http://localhost:3000](http://localhost:3000) in your browser. Leave the terminal open while you use it and press Ctrl+C there to stop it. Changes to the code show up in the browser as you save.
+
+Nothing else has to be configured. The item catalog is generated on its own when the app starts, and your inventory is stored by the browser for that address, so the copy on `localhost` starts empty: use Export on the public site and Import here to bring your data. The only feature that needs setup is [Send to another device](#send-to-another-device); without it, that option says it is not available and everything else works.
+
+**If something fails**
+
+- `npm` or `node` "is not recognized" / "command not found": Node.js is not installed, or the terminal was open before installing it. Install it and open a new terminal.
+- An error about the Node version or unsupported syntax: update Node.js to 20.9 or newer.
+- "Port 3000 is in use": another program is using it. Run `npm run dev -- -p 3001` and open `http://localhost:3001`.
+
+## Deploying your own copy
+
+The app is a regular Next.js project, so any host that runs Next.js works. With [Vercel](https://vercel.com/), which is free for personal, non-commercial projects:
+
+1. Fork this repository on GitHub (the **Fork** button).
+2. In Vercel, choose **Add New → Project**, import your fork and press **Deploy**. No settings need to change.
+3. Optional, for "Send to another device": in the Vercel project, open **Storage**, create a **Blob** store with **Private** access and connect it to the project, then redeploy. See [Send to another device](#send-to-another-device).
+
+Things in the code that point to this deployment and should be changed in yours:
+
+- `SITE_URL` in `src/lib/site.js`: the address used in link previews, `robots.txt` and `sitemap.xml`.
+- `public/google*.html`: this site's Google Search Console verification; delete it.
+- The GitHub links in `src/components/layout/Header.jsx` and `src/lib/buildVersion.mjs`, if you want them to point to your fork.
+- `.github/workflows/update-data.yml` updates the Warframe data daily and releases on its own, following this repository's `development` → `master` flow (see [Releasing](#releasing)). Keep the two branches, or delete the workflow and update `@wfcd/items` by hand.
+
+Warframe content belongs to Digital Extremes, whose [content policy](https://www.warframe.com/contentpolicy) asks fan projects to stay non-commercial: do not charge for access to your copy.
+
+## Development
 
 ### Scripts
 
