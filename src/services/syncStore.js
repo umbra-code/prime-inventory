@@ -1,4 +1,4 @@
-import { neon } from "@neondatabase/serverless";
+import { connect } from "@/services/postgres";
 
 // Server side of device sync: one row per group of paired devices, holding
 // their inventory encrypted with a key the server never sees (see
@@ -20,18 +20,13 @@ const STALE_AFTER = "400 days";
 
 export class SyncStoreFullError extends Error {}
 
-/**
- * False when the deployment has no database connected (e.g. a fork).
- * DATABASE_URL must be a Neon database: the driver talks to Neon's HTTPS
- * endpoint, not to Postgres directly.
- */
+/** False when the deployment has no database connected (e.g. a fork). */
 export const isSyncStoreConfigured = () => Boolean(process.env.DATABASE_URL);
 
 let ready = null;
 // The table is created on first use, so a new deployment needs no setup step.
 const database = async () => {
-  // One time budget for all the queries of a request.
-  const sql = neon(process.env.DATABASE_URL, { fetchOptions: { signal: AbortSignal.timeout(QUERY_TIMEOUT_MS) } });
+  const sql = connect(process.env.DATABASE_URL, { timeoutMs: QUERY_TIMEOUT_MS });
   ready ??= sql`
     CREATE TABLE IF NOT EXISTS sync_inventories (
       id text PRIMARY KEY,

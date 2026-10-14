@@ -59,7 +59,7 @@ Optional, and an extra on top of the local inventory: every device keeps its own
 - **Merging is per value.** Each device keeps the last copy it agreed on with the server (`base`). What it changed since is the difference between `base` and its inventory, which is put back on top of the downloaded copy inside the reducer (`mergeSynced` in `src/services/history.js`). Edits to different parts on two devices both survive; when both changed the same part, the device that syncs last wins. A merge is a History entry, so it can be undone.
 - **When it syncs:** on opening the app, on coming back to the tab, when the connection returns, and a moment after the inventory changes. It never polls on a timer, because the free database sleeps when idle and a tab checking every few minutes would keep it awake all month. With several tabs open only one of them syncs (Web Locks); the others share the inventory through `localStorage` as before.
 
-It needs a [Neon](https://neon.com/) Postgres database in `DATABASE_URL` (the free plan is enough; this deployment gets it through Vercel). It has to be Neon: the driver talks to Neon's HTTPS endpoint, not to Postgres directly, so another Postgres server would need `src/services/syncStore.js` changed to use a different client. The table is created on first use, so there are no migrations to run. If the database does not answer within 8 seconds (a wrong address, an outage), the server reports sync as unavailable and the devices try again later. Groups not written to for over a year are removed; a device that comes back simply uploads its copy again.
+It needs a Postgres database in `DATABASE_URL`; any will do. This deployment uses [Neon](https://neon.com/)'s free plan through Vercel, chosen because an idle database there goes to sleep and wakes on its own, instead of being paused or deleted. The client is picked from the address (`src/services/postgres.js`): Neon's own driver, which sends queries over HTTPS, for `*.neon.tech`, and the standard `pg` client for everything else; `DATABASE_DRIVER=neon` or `pg` overrides that. The table is created on first use, so there are no migrations to run. If the database does not answer within 8 seconds (a wrong address, an outage), the server reports sync as unavailable and the devices try again later. Groups not written to for over a year are removed; a device that comes back simply uploads its copy again.
 
 ## Send to another device
 
@@ -132,7 +132,7 @@ The app is a regular Next.js project, so any host that runs Next.js works. With 
 1. Fork this repository on GitHub (the **Fork** button).
 2. In Vercel, choose **Add New → Project**, import your fork and press **Deploy**. No settings need to change.
 3. Optional, for "Send to another device": in the Vercel project, open **Storage**, create a **Blob** store with **Private** access and connect it to the project, then redeploy. See [Send to another device](#send-to-another-device).
-4. Optional, for sync between devices: in **Storage**, create a **Neon** Postgres database (the free plan is enough) and connect it, then redeploy. See [Sync between devices](#sync-between-devices).
+4. Optional, for sync between devices: in **Storage**, create a **Neon** Postgres database (the free plan is enough) and connect it, then redeploy. Any other Postgres works too: set its address in `DATABASE_URL`. See [Sync between devices](#sync-between-devices).
 
 Things in the code that point to this deployment and should be changed in yours:
 
@@ -204,6 +204,7 @@ src/services/transfer*.js   Its browser side (transfer.js) and Blob storage (tra
 src/app/api/transfer/       Its route handlers
 src/lib/syncCodec.js        Sync between devices: pairing secret, derived id and key, encryption
 src/services/sync*.js       Its browser side (sync.js) and database (syncStore.js)
+src/services/postgres.js    Database connection: Neon's driver or the standard client, by address
 src/context/SyncContext.jsx When it syncs, and the state shown by the header's cloud
 src/app/api/sync/           Its route handler
 src/i18n/                   UI strings, translator and language context
