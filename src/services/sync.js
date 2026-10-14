@@ -17,6 +17,8 @@ import { diffUserData } from "@/services/history";
 
 const STATE_KEY = "primeInventorySync";
 const ENDPOINT = "/api/sync";
+// Longer than the server's own limit, so its "unavailable" answer normally arrives first.
+const REQUEST_TIMEOUT_MS = 15000;
 
 /** `reason`: "offline", "unavailable" (no database, or it is paused), "full" or "invalid". */
 export class SyncError extends Error {
@@ -55,9 +57,10 @@ export const newSyncState = (secret) => ({ secret, version: 0, base: null, synce
 const request = async (url, options) => {
   let response;
   try {
-    response = await fetch(url, { ...options, cache: "no-store" });
+    response = await fetch(url, { ...options, cache: "no-store", signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
   } catch {
-    throw new SyncError("offline");
+    // No answer at all: the device is offline, or the server did not reply in time.
+    throw new SyncError(navigator.onLine === false ? "offline" : "unavailable");
   }
   if (response.status === 503) {
     const { error } = await response.json().catch(() => ({}));
