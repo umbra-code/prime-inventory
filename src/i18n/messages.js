@@ -256,7 +256,7 @@ const en = {
   "sync.intro":
     "Keep the same inventory on your phone and your computer: a change on one shows up on the other. No account needed; you pair devices with a code.",
   "sync.turnOn": "Turn on sync",
-  "sync.turnOff": "Turn off here",
+  "sync.turnOff": "Turn off sync on this device",
   "sync.now": "Sync now",
   "sync.addDevice": "Add a device",
   "sync.pairHint": "Scan this code, or open the link, on the device you want to add. Its inventory will be replaced by this one.",
@@ -547,7 +547,7 @@ const es = {
   "sync.intro":
     "Mantén el mismo inventario en tu celular y tu computador: un cambio en uno aparece en el otro. Sin cuenta; los dispositivos se emparejan con un código.",
   "sync.turnOn": "Activar sincronización",
-  "sync.turnOff": "Desactivar aquí",
+  "sync.turnOff": "Desactivar en este dispositivo",
   "sync.now": "Sincronizar ahora",
   "sync.addDevice": "Agregar un dispositivo",
   "sync.pairHint": "Escanea este código, o abre el enlace, en el dispositivo que quieres agregar. Su inventario será reemplazado por este.",

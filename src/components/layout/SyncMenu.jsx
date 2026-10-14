@@ -147,17 +147,24 @@ export function SyncMenu() {
                 {pairing ? (
                   <PairingCode link={pairingLink} />
                 ) : (
-                  <div className='flex flex-wrap gap-2'>
-                    <Button size='sm' onClick={() => setPairing(true)}>
-                      {t("sync.addDevice")}
-                    </Button>
-                    <Button size='sm' variant='outline' onClick={syncNow} disabled={status === "syncing"}>
-                      {t("sync.now")}
-                    </Button>
-                    <Button size='sm' variant='outline' onClick={disable} className='ml-auto'>
+                  <>
+                    <div className='flex flex-wrap gap-2'>
+                      <Button size='sm' onClick={() => setPairing(true)}>
+                        {t("sync.addDevice")}
+                      </Button>
+                      <Button size='sm' variant='outline' onClick={syncNow} disabled={status === "syncing"}>
+                        {t("sync.now")}
+                      </Button>
+                    </div>
+                    {/* Set apart and quieter: it is not an everyday action. */}
+                    <button
+                      type='button'
+                      onClick={disable}
+                      className='justify-self-start text-xs text-oro-ink-muted underline-offset-2 hover:text-oro-danger hover:underline'
+                    >
                       {t("sync.turnOff")}
-                    </Button>
-                  </div>
+                    </button>
+                  </>
                 )}
               </>
             ) : (
