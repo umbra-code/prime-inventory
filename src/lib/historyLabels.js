@@ -16,7 +16,7 @@ export const describeEntry = (entry, catalogIndex, { t, setName, partName }) => 
   const total = countChanges(entry);
 
   // Whole-inventory changes are summed up, not listed.
-  if (["import", "receive", "reset"].includes(entry.type)) {
+  if (["import", "receive", "reset", "sync"].includes(entry.type)) {
     return { title: t(`history.${entry.type}`), details: [t("history.changes", { count: total })], more: 0 };
   }
 

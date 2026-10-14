@@ -7,6 +7,7 @@ import { ReceiveFromDevice } from "@/components/layout/ReceiveFromDevice";
 import { Toaster } from "@/components/ui/sonner";
 import { InventoryProvider, InventoryStateContext } from "@/context/InventoryContext";
 import { PricesProvider } from "@/context/PricesContext";
+import { SyncProvider } from "@/context/SyncContext";
 import { I18nProvider } from "@/i18n/I18nContext";
 import { use } from "react";
 
@@ -35,9 +36,11 @@ export default function InventoryApp() {
     <I18nProvider>
       <InventoryProvider>
         <PricesProvider>
-          <AppShell />
-          <ReceiveFromDevice />
-          <Toaster position='bottom-right' richColors closeButton />
+          <SyncProvider>
+            <AppShell />
+            <ReceiveFromDevice />
+            <Toaster position='bottom-right' richColors closeButton />
+          </SyncProvider>
         </PricesProvider>
       </InventoryProvider>
     </I18nProvider>

@@ -22,7 +22,7 @@ const HISTORY_VERSION = 1;
 
 const FIELDS = ["counts", "mastered", "arsenal"];
 const EMPTY_VALUE = { counts: 0, mastered: false, arsenal: false };
-const ENTRY_TYPES = ["edit", "build", "sell", "import", "receive", "reset", "revert"];
+const ENTRY_TYPES = ["edit", "build", "sell", "import", "receive", "reset", "revert", "sync"];
 
 export const emptyHistory = () => ({ entries: [], position: 0 });
 
@@ -92,6 +92,17 @@ const applyChanges = (userData, changes, index) => {
   return next;
 };
 
+/**
+ * Device sync: the inventory another device uploaded (`remote`), with what
+ * this device changed since they last agreed (`base`) put back on top. Each
+ * value is merged on its own, so edits to different parts both survive; when
+ * both devices changed the same one, this device's value is kept.
+ */
+export const mergeSynced = (base, local, remote) => {
+  const mine = diffUserData(base, local);
+  return mine ? applyChanges(remote, mine, 1) : remote;
+};
+
 /** Undoes or redoes entries until `position` of them are applied. */
 export const moveTo = (state, position) => {
   const { entries, position: current } = state.history;
@@ -122,6 +133,8 @@ const causeType = (action) => {
       return action.type;
     case "restoreSet":
       return "revert";
+    case "syncMerge":
+      return "sync";
     case "replace":
       return action.cause ?? null;
     default:
@@ -158,12 +171,20 @@ export const inventoryReducer = (state, action) => {
     default:
   }
 
-  const userData = userDataReducer(state.userData, action);
+  // Merged here, against the inventory as it is at this instant, so an edit
+  // made while the download was in flight is not lost. Recorded like any
+  // other change: what another device did can be undone too.
+  const userData =
+    action.type === "syncMerge"
+      ? mergeSynced(action.base, state.userData, action.remote)
+      : userDataReducer(state.userData, action);
   if (userData === state.userData) return state;
 
   const type = causeType(action);
-  const changes = type && diffUserData(state.userData, userData);
-  if (!changes) return { ...state, userData };
+  if (!type) return { ...state, userData };
+  // Same values in a new object (a count set to what it was, a sync that brought nothing new).
+  const changes = diffUserData(state.userData, userData);
+  if (!changes) return state;
 
   const cause = { type, group: action.group ?? action.set?.uniqueName, id: action.id, at: action.at };
   return { userData, history: recordChange(state.history, cause, changes) };

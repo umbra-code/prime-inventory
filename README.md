@@ -21,6 +21,7 @@ A Warframe Prime parts tracker. Count the parts you own, see which sets are read
 - **Reset** lives in the Preferences menu under Danger zone, behind a confirmation and with undo.
 - **History and undo:** the History button lists your recent changes (edits, Build, Sell, imports, resets) and undoes them one step at a time or back to any point, also with Ctrl+Z / Ctrl+Y. It survives reloads, so a mistake noticed later can still be fixed.
 - **Backups:** export your inventory to a small JSON file and import it on any device. Backups from older versions of the app are still accepted.
+- **Sync between devices:** pair your phone and your computer with a QR code, no account needed, and a change on one shows up on the other. The inventory is encrypted on your devices; if sync is ever unavailable, each device keeps working on its own.
 - **Send to another device:** copy your inventory to another device with a short link or a QR code. The copy is encrypted in your browser and the link works for 15 minutes; afterwards each device keeps its own inventory.
 - **English and Spanish:** the interface follows your browser language, and item names can stay in English (as on warframe.market) or use the game's own translations. Both are in the Preferences menu, next to the theme.
 - **Light and dark themes:** follows your system setting by default.
@@ -47,6 +48,18 @@ Every change to the inventory is recorded so it can be undone later, not only fr
 - **Quick edits are grouped:** changes to the same set less than 5 seconds apart join one entry (ten clicks on "+" read "Barrel 0 → 10"), and edits that end where they started leave none. Build, Sell, Import, Reset and receiving from another device always get their own entry.
 - **Undo is a position in the list:** undo moves it back, redo forward, and the History menu jumps straight to any entry. Undone entries stay, dimmed, until a new change is made.
 - The history belongs to the device: it is not part of backups or of "Send to another device". Other open tabs share it.
+
+## Sync between devices
+
+Optional, and an extra on top of the local inventory: every device keeps its own full copy in `localStorage`, and when the server cannot be reached (offline, no database, the free tier paused) the app works exactly as it does without sync and catches up later. The cloud in the header shows the state: off, syncing, up to date, or not available.
+
+- **Pairing instead of accounts.** Turning sync on creates a random secret; another device joins by opening `…/#s=<secret>` (a QR code). Nothing identifies the user, so there is no personal data to keep.
+- **The server cannot read it.** From the secret each device derives two things: the id its group is stored under, and the key that encrypts the inventory (`src/lib/syncCodec.js`). The database holds one row per group: `id`, an encrypted `payload`, a `version` and a date.
+- **Writes name the version they replace.** `PUT /api/sync/<id>` stores a payload only if `baseVersion` is the stored version; otherwise it answers `409` with the newer copy for the device to merge.
+- **Merging is per value.** Each device keeps the last copy it agreed on with the server (`base`). What it changed since is the difference between `base` and its inventory, which is put back on top of the downloaded copy inside the reducer (`mergeSynced` in `src/services/history.js`). Edits to different parts on two devices both survive; when both changed the same part, the device that syncs last wins. A merge is a History entry, so it can be undone.
+- **When it syncs:** on opening the app, on coming back to the tab, when the connection returns, and a moment after the inventory changes. It never polls on a timer, because the free database sleeps when idle and a tab checking every few minutes would keep it awake all month. With several tabs open only one of them syncs (Web Locks); the others share the inventory through `localStorage` as before.
+
+It needs a Postgres database in `DATABASE_URL` (this deployment uses [Neon](https://neon.com/)'s free plan through Vercel); the table is created on first use. Groups not written to for over a year are removed; a device that comes back simply uploads its copy again.
 
 ## Send to another device
 
@@ -81,7 +94,7 @@ Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo 
 - Tailwind CSS 4 with [shadcn/ui](https://ui.shadcn.com/) components, restyled with the Orokin theme (`src/app/globals.css`): every color is an `oro-*` token that switches with light/dark, plus `bevel`, `chip` and card-frame utilities
 - Cinzel (display) and Geist (body) via `next/font`
 - `next-themes` for theming
-- Two small route handlers and Vercel Blob for [Send to another device](#send-to-another-device); everything else is static
+- A few small route handlers, with Vercel Blob for [Send to another device](#send-to-another-device) and Postgres ([Neon](https://neon.com/)) for [Sync between devices](#sync-between-devices); everything else is static
 - JavaScript (no TypeScript)
 
 ## Running it on your computer
@@ -104,7 +117,7 @@ npm run dev               # starts the app
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser. Leave the terminal open while you use it and press Ctrl+C there to stop it. Changes to the code show up in the browser as you save.
 
-Nothing else has to be configured. The item catalog is generated on its own when the app starts, and your inventory is stored by the browser for that address, so the copy on `localhost` starts empty: use Export on the public site and Import here to bring your data. The only feature that needs setup is [Send to another device](#send-to-another-device); without it, that option says it is not available and everything else works.
+Nothing else has to be configured. The item catalog is generated on its own when the app starts, and your inventory is stored by the browser for that address, so the copy on `localhost` starts empty: use Export on the public site and Import here to bring your data. The only features that need setup are [Send to another device](#send-to-another-device) and [Sync between devices](#sync-between-devices); without it, they say they are not available and everything else works.
 
 **If something fails**
 
@@ -119,6 +132,7 @@ The app is a regular Next.js project, so any host that runs Next.js works. With 
 1. Fork this repository on GitHub (the **Fork** button).
 2. In Vercel, choose **Add New → Project**, import your fork and press **Deploy**. No settings need to change.
 3. Optional, for "Send to another device": in the Vercel project, open **Storage**, create a **Blob** store with **Private** access and connect it to the project, then redeploy. See [Send to another device](#send-to-another-device).
+4. Optional, for sync between devices: in **Storage**, create a **Neon** Postgres database (the free plan is enough) and connect it, then redeploy. See [Sync between devices](#sync-between-devices).
 
 Things in the code that point to this deployment and should be changed in yours:
 
@@ -188,6 +202,10 @@ src/services/prices.js      Platinum prices: download, cache, matching to sets a
 src/lib/transferCodec.js    Send to another device: compression, encryption and link format
 src/services/transfer*.js   Its browser side (transfer.js) and Blob storage (transferStore.js)
 src/app/api/transfer/       Its route handlers
+src/lib/syncCodec.js        Sync between devices: pairing secret, derived id and key, encryption
+src/services/sync*.js       Its browser side (sync.js) and database (syncStore.js)
+src/context/SyncContext.jsx When it syncs, and the state shown by the header's cloud
+src/app/api/sync/           Its route handler
 src/i18n/                   UI strings, translator and language context
 src/lib/itemNames.mjs       In-game item names per language (used by the catalog script)
 src/context/InventoryContext.jsx  App state (state + stable actions contexts)

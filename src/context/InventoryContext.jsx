@@ -212,6 +212,9 @@ export function InventoryProvider({ children }) {
       redo: () => dispatch({ type: "redo" }),
       goToHistory: (position) => dispatch({ type: "goTo", position }),
       clearHistory: () => dispatch({ type: "clearHistory" }),
+
+      // Device sync: puts what this device changed since `base` on top of `remote`.
+      mergeSynced: (remote, base) => record({ type: "syncMerge", remote, base }),
       build: (set) => consumeSet("build", set, translate("built", { name: nameOf(set) })),
       sell: (set) => consumeSet("sell", set, translate("sold", { name: nameOf(set) })),
 
