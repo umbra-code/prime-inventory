@@ -7,8 +7,9 @@ import { imageUrl } from "@/lib/images";
 import { RARITY_CLASS } from "@/lib/relics";
 import { ChevronRight, Lock, PartyPopper, Search, X } from "lucide-react";
 import Image from "next/image";
-import { useProgressiveCount } from "@/lib/useProgressiveCount";
-import { use, useState } from "react";
+import { useRevealOnScroll } from "@/lib/useRevealOnScroll";
+import { searchRelics } from "@/services/relicSearch";
+import { use, useDeferredValue, useState } from "react";
 
 /** A missing part; clicking it opens its set in the inventory tab. */
 function PartButton({ entry, children }) {
@@ -45,7 +46,7 @@ function MissingCount({ missing }) {
   return <span className='shrink-0 font-mono text-xs text-oro-ink-muted'>×{missing}</span>;
 }
 
-function RelicCard({ relic }) {
+function RelicCard({ relic, entries = relic.entries, hidden = 0 }) {
   const { t } = useI18n();
   // Void cyan marks relics that drop right now; vaulted ones stay plain.
   return (
@@ -63,7 +64,7 @@ function RelicCard({ relic }) {
               <span
                 className={`text-[11px] font-semibold uppercase tracking-[0.08em] whitespace-nowrap ${relic.available ? "text-oro-void" : "text-oro-ink-muted"}`}
               >
-                {t("partsYouNeed", { count: relic.entries.length })}
+                {t("partsYouNeed", { count: entries.length })}
               </span>
             </div>
             <p className={`mt-0.5 flex items-center gap-1 text-xs ${relic.available ? "text-oro-void" : "text-oro-ink-faint"}`}>
@@ -78,7 +79,7 @@ function RelicCard({ relic }) {
             </p>
           </header>
           <ul className='space-y-0.5 px-2.5 pb-3.5'>
-            {relic.entries.map((entry) => (
+            {entries.map((entry) => (
               <li key={entry.part.uniqueName} className='flex items-center gap-3 px-2 py-1.5 hover:bg-oro-surface-2'>
                 <PartButton entry={entry} />
                 <MissingCount missing={entry.missing} />
@@ -90,6 +91,7 @@ function RelicCard({ relic }) {
               </li>
             ))}
           </ul>
+          {hidden > 0 && <p className='px-[18px] pb-3.5 -mt-1.5 text-xs text-oro-ink-faint'>{t("relicMoreParts", { count: hidden })}</p>}
         </div>
       </section>
     </div>
@@ -144,12 +146,9 @@ const loadRelicFilter = () => {
   }
 };
 
-// "lith g1", "LITH G1" and "lithg1" all find the Lith G1 relic.
-const normalize = (text) => text.toLowerCase().replace(/\s+/g, "");
-
 export function MissingPartsView() {
   const { missingParts } = use(InventoryStateContext);
-  const { t, rich } = useI18n();
+  const { t, rich, setName, partName } = useI18n();
   const { totalParts, totalSets, relics, vaultedOnly } = missingParts;
   const [filter, setFilterState] = useState(loadRelicFilter);
   const [query, setQuery] = useState("");
@@ -163,13 +162,15 @@ export function MissingPartsView() {
   };
 
   const counts = Object.fromEntries(RELIC_FILTERS.map((value) => [value, relics.filter((relic) => matchesFilter(value, relic)).length]));
-  const search = normalize(query);
-  const shownRelics = relics.filter((relic) => matchesFilter(filter, relic) && (!search || normalize(relic.name).includes(search)));
-  // "lith g1" also finds Lith G10 to G19; the relic named exactly that goes first.
-  const exact = search ? shownRelics.findIndex((relic) => normalize(relic.name) === search) : -1;
-  if (exact > 0) shownRelics.unshift(...shownRelics.splice(exact, 1));
-  // Hundreds of vaulted relics: the first cards show at once, the rest follow.
-  const shown = useProgressiveCount(shownRelics.length, `${filter}|${search}`);
+  // Typing stays quick: the list catches up with the search a moment later.
+  const search = useDeferredValue(query).trim();
+  const results = searchRelics(
+    relics.filter((relic) => matchesFilter(filter, relic)),
+    search,
+    { setName, partName }
+  );
+  // Hundreds of vaulted relics: only the cards near the screen are built, more as you scroll.
+  const [shown, sentinel] = useRevealOnScroll(results.length, `${filter}|${search}`);
 
   if (totalParts === 0) {
     return (
@@ -256,12 +257,15 @@ export function MissingPartsView() {
         </div>
       </div>
 
-      {shownRelics.length > 0 ? (
-        <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 group-data-[wide=true]/app:grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))]'>
-          {shownRelics.slice(0, shown).map((relic) => (
-            <RelicCard key={relic.name} relic={relic} />
-          ))}
-        </div>
+      {results.length > 0 ? (
+        <>
+          <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 group-data-[wide=true]/app:grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))]'>
+            {results.slice(0, shown).map(({ relic, entries, hidden }) => (
+              <RelicCard key={relic.name} relic={relic} entries={entries} hidden={hidden} />
+            ))}
+          </div>
+          {shown < results.length && <div ref={sentinel} aria-hidden='true' className='h-px' />}
+        </>
       ) : (
         <p className='py-8 text-center text-sm text-oro-ink-muted'>
           {search ? t("noRelicsMatch", { query: query.trim() }) : t(`noRelics.${filter}`)}
