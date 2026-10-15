@@ -13,8 +13,10 @@ import { ActiveFilters, FilterPanel } from "@/components/layout/FilterPanel";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { PricesContext } from "@/context/PricesContext";
 import { useI18n } from "@/i18n/I18nContext";
+import { PLATINUM_ICON } from "@/lib/images";
 import { getSparePlatinum } from "@/services/prices";
 import { ArrowUpDown, LayoutGrid, Rows3, Search, X } from "lucide-react";
+import Image from "next/image";
 import { use, useMemo } from "react";
 
 // Beveled field; the border is an inset shadow so the bevel does not cut it.
@@ -95,10 +97,10 @@ export function InventoryDashboard() {
       label: t("stat.sparePlatinum"),
       title: t("sparePlatinumLabel", { amount: platinumAmount }),
       value: (
-        <>
+        <span className='inline-flex items-center gap-2'>
+          <Image src={PLATINUM_ICON} alt='' width={24} height={24} className='size-6' />
           {platinumAmount}
-          <span className='ml-0.5 text-[0.6em] text-oro-ink-muted'>{t("platinumUnit")}</span>
-        </>
+        </span>
       ),
       className: "text-oro-ink",
     },

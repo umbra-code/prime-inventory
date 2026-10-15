@@ -2,8 +2,10 @@
 
 import { PricesContext } from "@/context/PricesContext";
 import { useI18n } from "@/i18n/I18nContext";
+import { PLATINUM_ICON } from "@/lib/images";
 import { findPrice, marketUrl } from "@/services/prices";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 import { use } from "react";
 
 /**
@@ -30,10 +32,8 @@ export function MarketPrice({ set, part, prefix, className = "" }) {
       className={`group/price inline-flex items-center gap-1 tabular-nums underline-offset-2 hover:text-oro-gold hover:underline ${className}`}
     >
       {prefix && <span className='mr-0.5 opacity-70'>{prefix}</span>}
-      <span>
-        {amount}
-        <span className='ml-px text-[0.85em] opacity-70'>{t("platinumUnit")}</span>
-      </span>
+      <Image src={PLATINUM_ICON} alt='' width={14} height={14} className='size-3.5' />
+      <span>{amount}</span>
       <ExternalLink aria-hidden='true' className='size-3 opacity-50 group-hover/price:opacity-100' />
     </a>
   );

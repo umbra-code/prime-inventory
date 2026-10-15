@@ -86,7 +86,7 @@ The feature needs a Blob store: create a private one in the Vercel project (Stor
 - **Build assets** (`/_next/static`) and **images** (`/_next/image`): cache first, trimmed to the newest entries. Images never loaded while online are replaced with an empty placeholder.
 - The catalog refresh is not handled by the service worker; the app caches it in `localStorage`.
 
-Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo are original artwork (`scripts/icon.svg`); the PNGs in `public/icons/` and `src/app/` and the transparent `public/icons/logo.svg` are derived from it.
+Bump `VERSION` in `sw.js` when its caching logic changes. The app icon and logo are original artwork (`scripts/icon.svg`); the PNGs in `public/icons/` and `src/app/` and the transparent `public/icons/logo.svg` are derived from it. `public/icons/platinum.webp` is the in-game platinum icon (Warframe artwork by Digital Extremes, like the item images), mirrored and shrunk to icon size.
 
 ## Tech stack
 
