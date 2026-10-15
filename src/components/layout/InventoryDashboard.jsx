@@ -9,27 +9,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Ducats } from "@/components/inventory/Ducats";
+import { ActiveFilters, FilterPanel } from "@/components/layout/FilterPanel";
 import { InventoryStateContext } from "@/context/InventoryContext";
 import { PricesContext } from "@/context/PricesContext";
 import { useI18n } from "@/i18n/I18nContext";
 import { getSparePlatinum } from "@/services/prices";
-import { ArrowUpDown, LayoutGrid, Rows3, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowUpDown, LayoutGrid, Rows3, Search, X } from "lucide-react";
 import { use, useMemo } from "react";
 
 // Beveled field; the border is an inset shadow so the bevel does not cut it.
 const FIELD =
   "bevel [--cut:6px] h-[38px] rounded-none border-0 bg-oro-surface dark:bg-oro-surface dark:hover:bg-oro-surface text-oro-ink shadow-[inset_0_0_0_1px_var(--oro-line)] hover:shadow-[inset_0_0_0_1px_var(--oro-line-strong)] focus-visible:ring-0 focus-visible:shadow-[inset_0_0_0_1px_var(--oro-gold)]";
 
-// A filter that is narrowing the list is gilded, so it cannot go unnoticed.
-const ACTIVE_FIELD =
-  "!text-oro-gold font-medium !shadow-[inset_0_0_0_1px_var(--oro-gold)] !bg-oro-gold/10 [&>svg]:!text-oro-gold [&>svg]:!opacity-100";
-
-function FilterSelect({ value, onValueChange, options, optionLabel, label, icon, active = false, className = "" }) {
+function FilterSelect({ value, onValueChange, options, optionLabel, label, icon, className = "" }) {
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         aria-label={label}
-        className={`${FIELD} w-full justify-start lg:w-44 data-[size=default]:h-[38px] [&>svg:last-child]:ml-auto ${active ? ACTIVE_FIELD : ""} ${className}`}
+        className={`${FIELD} w-full justify-start lg:w-44 data-[size=default]:h-[38px] [&>svg:last-child]:ml-auto ${className}`}
       >
         {icon}
         <SelectValue />
@@ -45,56 +42,22 @@ function FilterSelect({ value, onValueChange, options, optionLabel, label, icon,
   );
 }
 
-/** "2 filters · Clear": says that the list is narrowed and undoes it in one click. */
-export function ClearFilters({ count, onClear }) {
-  const { t } = useI18n();
-  return (
-    <button
-      type='button'
-      onClick={onClear}
-      className='chip inline-flex cursor-pointer items-center gap-1.5 bg-oro-gold/15 px-2.5 py-1 text-xs font-medium text-oro-gold hover:bg-oro-gold/25'
-    >
-      <SlidersHorizontal className='size-3.5' aria-hidden='true' />
-      {t("activeFilters", { count })}
-      <span aria-hidden='true'>·</span>
-      {t("clearFilters")}
-    </button>
-  );
-}
-
 export function InventoryDashboard() {
   const {
     searchTerm,
     setSearchTerm,
-    selectedCategory,
-    setSelectedCategory,
-    selectedStatus,
-    setSelectedStatus,
-    selectedAvailability,
-    setSelectedAvailability,
     selectedSort,
     setSelectedSort,
-    categories,
-    types,
-    selectedType,
-    setSelectedType,
-    statusFilters,
-    availabilityFilters,
     sortOptions,
     stats,
     catalog,
     summaries,
     filteredSets,
-    activeFilterCount,
-    clearFilters,
     layout,
     setLayout,
   } = use(InventoryStateContext);
   const prices = use(PricesContext);
   const { t, formatNumber } = useI18n();
-  // Option values are internal keys; "All" gets a label per filter.
-  const labelFor = (prefix, allKey) => (option) =>
-    option === "All" ? t(allKey) : t(`${prefix}.${option}`);
 
   // Prices arrive on their own and may be missing; the tile follows them.
   const sparePlatinum = useMemo(
@@ -158,8 +121,8 @@ export function InventoryDashboard() {
       </div>
 
       {/* Filters */}
-      <div className='flex flex-col gap-3 lg:flex-row lg:items-center'>
-        <div className='w-full lg:flex-1'>
+      <div className='flex flex-col gap-3 sm:flex-row sm:items-center'>
+        <div className='w-full sm:flex-1'>
           <div className='relative'>
             <Search className='pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-oro-ink-faint' />
             <Input
@@ -182,41 +145,9 @@ export function InventoryDashboard() {
           </div>
         </div>
 
-        <div className='grid grid-cols-2 gap-3 sm:grid-cols-4 lg:flex'>
-          <FilterSelect
-            label={t("filterCategory")}
-            value={selectedCategory}
-            active={selectedCategory !== "All"}
-            onValueChange={setSelectedCategory}
-            options={categories}
-            optionLabel={labelFor("category", "allCategories")}
-          />
-          {types.length > 0 && (
-            <FilterSelect
-              label={t("filterType")}
-              value={selectedType}
-              active={selectedType !== "All"}
-              onValueChange={setSelectedType}
-              options={types}
-              optionLabel={(option) => (option === "All" ? t("allTypes") : t(`type.${option}`, {}, option))}
-            />
-          )}
-          <FilterSelect
-            label={t("filterStatus")}
-            value={selectedStatus}
-            active={selectedStatus !== "All"}
-            onValueChange={setSelectedStatus}
-            options={statusFilters}
-            optionLabel={labelFor("status", "allStatuses")}
-          />
-          <FilterSelect
-            label={t("filterAvailability")}
-            value={selectedAvailability}
-            active={selectedAvailability !== "All"}
-            onValueChange={setSelectedAvailability}
-            options={availabilityFilters}
-            optionLabel={labelFor("availability", "anyAvailability")}
-          />
+        {/* Filters behind one button; sorting stays at hand. */}
+        <div className='grid grid-cols-2 gap-3 sm:flex'>
+          <FilterPanel className='w-full sm:w-auto' />
           <FilterSelect
             label={t("sortBy")}
             value={selectedSort}
@@ -231,7 +162,7 @@ export function InventoryDashboard() {
       <div className='flex items-center justify-between gap-3'>
         <div className='flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-oro-ink-muted'>
           <span>{t("showing", { shown: filteredSets.length, total: stats.total })}</span>
-          {activeFilterCount > 0 && <ClearFilters count={activeFilterCount} onClear={clearFilters} />}
+          <ActiveFilters />
         </div>
         <div role='group' aria-label={t("layoutLabel")} className='flex gap-1'>
           {[
