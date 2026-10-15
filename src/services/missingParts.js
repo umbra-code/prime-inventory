@@ -1,7 +1,8 @@
 import { getCount } from "./userInventory";
 
 // Parts still needed to build the sets that are not mastered yet, grouped by
-// the relics that can drop them right now.
+// the relics that drop them: the ones in the drop tables now, and the vaulted
+// ones a veteran may still have in the inventory.
 
 const RARITY_ORDER = { Common: 0, Uncommon: 1, Rare: 2 };
 const TIER_ORDER = { Lith: 0, Meso: 1, Neo: 2, Axi: 3 };
@@ -26,16 +27,19 @@ const compareEntries = (a, b) =>
 const averageRarity = (group) =>
   group.entries.reduce((sum, entry) => sum + RARITY_ORDER[entry.rarity], 0) / group.entries.length;
 
-// More needed parts first, then easier drops, then lower tiers, then name.
+// More needed parts first; on a tie, a relic that drops now before a vaulted
+// one, then easier drops, then lower tiers, then name.
 const compareRelicGroups = (a, b) =>
   b.entries.length - a.entries.length ||
+  Number(b.available) - Number(a.available) ||
   averageRarity(a) - averageRarity(b) ||
   tierOf(a.name) - tierOf(b.name) ||
   a.name.localeCompare(b.name, "en", { numeric: true });
 
 /**
- * Groups missing parts by the available relics that drop them.
- * - `relics`: available relics, each with the missing parts it can drop.
+ * Groups missing parts by the relics that drop them.
+ * - `relics`: every relic that drops a missing part, available or vaulted
+ *   (`available`), each with those parts, the most useful first.
  * - `vaultedOnly`: missing parts that no available relic drops (including
  *   parts without any known relic).
  */
@@ -45,13 +49,10 @@ export const groupMissingPartsByRelic = (sets, userData) => {
   const vaultedOnly = [];
 
   for (const entry of missingParts) {
-    const available = (entry.part.relics ?? []).filter((relic) => relic.available);
-    if (available.length === 0) {
-      vaultedOnly.push(entry);
-      continue;
-    }
-    for (const relic of available) {
-      if (!relics.has(relic.name)) relics.set(relic.name, { name: relic.name, entries: [] });
+    const partRelics = entry.part.relics ?? [];
+    if (!partRelics.some((relic) => relic.available)) vaultedOnly.push(entry);
+    for (const relic of partRelics) {
+      if (!relics.has(relic.name)) relics.set(relic.name, { name: relic.name, available: Boolean(relic.available), entries: [] });
       relics.get(relic.name).entries.push({ ...entry, rarity: relic.rarity });
     }
   }

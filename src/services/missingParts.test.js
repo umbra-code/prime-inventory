@@ -47,13 +47,26 @@ describe("getMissingParts", () => {
 });
 
 describe("groupMissingPartsByRelic", () => {
-  it("groups missing parts by available relic, most useful relic first", () => {
+  it("groups missing parts by relic, most useful relic first", () => {
     const { relics } = groupMissingPartsByRelic(sets, none);
-    expect(relics.map((group) => [group.name, group.entries.map((e) => `${e.set.name} ${e.part.name}`)])).toEqual([
+    expect(relics.map((group) => [group.name, group.available, group.entries.map((e) => `${e.set.name} ${e.part.name}`)])).toEqual([
       // Two parts each; Axi S8 has easier drops (common + uncommon vs common + rare).
-      ["Axi S8", ["Cernos Prime Grip", "Nyx Prime Chassis"]],
-      ["Neo C8", ["Nyx Prime Neuroptics", "Nyx Prime Chassis"]],
+      ["Axi S8", true, ["Cernos Prime Grip", "Nyx Prime Chassis"]],
+      ["Neo C8", true, ["Nyx Prime Neuroptics", "Nyx Prime Chassis"]],
+      // One part each: the common drop first, then by tier.
+      ["Lith V6", false, ["Cernos Prime Grip"]],
+      ["Neo V4", false, ["Cernos Prime String"]],
     ]);
+  });
+
+  it("puts a relic that drops now before a vaulted one with as many parts", () => {
+    const vaultedFirst = { ...cernos, components: [part("Grip", [relic("Lith A1", "Common"), relic("Neo Z9", "Rare", true)])] };
+    expect(groupMissingPartsByRelic([vaultedFirst], none).relics.map((group) => group.name)).toEqual(["Neo Z9", "Lith A1"]);
+  });
+
+  it("includes vaulted relics, also for parts that an available relic drops", () => {
+    const { relics } = groupMissingPartsByRelic([cernos], none);
+    expect(relics.filter((group) => !group.available).map((group) => group.name)).toEqual(["Lith V6", "Neo V4"]);
   });
 
   it("keeps the rarity the part has in each relic", () => {
@@ -63,7 +76,7 @@ describe("groupMissingPartsByRelic", () => {
     expect(chassisIn("Axi S8")).toBe("Uncommon");
   });
 
-  it("puts parts with no available relic in vaultedOnly", () => {
+  it("puts parts with no available relic in vaultedOnly, without dropping them from their vaulted relics", () => {
     const { vaultedOnly } = groupMissingPartsByRelic(sets, none);
     expect(vaultedOnly.map((e) => `${e.set.name} ${e.part.name}`)).toEqual([
       "Cernos Prime String",
