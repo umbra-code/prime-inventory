@@ -9,6 +9,7 @@ import Image from "next/image";
 import { memo, use } from "react";
 import { Ducats } from "./Ducats";
 import { MarketPrice } from "./MarketPrice";
+import { MasteryReq } from "./MasteryReq";
 import { PrimePart } from "./PrimePart";
 import { SetToggles } from "./SetToggles";
 
@@ -18,10 +19,11 @@ const arePropsEqual = (prev, next) =>
   prev.primeSet === next.primeSet &&
   prev.isMastered === next.isMastered &&
   prev.inArsenal === next.inArsenal &&
+  prev.masteryRank === next.masteryRank &&
   prev.counts.length === next.counts.length &&
   prev.counts.every((count, i) => count === next.counts[i]);
 
-export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, inArsenal }) {
+export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, inArsenal, masteryRank }) {
   const { build, sell } = use(InventoryActionsContext);
   const { t, setName } = useI18n();
   const name = setName(primeSet);
@@ -66,6 +68,7 @@ export const PrimeSet = memo(function PrimeSet({ primeSet, counts, isMastered, i
                   {t(`category.${primeSet.category}`)}
                   {weaponTypeLabel(t, primeSet) && ` · ${weaponTypeLabel(t, primeSet)}`}
                 </span>
+                <MasteryReq set={primeSet} masteryRank={masteryRank} className='before:mr-1.5 before:text-oro-ink-muted before:font-normal before:content-["·"]' />
                 {primeSet.vaulted && (
                   <span className='inline-flex items-center gap-1 whitespace-nowrap' title={t("vaultedHint")}>
                     <Lock className='size-3' aria-hidden='true' /> {t("vaulted")}

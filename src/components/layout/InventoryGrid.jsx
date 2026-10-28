@@ -53,6 +53,7 @@ export function InventoryGrid() {
     selectedStatus,
     selectedAvailability,
     selectedSort,
+    masteryRank,
   } = use(InventoryStateContext);
 
   // The full list can be 160+ sets: the first ones show at once and the rest
@@ -76,6 +77,7 @@ export function InventoryGrid() {
             counts={owned}
             isMastered={isMastered}
             inArsenal={inArsenal}
+            masteryRank={masteryRank}
           />
         );
       })}

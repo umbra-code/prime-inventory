@@ -2,7 +2,7 @@
 // (browser), so both sources produce the exact same shape.
 
 /** Bump when the catalog shape changes so cached catalogs in the old shape are ignored. */
-export const CATALOG_FORMAT = 3;
+export const CATALOG_FORMAT = 4;
 
 // @wfcd/items types every melee weapon as "Melee"; real classes come from
 // src/data/meleeClasses.json. Weapons missing there get this type.
@@ -101,6 +101,8 @@ export const slimCatalog = (items, { meleeClasses = {} } = {}) => {
         components,
       };
       if (Boolean(item.vaulted) && hasAvailableRelic) set.returned = true;
+      // Warframes and companions need no rank; only kept when there is one.
+      if (item.masteryReq > 0) set.masteryReq = item.masteryReq;
       return set;
     })
     .filter((set) => set.components.length > 0)

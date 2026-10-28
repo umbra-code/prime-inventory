@@ -8,6 +8,7 @@ import Image from "next/image";
 import { memo, use } from "react";
 import { CountStepper, PartStatus } from "./CountStepper";
 import { MarketPrice } from "./MarketPrice";
+import { MasteryReq } from "./MasteryReq";
 import { SetToggles } from "./SetToggles";
 
 // Compact layout: one row per set, parts as small steppers, for quick updates
@@ -18,10 +19,11 @@ const arePropsEqual = (prev, next) =>
   prev.set === next.set &&
   prev.isMastered === next.isMastered &&
   prev.inArsenal === next.inArsenal &&
+  prev.masteryRank === next.masteryRank &&
   prev.counts.length === next.counts.length &&
   prev.counts.every((count, i) => count === next.counts[i]);
 
-const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal }) {
+const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal, masteryRank }) {
   const { build, sell } = use(InventoryActionsContext);
   const { t, setName, partName, fullPartName } = useI18n();
   const summary = summarizeSet(set, counts, isMastered);
@@ -58,6 +60,7 @@ const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal }) {
               {progressLabel(t, summary)}
             </span>
             <MarketPrice set={set} className='ml-1 shrink-0 text-oro-ink-muted' />
+            <MasteryReq set={set} masteryRank={masteryRank} className='ml-1' />
           </div>
         </div>
       </div>
@@ -91,7 +94,7 @@ const SetRow = memo(function SetRow({ set, counts, isMastered, inArsenal }) {
 
 /** `sets` is the part of the filtered list to show (see InventoryGrid). */
 export function InventoryTable({ sets }) {
-  const { summaries } = use(InventoryStateContext);
+  const { summaries, masteryRank } = use(InventoryStateContext);
   const { t } = useI18n();
 
   return (
@@ -107,7 +110,16 @@ export function InventoryTable({ sets }) {
       <ul>
         {sets.map((set) => {
           const { owned, isMastered, inArsenal } = summaries.get(set.uniqueName);
-          return <SetRow key={set.uniqueName} set={set} counts={owned} isMastered={isMastered} inArsenal={inArsenal} />;
+          return (
+            <SetRow
+              key={set.uniqueName}
+              set={set}
+              counts={owned}
+              isMastered={isMastered}
+              inArsenal={inArsenal}
+              masteryRank={masteryRank}
+            />
+          );
         })}
       </ul>
     </div>

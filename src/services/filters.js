@@ -97,7 +97,9 @@ export const filterAndSortSets = (
     : result;
 };
 
-const DEFAULT_FILTERS = { category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards", wide: false };
+const DEFAULT_FILTERS = { category: "All", type: "All", status: "All", availability: "All", sort: "Name", layout: "cards", wide: false, masteryRank: null };
+
+const isMasteryRank = (value) => Number.isInteger(value) && value >= 0 && value <= 40;
 
 /** Saved filters and sort, falling back to defaults for unknown values. */
 export const loadFilters = (categories) => {
@@ -114,6 +116,8 @@ export const loadFilters = (categories) => {
       layout: pick(layouts, saved.layout, DEFAULT_FILTERS.layout),
       // Full-width page instead of the centered column.
       wide: saved.wide === true,
+      // The player's Mastery Rank, or null when not given.
+      masteryRank: isMasteryRank(saved.masteryRank) ? saved.masteryRank : null,
     };
   } catch {
     return { ...DEFAULT_FILTERS };

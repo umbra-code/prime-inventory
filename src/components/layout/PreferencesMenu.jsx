@@ -19,6 +19,9 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { InventoryActionsContext, InventoryStateContext } from "@/context/InventoryContext";
@@ -35,7 +38,7 @@ const THEMES = [
 ];
 
 /**
- * Theme, page width, interface language and item name language in one menu, plus the
+ * Theme, page width, Mastery Rank, interface language and item name language in one menu, plus the
  * inventory reset, kept here rather than in the header because it wipes
  * everything.
  */
@@ -43,8 +46,16 @@ export function PreferencesMenu() {
   const { theme = "system", setTheme } = useTheme();
   const { t, locale, setLocale, itemNames, setItemNames, languages } = useI18n();
   const { resetInventory } = use(InventoryActionsContext);
-  const { wide, setWide } = use(InventoryStateContext);
+  const { wide, setWide, masteryRank, setMasteryRank, highestMasteryReq } = use(InventoryStateContext);
   const [confirmingReset, setConfirmingReset] = useState(false);
+
+  // The top option covers every rank from there up: it already unlocks every Prime.
+  const rankLabel = (rank) =>
+    rank === null
+      ? t("masteryRank.notSet")
+      : t(rank >= highestMasteryReq ? "masteryRank.orHigher" : "masteryRank.value", {
+          rank: Math.min(rank, highestMasteryReq),
+        });
 
   return (
     <>
@@ -71,6 +82,28 @@ export function PreferencesMenu() {
             <DropdownMenuRadioItem value='centered'>{t("width.centered")}</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value='full'>{t("width.full")}</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>{t("masteryRankLabel")}</DropdownMenuLabel>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <span className='text-oro-ink-muted'>{rankLabel(masteryRank)}</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent className='w-56'>
+              <p className='px-2 py-1.5 text-xs text-oro-ink-muted'>{t("masteryRankHint")}</p>
+              <DropdownMenuRadioGroup
+                value={masteryRank === null ? "none" : String(Math.min(masteryRank, highestMasteryReq))}
+                onValueChange={(value) => setMasteryRank(value === "none" ? null : Number(value))}
+              >
+                <DropdownMenuRadioItem value='none'>{rankLabel(null)}</DropdownMenuRadioItem>
+                {Array.from({ length: highestMasteryReq + 1 }, (_, rank) => (
+                  <DropdownMenuRadioItem key={rank} value={String(rank)}>
+                    {rankLabel(rank)}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
 
           <DropdownMenuSeparator />
           <DropdownMenuLabel>{t("interfaceLanguage")}</DropdownMenuLabel>

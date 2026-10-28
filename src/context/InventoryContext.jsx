@@ -92,6 +92,7 @@ export function InventoryProvider({ children }) {
   }, []);
   const [layout, setLayout] = useState(initialFilters.layout);
   const [wide, setWide] = useState(initialFilters.wide);
+  const [masteryRank, setMasteryRank] = useState(initialFilters.masteryRank);
 
   // Sets and parts by uniqueName, to name what a history entry changed and to
   // know which set an edited part belongs to.
@@ -104,6 +105,12 @@ export function InventoryProvider({ children }) {
     }
     return { sets, parts };
   }, [catalog]);
+
+  // Ranks at or above this one can use every Prime, so the rank picker stops there.
+  const highestMasteryReq = useMemo(
+    () => Math.max(0, ...catalog.sets.map((set) => set.masteryReq ?? 0)),
+    [catalog]
+  );
 
   // Read by event handlers without making the actions unstable.
   const latest = useRef({ userData, catalog, catalogIndex, t, setName });
@@ -136,8 +143,9 @@ export function InventoryProvider({ children }) {
       sort: selectedSort,
       layout,
       wide,
+      masteryRank,
     });
-  }, [selectedCategory, selectedType, selectedStatus, selectedAvailability, selectedSort, layout, wide]);
+  }, [selectedCategory, selectedType, selectedStatus, selectedAvailability, selectedSort, layout, wide, masteryRank]);
 
   // Keep other open tabs in sync (key is null when storage was cleared).
   useEffect(() => {
@@ -372,6 +380,9 @@ export function InventoryProvider({ children }) {
       setLayout,
       wide,
       setWide,
+      masteryRank,
+      setMasteryRank,
+      highestMasteryReq,
     }),
     [
       catalog,
@@ -398,6 +409,8 @@ export function InventoryProvider({ children }) {
       view,
       layout,
       wide,
+      masteryRank,
+      highestMasteryReq,
     ]
   );
 

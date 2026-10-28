@@ -188,6 +188,17 @@ describe("slimCatalog", () => {
     });
   });
 
+  it("keeps the mastery rank requirement only when there is one", () => {
+    const sets = slimCatalog([
+      item("Braton Prime", [part("/A")], { masteryReq: 8 }),
+      item("Ash Prime", [part("/B")], { category: "Warframes", masteryReq: 0 }),
+    ]);
+    expect(Object.fromEntries(sets.map((s) => [s.name, s.masteryReq]))).toEqual({
+      "Ash Prime": undefined,
+      "Braton Prime": 8,
+    });
+  });
+
   it("sorts sets by name", () => {
     const sets = slimCatalog([item("Zephyr Prime", [part("/A")]), item("Ash Prime", [part("/B")])]);
     expect(sets.map((set) => set.name)).toEqual(["Ash Prime", "Zephyr Prime"]);
